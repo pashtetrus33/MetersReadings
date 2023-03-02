@@ -1,0 +1,1 @@
+web: java -jar target/pmbakanov-1.0.jar
