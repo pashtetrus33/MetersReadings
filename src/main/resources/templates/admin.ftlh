@@ -2,14 +2,18 @@
 <@t.template user>
     `<h1 style="text-align: center">Панель администратора</h1><hr>
 
-    <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 100%"
+    <div style="margin: 0 auto; text-align: center">
+    <a class="btn btn-danger mb-2" style="text-align: center; width: 30%"
        href="/registration" role="button">
         Регистрация нового пользователя
     </a>
-    <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 100%"
-       href="/profile" role="button">
-        Назад на страницу профиля
-    </a>
+    </div>
+    <div style="margin: 0 auto; text-align: center">
+        <a class="btn btn-danger mb-2" style="text-align: center; width: 30%"
+           href="/profile" role="button">
+            Назад на страницу профиля
+        </a>
+    </div>
     <br>
     <table class="table table-hover table-dark">
         <tr>

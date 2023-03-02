@@ -2,7 +2,7 @@
 <@t.template user>
     <h1 style="text-align: center">Регистрация</h1>
     <hr>
-    <form action="/registration" method="post">
+    <form action="/registration" method="post" style="margin: 0 auto; text-align: center; width: 50%">
         <div class="form-group">
             <label for="name">ФИО пользователя</label>
             <input type="text" class="form-control" required id="name" name="name">
@@ -19,13 +19,18 @@
             <label for="password">Пароль</label>
             <input type="password" class="form-control" id="password" required name="password">
         </div>
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <button type="submit" style="width: 100%" class="btn btn-dark">Зарегистрироваться</button>
+        <div style="margin: 0 auto; text-align: center">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <button type="submit" style="width: 50%" class="btn btn-danger mb-2">Зарегистрировать</button>
+        </div>
+
     </form>
-    <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 100%"
-       href="/profile" role="button">
-        Назад на страницу профиля
-    </a>
+    <div style="margin: 0 auto; text-align: center">
+        <a class="btn btn-dark mb-2" style="text-align: center; width: 25%"
+           href="/profile" role="button">
+            Назад на страницу профиля
+        </a>
+    </div>
     <#if errorMessage??>
         <h2 style="color: red">${errorMessage}</h2>
     </#if>

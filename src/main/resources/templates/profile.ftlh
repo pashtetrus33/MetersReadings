@@ -13,17 +13,26 @@
         <h4>Адрес: <b>${user.address}</b></h4>
         <hr>
         <#if user.isAdmin()>
-            <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
+            <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
                href="/admin">
                 Панель администратора
             </a>
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allusersrecords">
+                Последние показания счетчиков
+            </a>
+
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allusersrequests">
+                Последние заявки на ремонт
+            </a>
         </#if>
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 100%"
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample" role="button"
            aria-expanded="true" aria-controls="collapseExample">
             Добавить показания счетчиков
         </a>
-        <div class="collapse mb-3" id="collapseExample" style="">
+        <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center; width: 50%">
             <form action="/record/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="kitchenCold">Кухня: холодная вода</label>
@@ -56,12 +65,12 @@
                 <button type="submit" style="width: 100%" class="btn btn-dark">Добавить</button>
             </form>
         </div>
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 100%"
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample2" role="button"
            aria-expanded="true" aria-controls="collapseExample">
             Добавить заявку на ремонт
         </a>
-        <div class="collapse mb-3" id="collapseExample2" style="">
+        <div class="collapse mb-3" id="collapseExample2" style="margin: 0 auto; text-align: center; width: 50%">
             <form action="/request/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="description">Описание</label>
@@ -83,20 +92,20 @@
 
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
-                <button type="submit" style="width: 100%" class="btn btn-dark">Добавить</button>
+                <button type="submit" style="width: 50%" class="btn btn-dark">Добавить</button>
             </form>
         </div>
-        <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
+        <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            href="/my/records">
             История показаний счетчиков
         </a>
-        <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
+        <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            href="/my/requests">
             История заявок на ремонт
         </a>
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button type="submit" style="text-align: center; width: 100%" class="btn btn-danger mb-2">
+            <button type="submit" style="text-align: center; width: 50%" class="btn btn-danger mb-2">
                 Выйти из аккаунта
             </button>
         </form>

@@ -3,7 +3,7 @@ package com.example.pmbakanov.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime;;
 
 @Entity
 @Table(name = "records")

@@ -28,21 +28,22 @@ public class AdminController {
         return "admin";
     }
 
-
-    @GetMapping("/registration")
-    public String registration(Principal principal, Model model) {
+    @GetMapping("/allusersrecords")
+    public String alluserrecords(Model model, Principal principal) {
+        model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "registration";
+        return "alluserrecords";
     }
 
-    @PostMapping("/registration")
-    public String createUser(User user, Model model) {
-        if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "Пользователь с именем: " + user.getLogin() + " уже существует");
-            return "registration";
-        }
-        return "redirect:/profile";
+    @GetMapping("/allusersrequests")
+    public String allusersrequests(Model model, Principal principal) {
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "alluserrequests";
     }
+
+
+
 
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {

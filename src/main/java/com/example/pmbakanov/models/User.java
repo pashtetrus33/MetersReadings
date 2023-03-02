@@ -29,22 +29,51 @@ public class User implements UserDetails {
     @Column(length = 1000)
     private String password;
 
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
-    joinColumns = @JoinColumn(name = "user_id"))
+            joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-    mappedBy = "user")
+            mappedBy = "user")
     private List<Record> records = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Request> requests = new ArrayList<>();
 
     public void addRecordToUser(Record record) {
         record.setUser(this);
         records.add(record);
+    }
+
+    public Record getLastRecord() {
+        Record result = null;
+        if (areRecords()) {
+            for (Record record : records) {
+                result = record;
+            }
+        }
+        return result;
+    }
+
+    public boolean areRecords() {
+        return records.size() > 0;
+    }
+
+    public Request getLastRequest() {
+        Request result = null;
+        if (areRequests()) {
+            for (Request request : requests) {
+                result = request;
+            }
+        }
+        return result;
+    }
+
+    public boolean areRequests() {
+        return requests.size() > 0;
     }
 
     public void addRequestToUser(Request request) {
@@ -153,6 +182,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
+
     public boolean isAdmin() {
         return roles.contains(Role.ROLE_ADMIN);
     }

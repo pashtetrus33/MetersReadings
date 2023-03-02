@@ -2,10 +2,12 @@
 <@t.template user>
     <h1 style="text-align: center">История заявок на ремонт</h1>
     <hr>
-    <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 100%"
-       href="/profile" role="button">
-        Назад на страницу профиля
-    </a>
+    <div style="margin: 0 auto; text-align: center">
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
+           href="/profile" role="button">
+            Назад на страницу профиля
+        </a>
+    </div>
     <br>
     <div class="card-columns">
         <#list requests as request>
