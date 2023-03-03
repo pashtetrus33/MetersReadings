@@ -24,7 +24,7 @@
 
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrequests">
-                Последние заявки на ремонт
+                Последние заявки
             </a>
         </#if>
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
@@ -68,7 +68,7 @@
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample2" role="button"
            aria-expanded="true" aria-controls="collapseExample">
-            Добавить заявку на ремонт
+            Создать заявку
         </a>
         <div class="collapse mb-3" id="collapseExample2" style="margin: 0 auto; text-align: center; width: 50%">
             <form action="/request/create" method="post" enctype="multipart/form-data">
@@ -77,19 +77,6 @@
                     <input type="text" required class="form-control"
                            id="description" name="description">
                 </div>
-                <div class="form-group">
-                    <div class="custom-file">
-                        <input type="file" name="file1" id="file1">
-                        <label class="custom-file-label" for="file1">Первая фотография</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="custom-file">
-                        <input type="file" name="file2" id="file2">
-                        <label class="custom-file-label" for="file2">Вторая фотография</label>
-                    </div>
-                </div>
-
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <button type="submit" style="width: 50%" class="btn btn-dark">Добавить</button>
@@ -97,11 +84,11 @@
         </div>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            href="/my/records">
-            История показаний счетчиков
+            История показаний
         </a>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            href="/my/requests">
-            История заявок на ремонт
+            История заявок
         </a>
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>

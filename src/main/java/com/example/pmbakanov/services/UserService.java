@@ -61,4 +61,9 @@ public class UserService {
         userRepository.save(user);
         log.info("Changing password for User with login: {}", user.getLogin());
     }
+
+    public void deleteUser(User user) {
+        log.info("Deleting User with login: {}", user.getLogin());
+        userRepository.delete(user);
+    }
 }

@@ -24,4 +24,14 @@
         <button type="submit" class="btn btn-dark">Сохранить</button>
     </form>
 
+
+    <form action="/admin/user/delete" method="post" style="width: 25%">
+        <input type="hidden" value="${user.id}" name="userId">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <button type="submit" style="text-align: center; width: 50%" class="btn btn-danger mb-2">
+            Удалить пользователя
+        </button>
+    </form>
+
+
 </@t.template>

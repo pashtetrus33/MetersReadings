@@ -61,4 +61,10 @@ public class AdminController {
         userService.changeUserPassword(user, form);
         return "redirect:/admin";
     }
+
+    @PostMapping("/admin/user/delete")
+    public String userDelete(@RequestParam("userId") User user) {
+        userService.deleteUser(user);
+        return "redirect:/admin";
+    }
 }

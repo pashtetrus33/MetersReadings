@@ -70,7 +70,7 @@ public class Request {
     private User user;
     @PrePersist
     private void onCreate() {
-        dateOfCreated = LocalDateTime.now();
+        dateOfCreated = LocalDateTime.now().minusHours(3);
         status = "Новая";
     }
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "request")

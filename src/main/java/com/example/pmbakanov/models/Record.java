@@ -80,7 +80,7 @@ public class Record {
 
 
     @PrePersist
-    private void onCreate() { dateOfCreated = LocalDateTime.now(); }
+    private void onCreate() { dateOfCreated = LocalDateTime.now().minusHours(3); }
 
 
 }
