@@ -33,6 +33,7 @@ public class UserService {
         return true;
     }
 
+
     public List<User> list() {
         return userRepository.findAll();
     }
@@ -53,5 +54,11 @@ public class UserService {
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByLogin(principal.getName());
+    }
+
+    public void changeUserPassword(User user, Map<String, String> form) {
+        user.setPassword(passwordEncoder.encode(form.get("password")));
+        userRepository.save(user);
+        log.info("Changing password for User with login: {}", user.getLogin());
     }
 }

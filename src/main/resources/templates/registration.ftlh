@@ -28,7 +28,7 @@
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mb-2" style="text-align: center; width: 25%"
            href="/profile" role="button">
-            Назад на страницу профиля
+            Назад
         </a>
     </div>
     <#if errorMessage??>

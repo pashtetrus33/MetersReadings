@@ -11,7 +11,7 @@
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-danger mb-2" style="text-align: center; width: 30%"
            href="/profile" role="button">
-            Назад на страницу профиля
+            Назад
         </a>
     </div>
     <br>
@@ -23,6 +23,7 @@
             <th scope="col">Роли</th>
             <th scope="col">Редактирование</th>
             <th scope="col">Подробная информация</th>
+
         </tr>
         <#list users as user>
             <tr>

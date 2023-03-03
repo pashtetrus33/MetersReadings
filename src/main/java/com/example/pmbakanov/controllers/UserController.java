@@ -44,6 +44,7 @@ public class UserController {
         }
         return "redirect:/profile";
     }
+
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
@@ -52,6 +53,4 @@ public class UserController {
         model.addAttribute("requests", user.getRequests());
         return "user-info";
     }
-
-
 }

@@ -14,7 +14,7 @@
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            href="/profile" role="button">
-            Назад на страницу профиля
+            Назад
         </a>
     </div>
 

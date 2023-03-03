@@ -43,8 +43,6 @@ public class AdminController {
     }
 
 
-
-
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
@@ -55,6 +53,12 @@ public class AdminController {
     @PostMapping("/admin/user/edit")
     public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/user/password_change")
+    public String userPasswordChange(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
+        userService.changeUserPassword(user, form);
         return "redirect:/admin";
     }
 }
