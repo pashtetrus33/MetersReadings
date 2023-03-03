@@ -30,11 +30,17 @@ public class RequestController {
         return "request-info";
     }
 
+//    @PostMapping("/request/create")
+//    public String createRequest(@RequestParam("file1") MultipartFile file1,
+//                                @RequestParam("file2") MultipartFile file2,
+//                                Request request, Principal principal) throws IOException {
+//        requestService.saveRequest(principal, request, file1, file2);
+//        return "redirect:/profile";
+//    }
+
     @PostMapping("/request/create")
-    public String createRequest(@RequestParam("file1") MultipartFile file1,
-                                @RequestParam("file2") MultipartFile file2,
-                                Request request, Principal principal) throws IOException {
-        requestService.saveRequest(principal, request, file1, file2);
+    public String createRequest(Request request, Principal principal) throws IOException {
+        requestService.saveRequest(principal, request);
         return "redirect:/profile";
     }
 

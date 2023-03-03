@@ -28,6 +28,7 @@ public class AdminController {
         return "admin";
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
     @GetMapping("/allusersrecords")
     public String alluserrecords(Model model, Principal principal) {
         model.addAttribute("users", userService.list());
@@ -35,6 +36,8 @@ public class AdminController {
         return "alluserrecords";
     }
 
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
     @GetMapping("/allusersrequests")
     public String allusersrequests(Model model, Principal principal) {
         model.addAttribute("users", userService.list());

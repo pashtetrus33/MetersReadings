@@ -3,7 +3,7 @@
     <h2 style="text-align: center">Личный кабинет</h2>
     <hr>
     <div style="text-align: center">
-        <img src="/static/images/avatar.png"
+        <img src="/static/images/avatar.jpg"
              style="border:2px solid black; border-radius: 20px" height="120">
         <br>
         <h2>${user.name}</h2>
@@ -17,6 +17,17 @@
                href="/admin">
                 Панель администратора
             </a>
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allusersrecords">
+                Последние показания счетчиков
+            </a>
+
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allusersrequests">
+                Последние заявки
+            </a>
+        </#if>
+        <#if user.isSupervisor()>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrecords">
                 Последние показания счетчиков

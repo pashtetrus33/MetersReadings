@@ -187,5 +187,9 @@ public class User implements UserDetails {
         return roles.contains(Role.ROLE_ADMIN);
     }
 
+    public boolean isSupervisor() {
+        return roles.contains(Role.ROLE_SUPERVISOR);
+    }
+
 
 }

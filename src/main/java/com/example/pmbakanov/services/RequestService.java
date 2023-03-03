@@ -26,19 +26,22 @@ public class RequestService {
         return requestRepository.findAll();
     }
 
-    public void saveRequest(Principal principal, Request request, MultipartFile file1, MultipartFile file2) throws IOException {
-        request.setUser(getUserByPrincipal(principal));
-        Image image1;
-        Image image2;
-        if(file1.getSize() !=0) {
-            image1 = toImageEntity(file1);
-            request.addImageToRequest(image1);
-        }
-        if(file2.getSize() !=0){
-            image2 = toImageEntity(file2);
-            request.addImageToRequest(image2);
-        }
+    // С фотографиями
+//    public void saveRequest(Principal principal, Request request, MultipartFile file1, MultipartFile file2) throws IOException {
+//        request.setUser(getUserByPrincipal(principal));
+//        Image image1;
+//        Image image2;
+//        if(file1.getSize() !=0) {
+//            image1 = toImageEntity(file1);
+//            request.addImageToRequest(image1);
+//        }
+//        if(file2.getSize() !=0){
+//            image2 = toImageEntity(file2);
+//            request.addImageToRequest(image2);
+//        }
 
+    public void saveRequest(Principal principal, Request request) throws IOException {
+        request.setUser(getUserByPrincipal(principal));
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
     }
