@@ -1,18 +1,18 @@
 package com.example.pmbakanov.services;
 
-import com.example.pmbakanov.models.Image;
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.repositories.RequestRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -40,20 +40,20 @@ public class RequestService {
 //            request.addImageToRequest(image2);
 //        }
 
+    //    private Image toImageEntity(MultipartFile file) throws IOException {
+//        Image image = new Image();
+//        image.setName(file.getName());
+//        image.setOriginalFileName(file.getOriginalFilename());
+//        image.setContentType(file.getContentType());
+//        image.setSize(file.getSize());
+//        image.setBytes(file.getBytes());
+//        return image;
+//    }
+
     public void saveRequest(Principal principal, Request request) throws IOException {
         request.setUser(getUserByPrincipal(principal));
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
-    }
-
-    private Image toImageEntity(MultipartFile file) throws IOException {
-        Image image = new Image();
-        image.setName(file.getName());
-        image.setOriginalFileName(file.getOriginalFilename());
-        image.setContentType(file.getContentType());
-        image.setSize(file.getSize());
-        image.setBytes(file.getBytes());
-        return image;
     }
 
     public User getUserByPrincipal(Principal principal) {
@@ -63,8 +63,7 @@ public class RequestService {
 
 
     public void deleteRequest(Long id) {
-        Request request = requestRepository.findById(id)
-                .orElse(null);
+        Request request = requestRepository.findById(id).orElse(null);
         if (request != null) {
             requestRepository.delete(request);
             log.info("Request with id = {} was deleted", id);
@@ -78,10 +77,18 @@ public class RequestService {
         return requestRepository.findById(id).orElse(null);
     }
 
-    public void statusRequest(Long id) {
-        Request request = requestRepository.findById(id)
-                .orElse(null);
-        request.setStatus("В работе");
+    public void changeRequestStatus(Request request, Map<String, String> form) {
+        Set<String> statuses = Arrays.stream(Status.values()).map(Status::toString).collect(Collectors.toSet());
+
+        request.getStatuses().clear();
+        for (String key : form.keySet()) {
+            if (statuses.contains(key)) {
+                //request.getStatuses().add(Status.valueOf(key));
+                Status[] result = Status.values();
+                Status res = Arrays.stream(result).filter(p -> p.getTitle().equals(key)).findFirst().orElse(null);
+                request.getStatuses().add(Status.valueOf(res.name()));
+            }
+        }
         requestRepository.save(request);
     }
 }

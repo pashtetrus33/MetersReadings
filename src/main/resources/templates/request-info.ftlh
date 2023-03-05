@@ -7,7 +7,7 @@
 
     <hr>
     <p style="text-align: center">Описание: <b>${request.description}</b></p>
-    <p style="text-align: center">Статус: <b>${request.status}</b></p>
+    <p style="text-align: center">Статус: <b><#list request.statuses as status>${status}</#list></b></p>
 
     <#list images as img>
         <a href="/images/${img.id}"><img src="/images/${img.id} " height="300px"/></a>
@@ -21,13 +21,7 @@
     </div>
 
     <#if user.isAdmin()>
-        <form action="/request/status/${id}" method="post" style="margin: 0 auto; text-align: center">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button type="submit" style="margin: 0 auto; text-align: center; width: 50%" class="btn btn-danger mb-2">
-                Изменить статус
-            </button>
-        </form>
-        <form action="/request/delete/${id}" method="post" style="margin: 0 auto; text-align: center">
+             <form action="/request/delete/${id}" method="post" style="margin: 0 auto; text-align: center">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <button type="submit" style="width: 50%" class="btn btn-danger mb-2">
                 Удалить заявку

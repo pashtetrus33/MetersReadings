@@ -59,6 +59,10 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+
+
+
+
     @PostMapping("/admin/user/password_change")
     public String userPasswordChange(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserPassword(user, form);

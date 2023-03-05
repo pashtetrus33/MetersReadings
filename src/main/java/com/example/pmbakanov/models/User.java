@@ -50,11 +50,9 @@ public class User implements UserDetails {
 
     public Record getLastRecord() {
         Record result = null;
-        if (areRecords()) {
-            for (Record record : records) {
-                result = record;
-            }
-        }
+        if (areRecords())
+            result = records.get(records.size() - 1);
+
         return result;
     }
 
@@ -62,13 +60,10 @@ public class User implements UserDetails {
         return records.size() > 0;
     }
 
-    public Request getLastRequest() {
+    public Request getFirstRequest() {
         Request result = null;
-        if (areRequests()) {
-            for (Request request : requests) {
-                result = request;
-            }
-        }
+        if (areRequests())
+            result = requests.get(0);
         return result;
     }
 

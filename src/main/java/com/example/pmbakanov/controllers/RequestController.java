@@ -2,6 +2,8 @@ package com.example.pmbakanov.controllers;
 
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.models.enums.Role;
+import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.services.RequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,18 +54,24 @@ public class RequestController {
         return "redirect:/user/" + userId;
     }
 
-    @PostMapping("/request/status/{id}")
-    public String statusRequest(@PathVariable Long id) {
-        Long userId = requestService.getRequestById(id).getUser().getId();
-        requestService.statusRequest(id);
-        return "redirect:/user/" + userId;
-    }
-
     @GetMapping("/my/requests")
     public String userRequests(Principal principal, Model model) {
         User user = requestService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         model.addAttribute("requests", user.getRequests());
         return "my-requests";
+    }
+
+    @PostMapping("/request/statusedit")
+    public String requestStatusEdit(@RequestParam Long requestId, @RequestParam Map<String, String> form) {
+        requestService.changeRequestStatus(requestService.getRequestById(requestId), form);
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/request/statusedit/{user}")
+    public String userEdit(@PathVariable("user") User user, Model model) {
+        model.addAttribute("user", user);
+        model.addAttribute("statuses", Status.values());
+        return "statusrequest-edit";
     }
 }

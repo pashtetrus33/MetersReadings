@@ -1,6 +1,7 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    `<h1 style="text-align: center">Заявки на ремонт</h1><hr>
+    `<h1 style="text-align: center">Заявки на ремонт</h1>
+    <hr>
 
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
@@ -15,17 +16,20 @@
             <th scope="col">Имя</th>
             <th scope="col">Адрес</th>
             <th scope="col">Описание</th>
+            <th scope="col">Статус</th>
 
         </tr>
         <#list users as user>
-            <tr>
-                <th><#if user.areRequests()>${user.getLastRequest().dateOfCreated}<#else> - </#if></th>
-                <th>${user.name}</th>
-                <th>${user.address}</th>
-                <th><#if user.areRequests()>${user.getLastRequest().description}<#else> - </#if></th>
+            <#if user.areRequests()>
+                <tr>
+                    <th>${user.getFirstRequest().dateOfCreated}</th>
+                    <th>${user.name}</th>
+                    <th>${user.address}</th>
+                    <th>${user.getFirstRequest().description}</th>
+                    <th><#list user.getFirstRequest().statuses as status><a href="/request/statusedit/${user.id}">${status}</a></#list></th>
+                </tr>
+            </#if>
 
-
-            </tr>
         <#else>
             <h3>Пользователей нет</h3>
         </#list>

@@ -1,11 +1,15 @@
 package com.example.pmbakanov.models;
 
+import com.example.pmbakanov.models.enums.Role;
+import com.example.pmbakanov.models.enums.Status;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "requests")
@@ -30,15 +34,6 @@ public class Request {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public LocalDateTime getDateOfCreated() {
         return dateOfCreated;
     }
@@ -63,16 +58,30 @@ public class Request {
         this.images = images;
     }
 
-    private String status;
+    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "request_status",
+            joinColumns = @JoinColumn(name = "request_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Status> statuses = new HashSet<>();
     private LocalDateTime dateOfCreated;
+
+    public Set<Status> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(Set<Status> statuses) {
+        this.statuses = statuses;
+    }
+
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
     @PrePersist
     private void onCreate() {
         dateOfCreated = LocalDateTime.now().minusHours(3);
-        status = "Новая";
+        statuses.add(Status.STATUS_NEW);
     }
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "request")
     private List<Image> images = new ArrayList<>();
 

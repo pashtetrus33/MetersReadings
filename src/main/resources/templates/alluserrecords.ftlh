@@ -1,6 +1,7 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    `<h1 style="text-align: center">Показания пользователей</h1><hr>
+    `<h1 style="text-align: center">Показания пользователей</h1>
+    <hr>
 
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
@@ -20,16 +21,17 @@
             <th scope="col">Ванная<br> (горячая вода)</th>
         </tr>
         <#list users as user>
-            <tr>
-                <th><#if user.areRecords()>${user.getLastRecord().dateOfCreated}<#else> - </#if></th>
-                <th>${user.name}</th>
-                <th>${user.address}</th>
-                <th><#if user.areRecords()>${user.getLastRecord().kitchenCold}<#else> - </#if></th>
-                <th><#if user.areRecords()>${user.getLastRecord().kitchenHot}<#else> - </#if></th>
-                <th><#if user.areRecords()>${user.getLastRecord().toiletCold}<#else> - </#if></th>
-                <th><#if user.areRecords()>${user.getLastRecord().toiletHot}<#else> - </#if></th>
-
-            </tr>
+            <#if user.areRecords()>
+                <tr>
+                    <th>${user.getLastRecord().dateOfCreated}</th>
+                    <th>${user.name}</th>
+                    <th>${user.address}</th>
+                    <th>${user.getLastRecord().kitchenCold}</th>
+                    <th>${user.getLastRecord().kitchenHot}</th>
+                    <th>${user.getLastRecord().toiletCold}</th>
+                    <th>${user.getLastRecord().toiletHot}</th>
+                </tr>
+            </#if>
         <#else>
             <h3>Пользователей нет</h3>
         </#list>
