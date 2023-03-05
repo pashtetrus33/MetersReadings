@@ -13,7 +13,7 @@
 
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
-           href="/profile" role="button">
+           href="/user/${user.id}" role="button">
             Назад
         </a>
     </div>
