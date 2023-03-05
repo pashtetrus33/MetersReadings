@@ -12,14 +12,13 @@
         Адрес: <b>${user.address}</b>
 
     </div>
-    <br>
-    <hr>
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
            href="/profile" role="button">
             Назад
         </a>
     </div>
+    <hr>
     <h3 style="text-align: center">История показаний счетчиков </h3>
     <br>
     <div class="card-columns">
