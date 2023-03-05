@@ -39,7 +39,7 @@
                 </div>
             </a>
         <#else>
-            <h1 style="text-align: center">Не найдено</h1>
+            <h3 style="text-align: center">Не найдено</h3>
         </#list>
     </div>
 
@@ -65,7 +65,7 @@
                 </div>
             </a>
         <#else>
-            <h1 style="text-align: center">Не найдено</h1>
+            <h3 style="text-align: center">Не найдено</h3>
         </#list>
     </div>
 </@t.template>
