@@ -14,7 +14,13 @@
     </div>
     <br>
     <hr>
-    <h1 style="text-align: center">История показаний счетчиков </h1>
+    <div style="margin: 0 auto; text-align: center">
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
+           href="/user/profile" role="button">
+            Назад
+        </a>
+    </div>
+    <h3 style="text-align: center">История показаний счетчиков </h3>
     <br>
     <div class="card-columns">
         <#list records as record>
@@ -40,7 +46,7 @@
 
     <br>
     <hr>
-    <h1 style="text-align: center">История заявок </h1>
+    <h3 style="text-align: center">История заявок </h3>
     <br>
     <div class="card-columns">
         <#list requests as request>
