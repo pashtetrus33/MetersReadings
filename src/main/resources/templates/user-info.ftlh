@@ -61,7 +61,7 @@
 
                     </div>
                     <div class="card-footer">
-                        Имя пользователя: ${request.user.name}
+                        ${request.user.name}
                     </div>
                 </div>
             </a>
