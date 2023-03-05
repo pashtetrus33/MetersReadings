@@ -15,8 +15,8 @@
     <br>
     <hr>
     <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
-           href="/user/profile" role="button">
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
+           href="/profile" role="button">
             Назад
         </a>
     </div>
