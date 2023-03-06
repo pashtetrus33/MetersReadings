@@ -62,9 +62,9 @@ public class UserController {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
-            model.addAttribute("loginmessage", "User successfully activated");
+            model.addAttribute("loginmessage", "Пользователь успешно активирован");
         } else {
-            model.addAttribute("loginmessage", "Activation code is not found");
+            model.addAttribute("loginmessage", "Код активации не найден");
         }
         return "login";
     }
