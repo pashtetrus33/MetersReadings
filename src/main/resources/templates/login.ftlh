@@ -21,9 +21,14 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" style=" margin: 30px auto; width: 50%" class="btn btn-dark">Войти</button>
         </div>
-
     </form>
     <hr>
+    <div style="margin: 0 auto; text-align: center">
+        <a style=" margin: 30px auto; width: 50%" class="btn btn-dark"
+           href="/registration" role="button">
+            Регистрация нового пользователя
+        </a>
+    </div>
     <#if loginmessage??>
         <h2 style="color: red">${loginmessage}</h2>
     </#if>
