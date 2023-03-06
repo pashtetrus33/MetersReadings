@@ -27,6 +27,7 @@ public class UserController {
                           Model model) {
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
+        model.addAttribute("loginalert", "Код активации отправлен на указанную почту");
         return "profile";
     }
 
@@ -42,8 +43,8 @@ public class UserController {
             model.addAttribute("errorMessage", "Пользователь с именем: " + user.getLogin() + " уже существует");
             return "registration";
         }
-        model.addAttribute("loginalert", "Код активации отправлен на указанную почту");
-        return "redirect:/profile";
+        model.addAttribute("loginalert", "Ссылка для активации отправлена на указанную почту");
+        return "login";
     }
 
     @GetMapping("/user/{user}")
