@@ -24,7 +24,7 @@
     </form>
     <hr>
     <div style="margin: 0 auto; text-align: center">
-        <a style=" margin: 30px auto; width: 50%" class="btn btn-dark"
+        <a style=" margin: 30px auto; width:25%" class="btn btn-dark"
            href="/registration" role="button">
             Регистрация нового пользователя
         </a>
