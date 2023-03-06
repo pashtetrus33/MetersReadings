@@ -8,6 +8,7 @@ import com.example.pmbakanov.repositories.RequestRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RequestService {
 
+    @Autowired
     private MailSender mailSender;
     private final RequestRepository requestRepository;
     private final UserRepository userRepository;

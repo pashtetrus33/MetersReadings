@@ -45,7 +45,7 @@ public class UserService {
                     user.getName(),
                     user.getActivationCode()
             );
-            mailSender.sendMail(user.getEmail(), "Activation code", message);
+            mailSender.sendMail(user.getEmail(), "Ссылка для активации", message);
         }
         return true;
     }
