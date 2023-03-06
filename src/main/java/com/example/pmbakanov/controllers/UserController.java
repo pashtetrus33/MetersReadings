@@ -40,7 +40,7 @@ public class UserController {
     @PostMapping("/registration")
     public String createUser(User user, Model model) {
         if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "Пользователь с именем: " + user.getLogin() + " уже существует");
+            model.addAttribute("errorMessage", "Пользователь с именем и/или эл.почтой: " + user.getLogin() + " " +  user.getEmail() + " уже существует");
             return "registration";
         }
         model.addAttribute("loginalert", "Ссылка для активации отправлена на указанную почту");

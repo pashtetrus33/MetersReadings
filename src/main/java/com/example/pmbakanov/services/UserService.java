@@ -25,7 +25,9 @@ public class UserService {
 
     public boolean createUser(User user) {
         String login = user.getLogin();
+        String email = user.getEmail();
         if (userRepository.findByLogin(login) != null) return false;
+        if (userRepository.findByEmail(email) != null) return false;
         user.setActive(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getLogin().equals("bakanov")) {
