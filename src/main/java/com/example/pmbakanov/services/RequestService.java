@@ -2,6 +2,7 @@ package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.repositories.RequestRepository;
 import com.example.pmbakanov.repositories.UserRepository;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class RequestService {
+
+    private MailSender mailSender;
     private final RequestRepository requestRepository;
     private final UserRepository userRepository;
 
@@ -87,6 +90,7 @@ public class RequestService {
                 Status[] result = Status.values();
                 Status res = Arrays.stream(result).filter(p -> p.getTitle().equals(key)).findFirst().orElse(null);
                 request.getStatuses().add(Status.valueOf(res.name()));
+                mailSender.sendMail(request.getUser().getEmail(), "Статус заявки изменен: ", key);
             }
         }
         requestRepository.save(request);
