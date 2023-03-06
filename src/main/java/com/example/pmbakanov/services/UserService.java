@@ -5,27 +5,28 @@ import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
+    @Autowired
+    private MailSender mailSender;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
         String login = user.getLogin();
         if (userRepository.findByLogin(login) != null) return false;
-        user.setActive(true);
+        user.setActive(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getLogin().equals("bakanov")) {
             user.getRoles().add(Role.ROLE_ADMIN);
@@ -34,7 +35,18 @@ public class UserService {
             user.getRoles().add(Role.ROLE_USER);
             log.info("Saving new User with login: {}", login);
         }
+        user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
+
+        if (!StringUtils.isEmpty(user.getEmail())) {
+            String message = String.format(
+                    "Привет, %s \n" +
+                            "Добро пожаловать. Пожалуйста перейдите по ссылке для активации: https://meters.herokuapp.com//activate/%s",
+                    user.getName(),
+                    user.getActivationCode()
+            );
+            mailSender.sendMail(user.getEmail(), "Activation code", message);
+        }
         return true;
     }
 
@@ -53,7 +65,6 @@ public class UserService {
                 user.getRoles().add(Role.valueOf(key));
             }
         }
-        userRepository.save(user);
     }
 
     public User getUserByPrincipal(Principal principal) {
@@ -70,5 +81,18 @@ public class UserService {
     public void deleteUser(User user) {
         log.info("Deleting User with login: {}", user.getLogin());
         userRepository.delete(user);
+    }
+
+    public boolean activateUser(String code) {
+        User user = userRepository.findByActivationCode(code);
+
+        if (user == null) {
+            return false;
+        }
+        user.setActivationCode(null);
+        user.setActive(true);
+        userRepository.save(user);
+
+        return true;
     }
 }

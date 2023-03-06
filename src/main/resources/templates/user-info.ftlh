@@ -10,6 +10,7 @@
         <h2>${user.name}</h2>
         <br>
         Адрес: <b>${user.address}</b>
+        Эл.почта: <b>${user.email}</b>
 
     </div>
     <div style="margin: 0 auto; text-align: center">

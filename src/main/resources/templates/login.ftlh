@@ -1,18 +1,20 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h1 style="text-align: center" >Авторизация</h1>
+    <h1 style="text-align: center">Авторизация</h1>
     <hr>
     <form action="/" method="post">
         <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
             <label for="login">Имя пользователя</label>
-            <input type="text" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="login" name="username">
+            <input type="text" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="login"
+                   name="username">
             <div id="login" class="invalid-feedback">
                 Имя пользователя не найдено
             </div>
         </div>
         <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
             <label for="password">Пароль</label>
-            <input type="password" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="password" name="password">
+            <input type="password" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="password"
+                   name="password">
             <div id="password" class="invalid-feedback">
                 Неверный пароль
             </div>
@@ -22,5 +24,8 @@
 
     </form>
     <hr>
+    <#if loginmessage??>
+        <h2 style="color: red">${loginmessage}</h2>
+    </#if>
 
 </@t.template>

@@ -20,6 +20,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Column(unique = true, updatable = false)
     private String login;
     private String address;
@@ -29,6 +37,16 @@ public class User implements UserDetails {
     @Column(length = 1000)
     private String password;
 
+    private String email;
+    private String activationCode;
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
@@ -185,6 +203,5 @@ public class User implements UserDetails {
     public boolean isSupervisor() {
         return roles.contains(Role.ROLE_SUPERVISOR);
     }
-
 
 }

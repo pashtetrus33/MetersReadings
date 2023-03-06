@@ -16,6 +16,10 @@
             <input type="text" class="form-control" id="address" required name="address">
         </div>
         <div class="form-group">
+            <label for="address">Электронная почта</label>
+            <input type="email" class="form-control" id="email" required name="email" placeholder="some@some.com">
+        </div>
+        <div class="form-group">
             <label for="password">Пароль</label>
             <input type="password" class="form-control" id="password" required name="password">
         </div>
