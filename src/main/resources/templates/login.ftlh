@@ -32,5 +32,8 @@
     <#if loginmessage??>
         <h2 style="color: red">${loginmessage}</h2>
     </#if>
+    <#if loginalert??>
+        <h2 style="color: red">${loginalert}</h2>
+    </#if>
 
 </@t.template>
