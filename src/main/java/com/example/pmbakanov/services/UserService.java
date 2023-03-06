@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
-    @Autowired
     private MailSender mailSender;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
