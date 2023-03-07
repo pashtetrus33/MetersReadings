@@ -13,7 +13,14 @@
         </div>
         <div class="form-group">
             <label for="address">Адрес пользователя</label>
-            <input type="text" class="form-control" id="address" required name="address">
+            <select id="address" required name="address" class="form-control">
+                <option value="">Здание не выбрано</option>
+
+                <option value="Школьно-жилой дом">Школьно-жилой дом</option>
+                <option value="Жилой дом №1">Жилой дом №1</option>
+                <option value="Жилой дом №2">Жилой дом №2</option>
+
+            </select>
         </div>
         <div class="form-group">
             <label for="address">Электронная почта</label>
