@@ -19,12 +19,12 @@
                 Неверный пароль
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" style=" margin: 30px auto; width: 50%" class="btn btn-dark">Войти</button>
+            <button type="submit" style=" margin: 15px auto; width: auto" class="btn btn-dark">Войти</button>
         </div>
     </form>
     <hr>
     <div style="margin: 0 auto; text-align: center">
-        <a style=" margin: 30px auto; width:25%" class="btn btn-dark"
+        <a style=" margin: 0px auto; width:auto" class="btn btn-dark"
            href="/registration" role="button">
             Регистрация
         </a>
