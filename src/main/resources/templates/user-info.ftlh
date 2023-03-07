@@ -28,7 +28,7 @@
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
-                        <h5 class="card-title">Дата создания: ${record.dateOfCreated}</h5>
+                        <h5 class="card-title">Дата создания:  ${record.dateOfCreated}</h5>
                         <p class="card-text"> Кухня (холодная вода):${record.kitchenCold}</p>
                         <p class="card-text"> Кухня (горячая вода):${record.kitchenHot}</p>
                         <p class="card-text"> Cанузел (холодная вода):${record.toiletCold}</p>
