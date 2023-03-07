@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label for="login">Логин</label>
-            <input type="login" class="form-control" id="login" required name="login">
+            <input type="login" class="form-control" id="login" required name="login" placeholder="Может совпадать с эл.почтой">
         </div>
         <div class="form-group">
             <label for="address">Адрес пользователя</label>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <label for="address">Электронная почта</label>
-            <input type="email" class="form-control" id="email" required name="email" placeholder="some@some.com">
+            <input type="email" class="form-control" id="email" required name="email" placeholder="Получение кода активации и уведомлений">
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>
