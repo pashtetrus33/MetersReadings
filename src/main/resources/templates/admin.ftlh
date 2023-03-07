@@ -17,7 +17,6 @@
     <br>
     <table class="table table-hover table-dark">
         <tr>
-            <th scope="col">Логин</th>
             <th scope="col">Эл.почта</th>
             <th scope="col">Адрес</th>
             <th scope="col">Активность</th>
@@ -28,7 +27,6 @@
         </tr>
         <#list users as user>
             <tr>
-                <th>${user.login}</th>
                 <th>${user.email}</th>
                 <th>${user.address}</th>
                 <th><#if user.active>true<#else>false</#if></th>

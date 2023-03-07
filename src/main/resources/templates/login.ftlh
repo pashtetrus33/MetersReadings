@@ -4,15 +4,15 @@
     <hr>
     <form action="/" method="post">
         <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
-            <label for="login">Имя пользователя</label>
-            <input type="text" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="login"
-                   name="username">
-            <div id="login" class="invalid-feedback">
+            <label for="email" style="margin: auto;">Электронная почта</label>
+            <input type="text" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email"
+                   name="email">
+            <div id="email" class="invalid-feedback">
                 Имя пользователя не найдено
             </div>
         </div>
         <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
-            <label for="password">Пароль</label>
+            <label for="password" style="margin: auto;">Пароль</label>
             <input type="password" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="password"
                    name="password">
             <div id="password" class="invalid-feedback">

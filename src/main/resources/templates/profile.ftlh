@@ -7,8 +7,8 @@
              style="border:2px solid black; border-radius: 20px" height="120">
         <br>
         <h2>${user.name}</h2>
-        <h4>Логин: <b>${user.login}</b></h4>
-        <h4>Адрес: <b>${user.address}</b></h4>
+        <h4><b>${user.email}</b></h4>
+        <h4><b>${user.address}</b></h4>
         <hr>
         <#if user.isAdmin()>
             <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"

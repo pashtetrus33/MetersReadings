@@ -24,21 +24,19 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
-        String login = user.getLogin();
         String email = user.getEmail();
-        String adress = user.getAddress();
+        String address = user.getAddress();
         String flat = user.getFlat();
-        if (userRepository.findByLogin(login) != null) return false;
         if (userRepository.findByEmail(email) != null) return false;
         user.setActive(false);
-        user.setAddress(adress + " " + flat);
+        user.setAddress(address + " " + flat);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getLogin().equals("bakanov")) {
+        if (email.equals("pashtet_rus@mail.ru")) {
             user.getRoles().add(Role.ROLE_ADMIN);
-            log.info("Saving new Admin with login: {}", login);
+            log.info("Saving new Admin with email: {}", email);
         } else {
             user.getRoles().add(Role.ROLE_USER);
-            log.info("Saving new User with login: {}", login);
+            log.info("Saving new User with email: {}", email);
         }
         user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
@@ -76,17 +74,17 @@ public class UserService {
 
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
-        return userRepository.findByLogin(principal.getName());
+        return userRepository.findByEmail(principal.getName());
     }
 
     public void changeUserPassword(User user, Map<String, String> form) {
         user.setPassword(passwordEncoder.encode(form.get("password")));
         userRepository.save(user);
-        log.info("Changing password for User with login: {}", user.getLogin());
+        log.info("Changing password for User with email: {}", user.getEmail());
     }
 
     public void deleteUser(User user) {
-        log.info("Deleting User with login: {}", user.getLogin());
+        log.info("Deleting User with email: {}", user.getEmail());
         userRepository.delete(user);
     }
 

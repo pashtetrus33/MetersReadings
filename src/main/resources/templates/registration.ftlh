@@ -8,8 +8,8 @@
             <input type="text" class="form-control" required id="name" name="name">
         </div>
         <div class="form-group">
-            <label for="login">Логин</label>
-            <input type="login" class="form-control" id="login" required name="login" placeholder="Может совпадать с эл.почтой">
+            <label for="address">Электронная почта</label>
+            <input type="email" class="form-control" id="email" required name="email" placeholder="Получение кода активации и уведомлений">
         </div>
         <div class="form-group">
             <label for="address">Адрес пользователя</label>
@@ -49,10 +49,6 @@
                 <option value="кв.№61">кв.№61</option>
                 <option value="кв.№62">кв.№62</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="address">Электронная почта</label>
-            <input type="email" class="form-control" id="email" required name="email" placeholder="Получение кода активации и уведомлений">
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>
