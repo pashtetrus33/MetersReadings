@@ -68,6 +68,7 @@ public class UserService {
                 mailSender.sendMail(user.getEmail(), "Смена типа пользователя", Role.valueOf(key).name());
             }
         }
+        userRepository.save(user);
     }
 
     public User getUserByPrincipal(Principal principal) {
