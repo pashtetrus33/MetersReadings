@@ -37,7 +37,6 @@ public class User implements UserDetails {
     public String getFlat() {
         return flat;
     }
-
     public void setFlat(String flat) {
         this.flat = flat;
     }
