@@ -3,9 +3,9 @@
     `<h1 style="text-align: center">Панель администратора</h1><hr>
 
     <div style="margin: 0 auto; text-align: center">
-    <a class="btn btn-danger mb-2" style="text-align: center; width: 30%"
+    <a class="btn btn-danger mb-2" style="text-align: center; width: auto"
        href="/registration" role="button">
-        Регистрация нового пользователя
+        Регистрация
     </a>
     </div>
     <div style="margin: 0 auto; text-align: center">

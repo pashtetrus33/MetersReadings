@@ -4,7 +4,7 @@
     <h3 style="text-align: center"> ${user.name}</h3>
 
     <hr>
-    <form action="/admin/user/edit" method="post">
+    <form action="/admin/user/edit" method="post" style="text-align: center;">
         <#list roles as role>
             <div>
                 <label><input type="checkbox"
@@ -16,20 +16,20 @@
         <button type="submit" class="btn btn-dark">Сохранить</button>
     </form>
 
-    <form action="/admin/user/password_change" method="post">
+    <form action="/admin/user/password_change" method="post" style="text-align: center">
         <label for="password">Пароль</label>
         <input type="password" class="form-control" id="password" required name="password" style="width: 25%">
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit" class="btn btn-dark">Сохранить</button>
+        <button type="submit" class="btn btn-dark" style="margin: 13px;">Сохранить</button>
     </form>
 
 
-    <form action="/admin/user/delete" method="post" style="width: 25%">
+    <form action="/admin/user/delete" method="post" style="text-align: center;">
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button type="submit" style="text-align: center; width: 50%" class="btn btn-danger mb-2">
-            Удалить пользователя
+        <button type="submit" style="width: auto" class="btn btn-danger mb-2">
+            Удалить
         </button>
     </form>
 
