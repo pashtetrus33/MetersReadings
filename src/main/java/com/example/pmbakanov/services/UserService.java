@@ -26,9 +26,12 @@ public class UserService {
     public boolean createUser(User user) {
         String login = user.getLogin();
         String email = user.getEmail();
+        String adress = user.getAddress();
+        String flat = user.getFlat();
         if (userRepository.findByLogin(login) != null) return false;
         if (userRepository.findByEmail(email) != null) return false;
         user.setActive(false);
+        user.setAddress(adress + " " + flat);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getLogin().equals("bakanov")) {
             user.getRoles().add(Role.ROLE_ADMIN);
