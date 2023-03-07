@@ -23,6 +23,16 @@
             </select>
         </div>
         <div class="form-group">
+            <select id="flat" required name="flat" class="form-control">
+                <option value="">Квартира не выбрана</option>
+
+                <option value="кв.№11">кв.№11</option>
+                <option value="кв.№21">кв.№21</option>
+                <option value="кв.№31">кв.№31</option>
+
+            </select>
+        </div>
+        <div class="form-group">
             <label for="address">Электронная почта</label>
             <input type="email" class="form-control" id="email" required name="email" placeholder="Получение кода активации и уведомлений">
         </div>
