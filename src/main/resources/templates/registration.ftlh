@@ -61,7 +61,7 @@
 
     </form>
     <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-dark mb-2" style="text-align: center; width: 25%"
+        <a class="btn btn-dark mb-2" style="text-align: center"
            href="/profile" role="button">
             Назад
         </a>
