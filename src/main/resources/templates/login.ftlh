@@ -30,10 +30,10 @@
         </a>
     </div>
     <#if loginmessage??>
-        <h4 style="color: red">${loginmessage}</h4>
+        <h6 style="color: red">${loginmessage}</h6>
     </#if>
     <#if loginalert??>
-        <h4 style="color: red">${loginalert}</h4>
+        <h6 style="color: red">${loginalert}</h6>
     </#if>
 
 </@t.template>
