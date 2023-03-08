@@ -42,7 +42,7 @@
             Добавить показания счетчиков
         </a>
         <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center">
-            <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 33%; margin: auto">
+            <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 51%; margin: auto">
                 <div class="form-group">
                     <label for="kitchenCold">Кухня: холодная вода</label>
                     <input type="number" required class="form-control"
