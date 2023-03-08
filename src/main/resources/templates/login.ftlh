@@ -3,7 +3,7 @@
     <h1 style="text-align: center">Авторизация</h1>
     <hr>
     <form action="/" method="post">
-        <div class="form-group" style="margin: 0 auto; text-align: center; width: auto">
+        <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
             <label for="email" style="margin: auto;">Электронная почта</label>
             <input type="email" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email"
                    name="email">
@@ -11,7 +11,7 @@
                 Электронная почта не найдена
             </div>
         </div>
-        <div class="form-group" style="margin: 0 auto; text-align: center; width: auto">
+        <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
             <label for="password" style="margin: auto;">Пароль</label>
             <input type="password" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="password"
                    name="password">
