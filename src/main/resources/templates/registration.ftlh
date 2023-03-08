@@ -4,15 +4,15 @@
     <hr>
     <form action="/registration" method="post" style="margin: 0 auto; text-align: center; width: 50%">
         <div class="form-group">
-            <label for="name">ФИО пользователя</label>
+            <label for="name" style="margin: auto;">ФИО пользователя</label>
             <input type="text" class="form-control" required id="name" name="name">
         </div>
         <div class="form-group">
-            <label for="address">Электронная почта</label>
+            <label for="address" style="margin: auto;">Электронная почта</label>
             <input type="email" class="form-control" id="email" required name="email" placeholder="Получение кода активации и уведомлений">
         </div>
         <div class="form-group">
-            <label for="address">Адрес пользователя</label>
+            <label for="address" style="margin: auto;">Адрес пользователя</label>
             <select id="address" required name="address" class="form-control">
                 <option value="">Здание не выбрано</option>
                 <option value="Школьно-жилой дом">Школьно-жилой дом</option>
@@ -51,7 +51,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="password">Пароль</label>
+            <label for="password" style="margin: auto;">Пароль</label>
             <input type="password" class="form-control" id="password" required name="password">
         </div>
         <div style="margin: 0 auto; text-align: center">
