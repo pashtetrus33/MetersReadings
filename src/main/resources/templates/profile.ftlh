@@ -1,12 +1,12 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h2 style="text-align: center">Личный кабинет</h2>
+    <h3 style="text-align: center">Личный кабинет</h3>
     <hr>
     <div style="text-align: center">
         <img src="/static/images/avatar.jpg"
              style="border:2px solid black; border-radius: 20px" height="120">
         <br>
-        <h2>${user.name}</h2>
+        <h4>${user.name}</h4>
         <h4><b>${user.email}</b></h4>
         <h4><b>${user.address}</b></h4>
         <hr>
@@ -41,7 +41,7 @@
            aria-expanded="true" aria-controls="collapseExample">
             Добавить показания счетчиков
         </a>
-        <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center; width: 50%">
+        <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center">
             <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 33%; margin: auto">
                 <div class="form-group">
                     <label for="kitchenCold">Кухня: холодная вода</label>

@@ -2,8 +2,8 @@
 <@t.template user>
 
     <hr>
-    <p><h2 style="text-align: center">${request.dateOfCreated} </h2></p>
-    <p><h2 style="text-align: center">${authorRequest.address} </h2></p>
+    <p><h3 style="text-align: center">${request.dateOfCreated} </h3></p>
+    <p><h3 style="text-align: center">${authorRequest.address} </h3></p>
 
     <hr>
     <p style="text-align: center">Описание: <b>${request.description}</b></p>

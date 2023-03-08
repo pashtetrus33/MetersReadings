@@ -1,6 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h1 style="text-align: center">История заявок на ремонт</h1>
+    <h4 style="text-align: center">История заявок на ремонт</h1>
     <hr>
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
@@ -25,7 +25,7 @@
                 </div>
             </a>
         <#else>
-            <h3 style="text-align: center">Не найдено</h3>
+            <h4 style="text-align: center">Не найдено</h4>
         </#list>
     </div>
 </@t.template>

@@ -18,7 +18,7 @@
                 </div>
             </a>
         <#else>
-            <h3 style="text-align: center">Не найдено</h3>
+            <h4 style="text-align: center">Не найдено</h4>
         </#list>
     </div>
 </@t.template>

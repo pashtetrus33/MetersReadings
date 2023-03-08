@@ -1,6 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h2 style="text-align: center">Редактирование пользователя:</h2>
+    <h3 style="text-align: center">Редактирование пользователя:</h3>
     <h3 style="text-align: center"> ${user.name}</h3>
 
     <hr>

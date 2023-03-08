@@ -1,6 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h2 style="text-align: center">Редактирование заявки пользователя:</h2>
+    <h3 style="text-align: center">Редактирование заявки пользователя:</h3>
     <h3 style="text-align: center"> ${user.name}</h3>
     <h3 style="text-align: center"> Заявка: ${user.getFirstRequest().description}</h3>
     <h3 style="text-align: center"> Дата создания:  ${user.getFirstRequest().dateOfCreated}</h3>

@@ -2,8 +2,8 @@
 <@t.template user>
 
     <hr>
-    <p><h2 style="text-align: center">${record.dateOfCreated} </h2></p>
-    <p><h2 style="text-align: center">${authorRecord.address} </h2></p>
+    <p><h3 style="text-align: center">${record.dateOfCreated} </h3></p>
+    <p><h3 style="text-align: center">${authorRecord.address} </h3></p>
 
     <hr>
     <p style="text-align: center">Кухня холодная вода: <b>${record.kitchenCold}</b></p>

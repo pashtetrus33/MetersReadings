@@ -1,6 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    `<h1 style="text-align: center">Показания пользователей</h1>
+    `<h4 style="text-align: center">Показания пользователей</h4>
     <hr>
 
     <div style="margin: 0 auto; text-align: center">
@@ -33,7 +33,7 @@
                 </tr>
             </#if>
         <#else>
-            <h3>Пользователей нет</h3>
+            <h4>Пользователей нет</h4>
         </#list>
     </table>
 </@t.template>
