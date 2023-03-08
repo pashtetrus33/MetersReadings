@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label for="address" style="margin: auto;">Электронная почта</label>
-            <input type="email" class="form-control" id="email" required name="email" placeholder="Получение кода активации и уведомлений">
+            <input type="email" class="form-control" id="email" required name="email">
         </div>
         <div class="form-group">
             <label for="address" style="margin: auto;">Адрес пользователя</label>
