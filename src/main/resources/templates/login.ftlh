@@ -3,7 +3,7 @@
     <h1 style="text-align: center">Авторизация</h1>
     <hr>
     <form action="/" method="post" style="width: 25%">
-        <div class="form-group" style="margin: 0 auto; text-align: center">
+        <div class="form-group" style="text-align: center">
             <label for="email" style="margin: auto;">Электронная почта</label>
             <input type="email" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email"
                    name="username">
