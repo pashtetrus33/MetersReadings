@@ -11,7 +11,7 @@
         <h4><b>${user.address}</b></h4>
         <hr>
         <#if user.isAdmin()>
-            <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/admin">
                 Админка
             </a>
