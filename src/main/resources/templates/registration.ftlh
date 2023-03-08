@@ -2,7 +2,7 @@
 <@t.template user>
     <h1 style="text-align: center">Регистрация</h1>
     <hr>
-    <form action="/registration" method="post" style="margin: 0 auto; width: 55%">
+    <form action="/registration" method="post" style="margin: 0 auto; width: 60%">
         <div class="form-group">
             <label for="name" style="margin: auto;">ФИО пользователя</label>
             <input type="text" class="form-control" required id="name" name="name">
