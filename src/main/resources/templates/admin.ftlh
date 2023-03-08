@@ -9,7 +9,7 @@
     </a>
     </div>
     <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-danger mb-2" style="text-align: center; width: auto"
+        <a class="btn btn-dark mb-2" style="text-align: center; width: auto"
            href="/profile" role="button">
             Назад
         </a>
