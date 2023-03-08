@@ -8,10 +8,6 @@
             <input type="text" class="form-control" required id="name" name="name">
         </div>
         <div class="form-group">
-            <label for="address" style="margin: auto;">Электронная почта</label>
-            <input type="email" class="form-control" id="email" required name="email">
-        </div>
-        <div class="form-group">
             <label for="address" style="margin: auto;">Адрес пользователя</label>
             <select id="address" required name="address" class="form-control">
                 <option value="">Здание не выбрано</option>
@@ -49,6 +45,10 @@
                 <option value="кв.№61">кв.№61</option>
                 <option value="кв.№62">кв.№62</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="address" style="margin: auto;">Электронная почта</label>
+            <input type="email" class="form-control" id="email" required name="email">
         </div>
         <div class="form-group">
             <label for="password" style="margin: auto;">Пароль</label>
