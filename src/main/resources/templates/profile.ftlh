@@ -74,7 +74,7 @@
                 <button type="submit" style="width: 100%" class="btn btn-dark">Добавить</button>
             </form>
         </div>
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
+        <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample2" role="button"
            aria-expanded="true" aria-controls="collapseExample">
             Создать заявку
