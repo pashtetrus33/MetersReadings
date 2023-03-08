@@ -1,6 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template userByPrincipal>
-    <h1 style="text-align: center">Информация о пользователе</h1>
+    <h4 style="text-align: center">Информация о пользователе</h4>
     <hr>
     <div style="text-align: center">
             <img src="/static/images/avatar.jpg"
@@ -9,8 +9,8 @@
         <br>
         <h2>${user.name}</h2>
         <br>
-        Адрес: <b>${user.address}</b>
-        Эл.почта: <b>${user.email}</b>
+        <b>${user.address}</b>
+        <b>${user.email}</b>
 
     </div>
     <div style="margin: 0 auto; text-align: center">
