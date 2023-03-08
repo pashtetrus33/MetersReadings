@@ -13,57 +13,57 @@
         <#if user.isAdmin()>
             <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
                href="/admin">
-                Панель администратора
+                Админка
             </a>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrecords">
-                Последние показания счетчиков
+                Счетчики
             </a>
 
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrequests">
-                Последние заявки
+                Заявки
             </a>
         </#if>
         <#if user.isSupervisor()>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrecords">
-                Последние показания счетчиков
+                Счетчики
             </a>
 
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrequests">
-                Последние заявки
+                Заявки
             </a>
         </#if>
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample" role="button"
            aria-expanded="true" aria-controls="collapseExample">
-            Добавить показания счетчиков
+            Добавить показания
         </a>
         <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center">
-            <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 51%; margin: auto">
+            <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 53%; margin: auto">
                 <div class="form-group">
-                    <label for="kitchenCold">Кухня: холодная вода</label>
+                    <label for="kitchenCold">Кухня:холодная вода</label>
                     <input type="number" required class="form-control"
                            id="kitchenCold" name="kitchenCold">
                 </div>
                 <div class="form-group">
-                    <label for="kitchenHot">Кухня: горячая вода</label>
+                    <label for="kitchenHot">Кухня:горячая вода</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="toiletCold">Санузел: холодная вода</label>
+                    <label for="toiletCold">Санузел:холодная вода</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletCold" name="toiletCold">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="toiletHot">Санузел: горячая вода</label>
+                    <label for="toiletHot">Санузел:горячая вода</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
