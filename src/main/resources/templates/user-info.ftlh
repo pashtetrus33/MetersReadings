@@ -20,7 +20,7 @@
         </a>
     </div>
     <hr>
-    <h3 style="text-align: center">История показаний счетчиков </h3>
+    <h4 style="text-align: center">История показаний счетчиков </h4>
     <br>
     <div class="card-columns">
         <#list records as record>
@@ -40,13 +40,13 @@
                 </div>
             </a>
         <#else>
-            <h3 style="text-align: center">Не найдено</h3>
+            <h4 style="text-align: center">Не найдено</h4>
         </#list>
     </div>
 
     <br>
     <hr>
-    <h3 style="text-align: center">История заявок </h3>
+    <h4 style="text-align: center">История заявок </h4>
     <br>
     <div class="card-columns">
         <#list requests as request>
@@ -66,7 +66,7 @@
                 </div>
             </a>
         <#else>
-            <h3 style="text-align: center">Не найдено</h3>
+            <h4 style="text-align: center">Не найдено</h4>
         </#list>
     </div>
 </@t.template>
