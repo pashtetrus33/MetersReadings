@@ -81,14 +81,9 @@
         </a>
         <div class="collapse mb-3" id="collapseExample2" style="margin: 0 auto; text-align: center; width: 50%">
             <form action="/request/create" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="description">Описание</label>
-                    <input type="text" required class="form-control"
-                           id="description" name="description">
-                </div>
                 <div class="form-outline">
-                    <textarea class="form-control" id="textAreaExample1" rows="4"></textarea>
-                    <label class="form-label" for="textAreaExample">Message</label>
+                    <label for="description">Описание</label>
+                    <textarea class="form-control"  id="description" rows="4"  name="description"></textarea>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
