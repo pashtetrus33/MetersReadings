@@ -6,7 +6,7 @@
         <div class="form-group" style="margin: 0 auto; text-align: center; width: 25%">
             <label for="email" style="margin: auto;">Электронная почта</label>
             <input type="email" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email"
-                   name="email">
+                   name="username">
             <div id="email" class="invalid-feedback">
                 Электронная почта не найдена
             </div>

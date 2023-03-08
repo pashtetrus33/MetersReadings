@@ -30,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/profile")
                 .permitAll()
                 .and()
-
                 .logout()
                 .permitAll();
     }

@@ -1,7 +1,6 @@
 package com.example.pmbakanov.models;
 
 import com.example.pmbakanov.models.enums.Role;
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,21 +14,12 @@ public class User implements UserDetails {
     public Long getId() {
         return id;
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String address;
     private String flat;
     private String name;
-
-    public String getFlat() {
-        return flat;
-    }
-    public void setFlat(String flat) {
-        this.flat = flat;
-    }
-
     private boolean active;
 
     @Column(length = 1000)
@@ -71,6 +61,13 @@ public class User implements UserDetails {
     public void addRecordToUser(Record record) {
         record.setUser(this);
         records.add(record);
+    }
+
+    public String getFlat() {
+        return flat;
+    }
+    public void setFlat(String flat) {
+        this.flat = flat;
     }
 
     public Record getLastRecord() {
