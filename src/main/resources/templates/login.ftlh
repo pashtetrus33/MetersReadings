@@ -8,7 +8,7 @@
             <input type="text" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email"
                    name="email">
             <div id="email" class="invalid-feedback">
-                Имя пользователя не найдено
+                Электронная почта не найдена
             </div>
         </div>
         <div class="form-group" style="margin: 0 auto; text-align: center; width: 50%">
