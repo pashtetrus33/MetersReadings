@@ -82,12 +82,12 @@
         <div class="collapse mb-3" id="collapseExample2" style="margin: 0 auto; text-align: center; width: 50%">
             <form action="/request/create" method="post" enctype="multipart/form-data">
                 <div class="form-outline">
-                    <label for="description">Описание</label>
+                    <label for="description" style="margin: auto;">Описание</label>
                     <textarea class="form-control"  id="description" rows="4"  name="description"></textarea>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
-                <button type="submit" style="width: 50%" class="btn btn-dark">Добавить</button>
+                <button type="submit" class="btn btn-dark">Добавить</button>
             </form>
         </div>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
