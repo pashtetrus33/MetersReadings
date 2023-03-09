@@ -15,16 +15,7 @@
         </#list>
         <input type="hidden" value="${user.getFirstRequest().id}" name="requestId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit" class="btn btn-dark">Сохранить</button>
+        <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
-
-    <#if user.isAdmin()>
-        <form action="/request/delete/${user.getFirstRequest().id}" method="post" style="margin: 0 auto; text-align: center">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button type="submit" class="btn btn-danger mb-2">
-                Удалить заявку
-            </button>
-        </form>
-    </#if>
 
 </@t.template>

@@ -17,6 +17,7 @@
             <th scope="col">Адрес</th>
             <th scope="col">Описание</th>
             <th scope="col">Статус</th>
+            <th scope="col">Удаление</th>
 
         </tr>
         <#list users as user>
@@ -28,6 +29,13 @@
                             <th>${user.address}</th>
                             <th>${request.description}</th>
                             <th><#list request.statuses as status><a href="/request/statusedit/${user.id}">${status}</a></#list></th>
+                            <th>  <form action="/request/delete/${user.getFirstRequest().id}" method="post" style="margin: 0 auto; text-align: center">
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                    <button type="submit" class="btn btn-danger mb-2">
+                                        Удалить
+                                    </button>
+                                </form>
+                            </th>
                         </tr>
                 </#list>
             </#if>
