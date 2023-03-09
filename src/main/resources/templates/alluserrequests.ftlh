@@ -23,7 +23,7 @@
         <#list requests as request>
                         <tr>
                             <th>${request.dateOfCreated}</th>
-                            <th>${request.user}</th>
+                            <th>${request.user.name}</th>
                             <th>${request.user.address}</th>
                             <th>${request.description}</th>
                             <th><#list request.statuses as status><a href="/request/statusedit/${request.user.id}">${status}</a></#list></th>
