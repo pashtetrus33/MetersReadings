@@ -20,18 +20,16 @@
             <th scope="col">Ванная<br> (холодная вода</th>
             <th scope="col">Ванная<br> (горячая вода)</th>
         </tr>
-        <#list users as user>
-            <#if user.areRecords()>
+        <#list records as record>
                 <tr>
-                    <th>${user.getLastRecord().dateOfCreated}</th>
-                    <th>${user.name}</th>
-                    <th>${user.address}</th>
-                    <th>${user.getLastRecord().kitchenCold}</th>
-                    <th>${user.getLastRecord().kitchenHot}</th>
-                    <th>${user.getLastRecord().toiletCold}</th>
-                    <th>${user.getLastRecord().toiletHot}</th>
+                    <th>${record.dateOfCreated}</th>
+                    <th>${record.user.name}</th>
+                    <th>${record.user.address}</th>
+                    <th>${record.user.getLastRecord().kitchenCold}</th>
+                    <th>${record.user.getLastRecord().kitchenHot}</th>
+                    <th>${record.user.getLastRecord().toiletCold}</th>
+                    <th>${record.user.getLastRecord().toiletHot}</th>
                 </tr>
-            </#if>
         <#else>
             <h4>Пользователей нет</h4>
         </#list>

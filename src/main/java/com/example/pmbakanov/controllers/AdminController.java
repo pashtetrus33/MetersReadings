@@ -28,15 +28,6 @@ public class AdminController {
         return "admin";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
-    @GetMapping("/allusersrecords")
-    public String alluserrecords(Model model, Principal principal) {
-        model.addAttribute("users", userService.list());
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "alluserrecords";
-    }
-
-
 //    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
 //    @GetMapping("/allusersrequests")
 //    public String allusersrequests(Model model, Principal principal) {
@@ -44,7 +35,6 @@ public class AdminController {
 //        model.addAttribute("user", userService.getUserByPrincipal(principal));
 //        return "alluserrequests";
 //    }
-
 
 
     @GetMapping("/admin/user/edit/{user}")
