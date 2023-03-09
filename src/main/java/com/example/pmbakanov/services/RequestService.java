@@ -59,8 +59,11 @@ public class RequestService {
         request.setUser(getUserByPrincipal(principal));
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
-        mailSender.sendMail("pashtet_rus@mail.ru", "Новая заявка" + ": " + request.getUser().getName(), request.getUser().getAddress() + "\n" +
-                request.getDescription());
+        for (User user: userRepository.findAll()){
+            if (user.isAdmin() || user.isSupervisor())
+                mailSender.sendMail(user.getEmail(), "Новая заявка" + ": " + request.getUser().getName(), request.getUser().getAddress() + "\n" +
+                        request.getDescription());
+        }
     }
 
     public User getUserByPrincipal(Principal principal) {
