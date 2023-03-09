@@ -97,7 +97,7 @@ public class RequestService {
                 Status[] result = Status.values();
                 Status res = Arrays.stream(result).filter(p -> p.getTitle().equals(key)).findFirst().orElse(null);
                 request.getStatuses().add(Status.valueOf(res.name()));
-                mailSender.sendMail(request.getUser().getEmail(), "Статус заявки изменен: ", key);
+                mailSender.sendMail(request.getUser().getEmail(), "Статус заявки изменен", request.getDescription() + "\n" + key);
             }
         }
         requestRepository.save(request);
