@@ -43,8 +43,8 @@ public class UserService {
 
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
-                    "Привет, %s \n" +
-                            "Добро пожаловать. Пожалуйста перейдите по ссылке для активации: https://meters.herokuapp.com/activate/%s",
+                            "Добро пожаловать, %s. \n" +
+                                    "Пожалуйста перейдите по ссылке для активации: https://meters.herokuapp.com/activate/%s",
                     user.getName(),
                     user.getActivationCode()
             );

@@ -67,6 +67,6 @@
         </a>
     </div>
     <#if errorMessage??>
-        <h2 style="color: red">${errorMessage}</h2>
+        <h6 style="color: red">${errorMessage}</h6>
     </#if>
 </@t.template>
