@@ -19,11 +19,12 @@
     </form>
 
     <#if user.isAdmin()>
-        <form action="/request/delete/${id}" method="post" style="margin: 0 auto; text-align: center">
+        <form action="/request/delete/${user.getFirstRequest().id}" method="post" style="margin: 0 auto; text-align: center">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button type="submit" style="width: 50%" class="btn btn-danger mb-2">
+            <button type="submit" class="btn btn-danger mb-2">
                 Удалить заявку
             </button>
         </form>
     </#if>
+
 </@t.template>
