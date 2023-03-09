@@ -4,7 +4,7 @@
     <hr>
 
     <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center"
            href="/profile" role="button">
             Назад
         </a>
@@ -30,8 +30,6 @@
                     <th>${record.user.getLastRecord().toiletCold}</th>
                     <th>${record.user.getLastRecord().toiletHot}</th>
                 </tr>
-        <#else>
-            <h4>Пользователей нет</h4>
         </#list>
     </table>
 </@t.template>
