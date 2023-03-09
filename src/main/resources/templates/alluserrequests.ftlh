@@ -21,15 +21,16 @@
         </tr>
         <#list users as user>
             <#if user.areRequests()>
-                <tr>
-                    <th>${user.getFirstRequest().dateOfCreated}</th>
-                    <th>${user.name}</th>
-                    <th>${user.address}</th>
-                    <th>${user.getFirstRequest().description}</th>
-                    <th><#list user.getFirstRequest().statuses as status><a href="/request/statusedit/${user.id}">${status}</a></#list></th>
-                </tr>
+                <#list user.requests as request>
+                        <tr>
+                            <th>${request.dateOfCreated}</th>
+                            <th>${user.name}</th>
+                            <th>${user.address}</th>
+                            <th>${request.description}</th>
+                            <th><#list request.statuses as status><a href="/request/statusedit/${user.id}">${status}</a></#list></th>
+                        </tr>
+                </#list>
             </#if>
-
         <#else>
             <h4>Пользователей нет</h4>
         </#list>
