@@ -59,6 +59,8 @@ public class RequestService {
         request.setUser(getUserByPrincipal(principal));
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
+        mailSender.sendMail("pashtet_rus@mail.ru", "Новая заявка", request.getUser().toString() + " " +
+                request.getDescription());
     }
 
     public User getUserByPrincipal(Principal principal) {
