@@ -5,7 +5,9 @@ import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.services.RequestService;
+import com.example.pmbakanov.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class RequestController {
     private final RequestService requestService;
+    private final UserService userService;
 
     @GetMapping("/request/{id}")
     public String requestInfo(@PathVariable Long id, Model model, Principal principal) {
@@ -73,5 +76,13 @@ public class RequestController {
         model.addAttribute("user", user);
         model.addAttribute("statuses", Status.values());
         return "statusrequest-edit";
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
+    @GetMapping("/allusersrequests")
+    public String allusersrequests(Model model, Principal principal) {
+        model.addAttribute("requests", requestService.listRequests(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "alluserrequests";
     }
 }

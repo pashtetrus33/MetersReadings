@@ -20,9 +20,7 @@
             <th scope="col">Удаление</th>
 
         </tr>
-        <#list users as user>
-            <#if user.areRequests()>
-                <#list user.requests as request>
+        <#list requests as request>
                         <tr>
                             <th>${request.dateOfCreated}</th>
                             <th>${user.name}</th>
@@ -38,9 +36,5 @@
                             </th>
                         </tr>
                 </#list>
-            </#if>
-        <#else>
-            <h4>Пользователей нет</h4>
-        </#list>
     </table>
 </@t.template>
