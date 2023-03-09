@@ -23,8 +23,8 @@
         <#list requests as request>
                         <tr>
                             <th>${request.dateOfCreated}</th>
-                            <th>${user.name}</th>
-                            <th>${user.address}</th>
+                            <th>${request.user}</th>
+                            <th>${request.user.address}</th>
                             <th>${request.description}</th>
                             <th><#list request.statuses as status><a href="/request/statusedit/${user.id}">${status}</a></#list></th>
                             <th>  <form action="/request/delete/${request.id}" method="post" style="margin: 0 auto; text-align: center">
