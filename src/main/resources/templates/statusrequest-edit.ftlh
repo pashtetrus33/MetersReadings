@@ -18,4 +18,11 @@
         <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
 
+    <div style="margin: 0 auto; text-align: center">
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
+           href="/allusersrequests" role="button">
+            Назад
+        </a>
+    </div>
+
 </@t.template>

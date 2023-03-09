@@ -68,7 +68,7 @@ public class RequestController {
     @PostMapping("/request/statusedit")
     public String requestStatusEdit(@RequestParam Long requestId, @RequestParam Map<String, String> form) {
         requestService.changeRequestStatus(requestService.getRequestById(requestId), form);
-        return "redirect:/profile";
+        return "redirect:/allusersrequests";
     }
 
     @GetMapping("/request/statusedit/{user}")
