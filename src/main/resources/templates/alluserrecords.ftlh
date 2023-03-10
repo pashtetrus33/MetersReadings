@@ -10,8 +10,9 @@
         </a>
     </div>
     <br>
+    <h5>${currentMonth} ${currentYear}</h5>
     <table class="table table-hover table-dark">
-        <h5>${currentMonth}${currentYear}</h5>
+
         <tr>
             <th scope="col">Дата</th>
             <th scope="col">Имя</th>
