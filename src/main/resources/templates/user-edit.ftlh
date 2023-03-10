@@ -53,6 +53,7 @@
     <hr>
     <form action="/admin/user/edit" method="post" style="text-align: center;">
             <div>
+                <label for="role" style="margin: auto;">Тип пользователя</label>
                 <@enumSelect "myEnumSelectName" roles/>
             </div>
         <input type="hidden" value="${user.id}" name="userId">
