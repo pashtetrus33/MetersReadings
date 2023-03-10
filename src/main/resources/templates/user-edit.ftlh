@@ -18,7 +18,8 @@
 
     <form action="/admin/user/password_change" method="post" style="text-align: center">
         <label for="password">Пароль</label>
-        <input type="password" class="form-control" id="password" required name="password" style="width: auto; margin: auto">
+        <input type="password" class="form-control" id="password" required name="password"
+               style="width: auto; margin: auto">
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark" style="margin: 13px;">Сохранить</button>
@@ -53,8 +54,8 @@
     <form action="/admin/user/edit" method="post" style="text-align: center;">
         <#list roles as role>
             <div>
-                <label><input type="checkbox"
-                              name="Name" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <@enumSelect "myEnumSelectName" roles/>
             </div>
         </#list>
         <input type="hidden" value="${user.id}" name="userId">
@@ -63,6 +64,6 @@
     </form>
 
 <#-- calling the macro -->
-    <@enumSelect "myEnumSelectName" roles/>
+
 
 </@t.template>
