@@ -9,7 +9,7 @@
     <form action="/request/statusedit" method="post">
         <#list statuses as status>
             <div>
-                <label><input type="checkbox"
+                <label><input type="radio"
                               name="${status}" ${user.getFirstRequest().statuses?seq_contains(status)?string("checked", "")}>${status}</label>
             </div>
         </#list>
