@@ -11,10 +11,6 @@
     </div>
     <br>
     <#list records as record>
-    <h4>${record.dateOfCreated.month}</h4> <br>
-    </#list>
-    <h4>${records.get(1).dateOfCreated.month}</h4> <br>
-    <hr>
     <table class="table table-hover table-dark">
         <tr>
             <th scope="col">Дата</th>
@@ -25,7 +21,6 @@
             <th scope="col">Ванная<br> (холодная вода</th>
             <th scope="col">Ванная<br> (горячая вода)</th>
         </tr>
-        <#list records as record>
                 <tr>
                     <th>${record.dateOfCreated}</th>
                     <th>${record.user.name}</th>
@@ -35,6 +30,6 @@
                     <th>${record.toiletCold}</th>
                     <th>${record.toiletHot}</th>
                 </tr>
-        </#list>
     </table>
+    </#list>
 </@t.template>
