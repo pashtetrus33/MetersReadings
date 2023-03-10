@@ -7,14 +7,12 @@
 
     <hr>
     <form action="/request/statusedit" method="post">
-        <#-- handy macro for this -->
-        <#macro enumSelect selectName enumValues>
-            <select name="${selectName}">
-                <#list enumValues as enum>
-                    <option value="${enum}">${enum.title}</option>
-                </#list>
-            </select>
-        </#macro>
+        <#list statuses as status>
+            <div>
+                <label><input type="checkbox"
+                              name="${status}" ${user.getFirstRequest().statuses?seq_contains(status)?string("checked", "")}>${status}</label>
+            </div>
+        </#list>
         <input type="hidden" value="${user.getFirstRequest().id}" name="requestId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
@@ -27,17 +25,16 @@
         </a>
     </div>
 
-
+<#-- handy macro for this -->
+    <#macro enumSelect selectName enumValues>
+        <select name="${selectName}">
+            <#list enumValues as enum>
+                <option value="${enum}">${enum.title}</option>
+            </#list>
+        </select>
+    </#macro>
 
 <#-- calling the macro -->
     <@enumSelect "myEnumSelectName" statuses/>
 
 </@t.template>
-
-
-<#--    <#list statuses as status>
-            <div>
-                <label><input type="checkbox"
-                              name="${status}" ${user.getFirstRequest().statuses?seq_contains(status)?string("checked", "")}>${status}</label>
-            </div>
-        </#list> -->
