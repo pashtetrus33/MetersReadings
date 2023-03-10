@@ -11,7 +11,7 @@
     </div>
     <br>
     <table class="table table-hover table-dark">
-        <h4>${currentMonth} ${currentYear}</h4>
+        <h5>${currentMonth}${currentYear}</h5>
         <tr>
             <th scope="col">Дата</th>
             <th scope="col">Имя</th>
