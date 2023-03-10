@@ -44,7 +44,7 @@
     <#macro enumSelect selectName enumValues>
         <select name="${selectName}">
             <#list enumValues as enum>
-                <option value="${enum}">${enum.name}</option>
+                <option value="${enum}">${enum}</option>
             </#list>
         </select>
     </#macro>
