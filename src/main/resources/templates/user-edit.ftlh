@@ -5,16 +5,15 @@
 
     <hr>
     <form action="/admin/user/edit" method="post" style="text-align: center;">
-        <#list roles as role>
-            <div>
-                <label><input type="checkbox"
-                              name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
-            </div>
-        </#list>
+        <div>
+            <label for="role" style="margin: auto;">Тип пользователя</label><br>
+            <@enumSelect "key" roles/>
+        </div>
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit" class="btn btn-dark">Сохранить</button>
+        <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
+
 
     <form action="/admin/user/password_change" method="post" style="text-align: center">
         <label for="password">Пароль</label>
@@ -50,18 +49,6 @@
         </select>
     </#macro>
 
-    <hr>
-    <form action="/admin/user/edit" method="post" style="text-align: center;">
-            <div>
-                <label for="role" style="margin: auto;">Тип пользователя</label>
-                <@enumSelect "myEnumSelectName" roles/>
-            </div>
-        <input type="hidden" value="${user.id}" name="userId">
-        <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit" class="btn btn-dark">Сохранить</button>
-    </form>
-
-<#-- calling the macro -->
 
 
 </@t.template>

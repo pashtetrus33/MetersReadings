@@ -6,14 +6,13 @@
     <h3 style="text-align: center"> Дата создания:  ${user.getFirstRequest().dateOfCreated}</h3>
 
     <hr>
+    <hr>
     <form action="/request/statusedit" method="post">
-        <#list statuses as status>
-            <div>
-                <label><input type="checkbox"
-                              name="${status}" ${user.getFirstRequest().statuses?seq_contains(status)?string("checked", "")}>${status}</label>
-            </div>
-        </#list>
-        <input type="hidden" value="${user.getFirstRequest().id}" name="requestId">
+        <div>
+            <label for="role" style="margin: auto;">Изменить статус заявки</label><br>
+            <@enumStatus "status" statuses/>
+        </div>
+        <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
@@ -26,7 +25,7 @@
     </div>
 
 <#-- handy macro for this -->
-    <#macro enumSelect selectName enumValues>
+    <#macro enumStatus selectName enumValues>
         <select name="${selectName}">
             <#list enumValues as enum>
                 <option value="${enum}">${enum.title}</option>
@@ -34,7 +33,5 @@
         </select>
     </#macro>
 
-<#-- calling the macro -->
-    <@enumSelect "myEnumSelectName" statuses/>
 
 </@t.template>

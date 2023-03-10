@@ -63,7 +63,7 @@ public class UserService {
                 .map(Role::name)
                 .collect(Collectors.toSet());
         user.getRoles().clear();
-        for (String key : form.keySet()) {
+        for (String key : form.values()) {
             if (roles.contains(key)) {
                 user.getRoles().add(Role.valueOf(key));
                 mailSender.sendMail(user.getEmail(), "Смена типа пользователя", Role.valueOf(key).name());
