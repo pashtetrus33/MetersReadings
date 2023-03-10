@@ -10,7 +10,7 @@
         </a>
     </div>
     <br>
-    <h5>${currentMonth} ${currentYear}</h5>
+    <h5 style="">${currentMonth} ${currentYear}</h5>
     <table class="table table-hover table-dark">
 
         <tr>

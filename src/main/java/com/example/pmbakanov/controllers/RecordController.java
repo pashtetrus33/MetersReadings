@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -55,8 +58,13 @@ public class RecordController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
     @GetMapping("/allusersrecords")
     public String alluserrecords(Model model, Principal principal) {
+
+        List<User> userList = new ArrayList<>();
+        userList = userService.list();
+        Collections.sort(userList);
+
         model.addAttribute("records", recordService.listRecords(null));
-        model.addAttribute("users", userService.list());
+        model.addAttribute("users", userList);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("currentMonth", LocalDateTime.now().getMonth());
         model.addAttribute("currentYear", LocalDateTime.now().getYear());
