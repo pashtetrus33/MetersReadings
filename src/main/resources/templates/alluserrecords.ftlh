@@ -10,6 +10,8 @@
         </a>
     </div>
     <br>
+    <h4>${records.get(0).dateOfCreated.month}</h4>
+    <hr>
     <table class="table table-hover table-dark">
         <tr>
             <th scope="col">Дата</th>
