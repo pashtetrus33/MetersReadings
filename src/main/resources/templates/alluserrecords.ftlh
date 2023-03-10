@@ -11,7 +11,7 @@
     </div>
     <br>
     <#list records as record>
-    ${record.dateOfCreated.month}
+    <h4>${record.dateOfCreated.month}</h4> <br>
     </#list>
     <hr>
     <table class="table table-hover table-dark">
