@@ -25,10 +25,10 @@
                     <th>${record.dateOfCreated}</th>
                     <th>${record.user.name}</th>
                     <th>${record.user.address}</th>
-                    <th>${record.user.getLastRecord().kitchenCold}</th>
-                    <th>${record.user.getLastRecord().kitchenHot}</th>
-                    <th>${record.user.getLastRecord().toiletCold}</th>
-                    <th>${record.user.getLastRecord().toiletHot}</th>
+                    <th>${record.kitchenCold}</th>
+                    <th>${record.kitchenHot}</th>
+                    <th>${record.toiletCold}</th>
+                    <th>${record.toiletHot}</th>
                 </tr>
         </#list>
     </table>
