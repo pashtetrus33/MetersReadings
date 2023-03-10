@@ -1,6 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    `<h1 style="text-align: center">Панель администратора</h1><hr>
+    `<h4 style="text-align: center">Панель администратора</h4><hr>
 
     <div style="margin: 0 auto; text-align: center">
     <a class="btn btn-danger mb-2" style="text-align: center; width: auto"
