@@ -10,7 +10,9 @@
         </a>
     </div>
     <br>
-
+    <#list records as record>
+    ${record.dateOfCreated.month}
+    </#list>
     <hr>
     <table class="table table-hover table-dark">
         <tr>
