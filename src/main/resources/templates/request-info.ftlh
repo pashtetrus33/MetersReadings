@@ -14,7 +14,7 @@
     </#list>
 
     <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center"
            href="/user/${user.id}" role="button">
             Назад
         </a>
