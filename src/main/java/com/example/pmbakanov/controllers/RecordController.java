@@ -59,6 +59,7 @@ public class RecordController {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("currentMonth", LocalDateTime.now().getMonth());
+        model.addAttribute("currentYear", LocalDateTime.now().getYear());
         return "alluserrecords";
     }
 }
