@@ -3,7 +3,7 @@
     <h4 style="text-align: center">История заявок на ремонт</h1>
     <hr>
     <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 25%"
+        <a class="btn btn-dark mt-3 mb-3" style="text-align: center"
            href="/profile" role="button">
             Назад
         </a>
