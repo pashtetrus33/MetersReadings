@@ -49,6 +49,19 @@
         </select>
     </#macro>
 
+    <hr>
+    <form action="/admin/user/edit" method="post" style="text-align: center;">
+        <#list roles as role>
+            <div>
+                <label><input type="checkbox"
+                              name="NAME" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
+            </div>
+        </#list>
+        <input type="hidden" value="${user.id}" name="userId">
+        <input type="hidden" value="${_csrf.token}" name="_csrf">
+        <button type="submit" class="btn btn-dark">Сохранить</button>
+    </form>
+
 <#-- calling the macro -->
     <@enumSelect "myEnumSelectName" roles/>
 
