@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User implements UserDetails, Comparable<User> {
     public Long getId() {
         return id;
     }
@@ -200,4 +200,9 @@ public class User implements UserDetails {
         return roles.contains(Role.ROLE_SUPERVISOR);
     }
 
+
+    @Override
+    public int compareTo(User o) {
+        return o.getAddress().compareTo(this.getAddress());
+    }
 }
