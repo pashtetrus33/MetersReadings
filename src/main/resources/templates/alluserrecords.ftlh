@@ -10,7 +10,7 @@
         </a>
     </div>
     <br>
-    <h4>${records.get(0).dateOfCreated.month}</h4>
+    <h4>${records.get(0).dateOfCreated}</h4>
     <hr>
     <table class="table table-hover table-dark">
         <tr>
