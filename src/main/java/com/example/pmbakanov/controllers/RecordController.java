@@ -55,6 +55,7 @@ public class RecordController {
     @GetMapping("/allusersrecords")
     public String alluserrecords(Model model, Principal principal) {
         model.addAttribute("records", recordService.listRecords(null));
+        model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "alluserrecords";
     }

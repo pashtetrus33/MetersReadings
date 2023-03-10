@@ -10,7 +10,6 @@
         </a>
     </div>
     <br>
-    <#list records as record>
     <table class="table table-hover table-dark">
         <tr>
             <th scope="col">Дата</th>
@@ -21,15 +20,18 @@
             <th scope="col">Ванная<br> (холодная вода</th>
             <th scope="col">Ванная<br> (горячая вода)</th>
         </tr>
+        <#list users as user >
                 <tr>
-                    <th>${record.dateOfCreated}</th>
-                    <th>${record.user.name}</th>
-                    <th>${record.user.address}</th>
-                    <th>${record.kitchenCold}</th>
-                    <th>${record.kitchenHot}</th>
-                    <th>${record.toiletCold}</th>
-                    <th>${record.toiletHot}</th>
+                    <th><#if user.areRecords()>${user.getLastRecord().dateOfCreated}<#else>--</#if></th>
+                    <th>${user.name}</th>
+                    <th>${user.address}</th>
+                    <th><#if user.areRecords()>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
+                    <th><#if user.areRecords()>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
+                    <th><#if user.areRecords()>${user.getLastRecord().toiletCold}<#else>--</#if></th>
+                    <th><#if user.areRecords()>${user.getLastRecord().toiletHot}<#else>--</#if></th>
                 </tr>
+        <#else>
+            <h4>Пользователей нет</h4>
+        </#list>
     </table>
-    </#list>
 </@t.template>
