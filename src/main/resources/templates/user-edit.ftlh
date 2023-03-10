@@ -52,12 +52,9 @@
 
     <hr>
     <form action="/admin/user/edit" method="post" style="text-align: center;">
-        <#list roles as role>
             <div>
-                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <@enumSelect "myEnumSelectName" roles/>
             </div>
-        </#list>
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark">Сохранить</button>
