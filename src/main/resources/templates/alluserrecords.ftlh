@@ -25,7 +25,7 @@
                     <th><#if user.areRecords()>${user.getLastRecord().dateOfCreated}<#else>--</#if></th>
                     <th>${user.name}</th>
                     <th>${user.address}</th>
-                    <th><#if (user.areRecords()) && (5=5)>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
+                    <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
                     <th><#if user.areRecords()>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
                     <th><#if user.areRecords()>${user.getLastRecord().toiletCold}<#else>--</#if></th>
                     <th><#if user.areRecords()>${user.getLastRecord().toiletHot}<#else>--</#if></th>

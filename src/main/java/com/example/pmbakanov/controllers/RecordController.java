@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor
@@ -57,6 +58,7 @@ public class RecordController {
         model.addAttribute("records", recordService.listRecords(null));
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("currentMonth", LocalDateTime.now().getMonth());
         return "alluserrecords";
     }
 }
