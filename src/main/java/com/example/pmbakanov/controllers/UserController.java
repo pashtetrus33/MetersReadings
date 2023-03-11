@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import java.security.Principal;
 
 @Controller
@@ -35,11 +36,13 @@ public class UserController {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "registration";
     }
+
     @GetMapping("/reset")
     public String passwordReset(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "password-reset";
     }
+
     @PostMapping("/reset")
     public String reset(User user, Model model) {
         if (!userService.resetPassword(user)) {
@@ -53,7 +56,7 @@ public class UserController {
     @PostMapping("/registration")
     public String createUser(User user, Model model) {
         if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "Пользователь с эл.почтой: "+ user.getEmail() + " уже существует");
+            model.addAttribute("errorMessage", "Пользователь с эл.почтой: " + user.getEmail() + " уже существует");
             return "registration";
         }
         model.addAttribute("loginalert", "Ссылка для активации отправлена на указанную почту");
@@ -72,18 +75,10 @@ public class UserController {
     @GetMapping("/activate/{code}")
     public String activate(Principal principal, Model model, @PathVariable String code) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        if (userService.getUserByPrincipal(principal).isActive()){
-            if (userService.activateUser(code)) {
-                model.addAttribute("loginmessage", "Сброс прошел успешно");
-            } else {
-                model.addAttribute("loginmessage", "Код активации не найден");
-            }
-            return "login";
-        }
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
-            model.addAttribute("loginmessage", "Пользователь успешно активирован");
+            model.addAttribute("loginmessage", "Операция  прошла успешно");
         } else {
             model.addAttribute("loginmessage", "Код активации не найден");
         }
