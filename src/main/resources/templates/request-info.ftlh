@@ -2,9 +2,9 @@
 <@t.template user>
 
     <hr>
-    <p><h4 style="text-align: center">${request.dateOfCreated} </h4>
-    <p><h4 style="text-align: center">${authorRequest.address} </h4>
-
+    <p><h5 style="text-align: center">${authorRequest.name} </h5>
+    <p><h5 style="text-align: center">${request.dateOfCreated} </h5>
+    <p><h5 style="text-align: center">${authorRequest.address} </h5>
     <hr>
     <p style="text-align: center; width: 100%; word-break: break-all; table-layout: fixed">Описание: <b>${request.description}</b></p>
     <p style="text-align: center">Статус: <b><#list request.statuses as status>${status}</#list></b></p>
