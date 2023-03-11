@@ -72,6 +72,14 @@ public class UserController {
     @GetMapping("/activate/{code}")
     public String activate(Principal principal, Model model, @PathVariable String code) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        if (userService.getUserByPrincipal(principal).isActive()){
+            if (userService.activateUser(code)) {
+                model.addAttribute("loginmessage", "Сброс прошел успешно");
+            } else {
+                model.addAttribute("loginmessage", "Код активации не найден");
+            }
+            return "login";
+        }
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
