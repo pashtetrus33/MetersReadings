@@ -3,7 +3,7 @@
     <h3 style="text-align: center">Редактирование пользователя:</h3>
     <h3 style="text-align: center"> ${user.name}</h3>
     <#list user.getRoles() as role>
-        <h4 style="text-align: center">Текущий тип: ${role}</h4>
+        <h3 style="text-align: center">Текущий тип: ${role}</h3>
     </#list>
 
 
