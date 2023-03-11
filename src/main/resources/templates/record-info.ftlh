@@ -2,14 +2,14 @@
 <@t.template user>
 
     <hr>
-    <p><h4 style="text-align: center">${record.dateOfCreated} </h4>
-    <p><h4 style="text-align: center">${authorRecord.address} </h4>
-
+    <p><h5 style="text-align: center">${authorRecord.name} </h5>
+    <p><h5 style="text-align: center">${record.dateOfCreated} </h5>
+    <p><h5 style="text-align: center">${authorRecord.address} </h5>
     <hr>
-    <p style="text-align: center">Xолодная вода (кухня): <h4>${record.kitchenCold}</h4>
-    <p style="text-align: center">Горячая вода (кухня): <h4>${record.kitchenHot}</h4>
-    <p style="text-align: center">Холодная вода (ванная): <h4>${record.toiletCold}</h4>
-    <p style="text-align: center">Горячая вода (ванная): <h4>${record.toiletHot}</h4>
+    <p style="text-align: center">Xолодная вода (кухня): <h5>${record.kitchenCold}</h5>
+    <p style="text-align: center">Горячая вода (кухня): <h5>${record.kitchenHot}</h5>
+    <p style="text-align: center">Холодная вода (ванная): <h5>${record.toiletCold}</h5>
+    <p style="text-align: center">Горячая вода (ванная): <h5>${record.toiletHot}</h5>
 
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center"

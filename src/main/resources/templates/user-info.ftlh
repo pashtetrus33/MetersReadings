@@ -7,7 +7,7 @@
                  style="border:2px solid black; border-radius: 20px" height="120">
         <br>
         <br>
-        <h5>${user.name}</h5>
+        <h5><b>${user.name}</b></h5>
         <h5>${user.address}</h5>
         <h5>${user.email}</h5>
 
