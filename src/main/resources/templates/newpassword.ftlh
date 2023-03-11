@@ -1,7 +1,6 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
     <h4 style="text-align: center">Установка нового пароля</h4>
-    <h4 style="text-align: center">${user.email}</h4>
     <hr>
     <form action="/newpassword" method="post" style="margin: 0 auto; width: 60%">
         <div class="form-group">
