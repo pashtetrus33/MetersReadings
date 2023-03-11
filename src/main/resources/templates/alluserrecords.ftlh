@@ -17,10 +17,10 @@
             <th scope="col" style="vertical-align: middle">Дата</th>
             <th scope="col" style="vertical-align: middle">Имя</th>
             <th scope="col" style="vertical-align: middle">Адрес</th>
-            <th scope="col" style="vertical-align: middle">Кухня<br>(холодная вода)</th>
-            <th scope="col" style="vertical-align: middle">Кухня<br>(горячая вода)</th>
-            <th scope="col" style="vertical-align: middle">Ванная<br>(холодная вода</th>
-            <th scope="col" style="vertical-align: middle">Ванная<br>(горячая вода)</th>
+            <th scope="col" style="vertical-align: middle">Кухня<br>холодная вода</th>
+            <th scope="col" style="vertical-align: middle">Кухня<br>горячая вода</th>
+            <th scope="col" style="vertical-align: middle">Ванная<br>холодная вода</th>
+            <th scope="col" style="vertical-align: middle">Ванная<br>горячая вода</th>
         </tr>
         <#list users as user >
                 <tr>

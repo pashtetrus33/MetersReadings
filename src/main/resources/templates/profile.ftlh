@@ -44,26 +44,26 @@
         <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center">
             <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 53%; margin: auto">
                 <div class="form-group">
-                    <label for="kitchenCold">Кухня:холодная вода</label>
+                    <label for="kitchenCold">Холодная вода (кухня)</label>
                     <input type="number" required class="form-control"
                            id="kitchenCold" name="kitchenCold">
                 </div>
                 <div class="form-group">
-                    <label for="kitchenHot">Кухня:горячая вода</label>
+                    <label for="kitchenHot">Горячая вода (кухня)</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="toiletCold">Санузел:холодная вода</label>
+                    <label for="toiletCold">Холодная вода (ванная)</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletCold" name="toiletCold">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="toiletHot">Санузел:горячая вода</label>
+                    <label for="toiletHot">Горячая вода (ванная)</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
