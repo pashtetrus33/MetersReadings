@@ -24,7 +24,7 @@
     </form>
     <hr>
     <div style="margin: 0 auto; text-align: center">
-        <a style=" margin: auto; width:auto" class="btn btn-dark"
+        <a style=" margin: auto; width:10px" class="btn btn-dark"
            href="/registration" role="button">
             Регистрация
         </a>
@@ -32,7 +32,7 @@
     <div style="margin: 0 auto; text-align: center">
         <a style=" margin: auto; width:auto" class="btn btn-dark"
            href="/password-reset" role="button">
-            Забыли пароль?
+            Не помню
         </a>
     </div>
     <#if loginmessage??>
