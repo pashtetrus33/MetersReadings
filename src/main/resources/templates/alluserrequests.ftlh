@@ -17,6 +17,7 @@
         <col style="width:40%">
         <col style="width:10%">
         <col style="width:5%">
+        <thead>
         <tr>
             <th scope="col">Дата</th>
             <th scope="col">Имя</th>
@@ -24,8 +25,8 @@
             <th scope="col">Описание</th>
             <th scope="col">Статус</th>
             <th scope="col">Удаление</th>
-
         </tr>
+        </thead>
         <#list requests as request>
                         <tr>
                             <th>${request.dateOfCreated}</th>
