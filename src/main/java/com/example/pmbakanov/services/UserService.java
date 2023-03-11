@@ -81,13 +81,13 @@ public class UserService {
         userRepository.save(user);
         log.info("Changing password for User with email: {}", user.getEmail());
     }
+
     public boolean resetPassword(User user) {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
         if (userRepository.findByEmail(email) == null) return false;
         log.info("Changing password for User with email: {}", user.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
-        user.setPassword(passwordEncoder.encode("123"));
         userRepository.save(user);
         String message = String.format(
                 "Добрый день, %s. \n" +
@@ -112,6 +112,9 @@ public class UserService {
             return false;
         }
         user.setActivationCode(null);
+        if (user.isActive()) {
+            user.setPassword(passwordEncoder.encode("123"));
+        }
         user.setActive(true);
         userRepository.save(user);
         return true;
