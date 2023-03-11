@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -90,11 +92,17 @@ public class UserController {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
-            model.addAttribute("loginmessage", "Сброс пароля прошел успешно");
             return "newpassword";
         } else {
             model.addAttribute("loginmessage", "Код сброса не найден");
         }
+        return "login";
+    }
+
+    @PostMapping("/newpassword")
+    public String setNewPassword(@RequestParam("userId") User user, @RequestParam Map<String, String> form, Model model) {
+        userService.changeUserPassword(user, form);
+        model.addAttribute("loginalert", "Пароль успешно установлен");
         return "login";
     }
 }

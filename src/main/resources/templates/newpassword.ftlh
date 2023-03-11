@@ -13,13 +13,4 @@
         </div>
 
     </form>
-    <div style="margin: 0 auto; text-align: center">
-        <a class="btn btn-dark mb-2" style="text-align: center"
-           href="/profile" role="button">
-            Назад
-        </a>
-    </div>
-    <#if errorMessage??>
-        <h6 style="color: red">${errorMessage}</h6>
-    </#if>
 </@t.template>
