@@ -82,11 +82,18 @@ public class UserService {
         log.info("Changing password for User with email: {}", user.getEmail());
     }
     public boolean resetPassword(User user) {
-        //user.setPassword(passwordEncoder.encode(form.get("password")));
-        //userRepository.save(user);
         String email = user.getEmail();
+        user = userRepository.findByEmail(email);
         if (userRepository.findByEmail(email) == null) return false;
         log.info("Changing password for User with email: {}", user.getEmail());
+        user.setActivationCode(UUID.randomUUID().toString());
+        String message = String.format(
+                "Добрый день, %s. \n" +
+                        "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/activate/%s",
+                user.getName(),
+                user.getActivationCode()
+        );
+        mailSender.sendMail(user.getEmail(), "Сброс пароля", message);
         return true;
     }
 

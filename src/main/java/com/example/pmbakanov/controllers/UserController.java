@@ -43,10 +43,10 @@ public class UserController {
     @PostMapping("/reset")
     public String reset(User user, Model model) {
         if (!userService.resetPassword(user)) {
-            model.addAttribute("errorMessage", "Пользователь с эл.почтой: " + user.getEmail() + "не найден");
+            model.addAttribute("errorMessage", "Пользователь с эл.почтой: " + user.getEmail() + " не найден");
             return "password-reset";
         }
-        return "password-reset";
+        return "login";
     }
 
     @PostMapping("/registration")
