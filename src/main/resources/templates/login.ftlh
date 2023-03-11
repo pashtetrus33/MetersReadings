@@ -31,7 +31,7 @@
     </div>
     <div style="margin: 0 auto; text-align: center">
         <a style=" margin: auto; width:auto" class="btn btn-dark"
-           href="/password-reset" role="button">
+           href="/forgot" role="button">
             Не помню
         </a>
     </div>

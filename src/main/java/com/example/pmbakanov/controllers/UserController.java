@@ -35,18 +35,18 @@ public class UserController {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "registration";
     }
-    @GetMapping("/password-reset")
+    @GetMapping("/forgot")
     public String passwordReset(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "password";
+        return "password-reset";
     }
-    @PostMapping("/password-reset")
-    public String passwordReset(User user, Model model) {
+    @PostMapping("/forgot")
+    public String reset(User user, Model model) {
         if (!userService.resetPassword(user)) {
             model.addAttribute("errorMessage", "Пользователь с эл.почтой: " + user.getEmail() + "не найден");
-            return "login";
+            return "password-reset";
         }
-        return "login";
+        return "password-reset";
     }
 
     @PostMapping("/registration")
