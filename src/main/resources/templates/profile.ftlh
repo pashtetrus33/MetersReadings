@@ -87,7 +87,7 @@
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
-                <button type="submit" class="btn btn-dark">Добавить</button>
+                <button type="submit" class="btn btn-dark" style="margin: 5px">Добавить</button>
             </form>
         </div>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
