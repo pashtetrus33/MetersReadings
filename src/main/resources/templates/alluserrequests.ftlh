@@ -11,6 +11,12 @@
     </div>
     <br>
     <table class="table table-hover table-dark">
+        <col style="width:5%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:40%">
+        <col style="width:10%">
+        <col style="width:5%">
         <tr>
             <th scope="col">Дата</th>
             <th scope="col">Имя</th>
