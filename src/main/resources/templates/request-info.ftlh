@@ -6,7 +6,7 @@
     <p><h3 style="text-align: center">${authorRequest.address} </h3></p>
 
     <hr>
-    <p style="text-align: center">Описание: <b>${request.description}</b></p>
+    <p style="text-align: center; width: 100%; word-break: break-all; table-layout: fixed">Описание: <b>${request.description}</b></p>
     <p style="text-align: center">Статус: <b><#list request.statuses as status>${status}</#list></b></p>
 
     <#list images as img>
