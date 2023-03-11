@@ -30,7 +30,7 @@
             </#if>
         </div>
     </nav>
-    <div class="container mt-4" style="text-align: center;">
+    <div class="container mt-4" style="text-align: center; max-width: 1517px">
         <#nested/>
     </div>
 
