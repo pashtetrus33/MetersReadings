@@ -6,9 +6,9 @@
         <img src="/static/images/avatar.jpg"
              style="border:2px solid black; border-radius: 20px" height="110">
         <br>
-        <h4>${user.name}</h4>
-        <h4><b>${user.email}</b></h4>
-        <h4><b>${user.address}</b></h4>
+        <h4><b>${user.name}</b></h4>
+        <h4>${user.email}<</h4>
+        <h4>${user.address}</h4>
         <hr>
         <#if user.isAdmin()>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
