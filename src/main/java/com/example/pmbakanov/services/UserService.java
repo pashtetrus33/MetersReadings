@@ -87,6 +87,7 @@ public class UserService {
         if (userRepository.findByEmail(email) == null) return false;
         log.info("Changing password for User with email: {}", user.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
+        userRepository.save(user);
         String message = String.format(
                 "Добрый день, %s. \n" +
                         "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/activate/%s",
