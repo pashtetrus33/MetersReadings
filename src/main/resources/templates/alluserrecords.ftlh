@@ -13,17 +13,17 @@
     <h5 style="">${currentMonth} ${currentYear}</h5>
     <table class="table table-hover table-dark">
 
-        <tr style="vertical-align: middle">
-            <th scope="col">Дата</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Адрес</th>
-            <th scope="col">Кухня<br>(холодная вода)</th>
-            <th scope="col">Кухня<br>(горячая вода)</th>
-            <th scope="col">Ванная<br>(холодная вода</th>
-            <th scope="col">Ванная<br>(горячая вода)</th>
+        <tr>
+            <th scope="col" style="vertical-align: middle">Дата</th>
+            <th scope="col" style="vertical-align: middle">Имя</th>
+            <th scope="col" style="vertical-align: middle">Адрес</th>
+            <th scope="col" style="vertical-align: middle">Кухня<br>(холодная вода)</th>
+            <th scope="col" style="vertical-align: middle">Кухня<br>(горячая вода)</th>
+            <th scope="col" style="vertical-align: middle">Ванная<br>(холодная вода</th>
+            <th scope="col" style="vertical-align: middle">Ванная<br>(горячая вода)</th>
         </tr>
         <#list users as user >
-                <tr style="vertical-align: middle">
+                <tr>
                     <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreated}<#else>--</#if></th>
                     <th>${user.name}</th>
                     <th>${user.address}</th>
