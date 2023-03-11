@@ -27,6 +27,7 @@
             <th scope="col">Удаление</th>
         </tr>
         </thead>
+        <tbody>
         <#list requests as request>
                         <tr>
                             <th>${request.dateOfCreated}</th>
@@ -43,5 +44,6 @@
                             </th>
                         </tr>
                 </#list>
+        </tbody>
     </table>
 </@t.template>
