@@ -55,7 +55,7 @@ public class RecordController {
         return "my-records";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_BUH')")
     @GetMapping("/allusersrecords")
     public String alluserrecords(Model model, Principal principal) {
 
