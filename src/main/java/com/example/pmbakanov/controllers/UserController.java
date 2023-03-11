@@ -101,8 +101,8 @@ public class UserController {
     }
 
     @PostMapping("/newpassword")
-    public String setNewPassword(@RequestParam("userId") User user, @RequestParam Map<String, String> form, Model model) {
-        userService.changeUserPassword(user, form);
+    public String setNewPassword(Principal principal, @RequestParam Map<String, String> form, Model model) {
+        userService.changeUserPassword(userService.getUserByPrincipal(principal), form);
         model.addAttribute("loginalert", "Пароль успешно установлен");
         return "login";
     }
