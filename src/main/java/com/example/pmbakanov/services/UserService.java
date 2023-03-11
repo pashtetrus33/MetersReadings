@@ -97,7 +97,6 @@ public class UserService {
         user.setActivationCode(null);
         user.setActive(true);
         userRepository.save(user);
-
         return true;
     }
 }
