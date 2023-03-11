@@ -10,7 +10,7 @@
         </a>
     </div>
     <br>
-    <table class="table table-hover table-dark">
+    <table class="table table-hover table-dark" style="width:100%;word-break: break-all;table-layout: fixed">
         <col style="width:10%">
         <col style="width:20%">
         <col style="width:20%">
