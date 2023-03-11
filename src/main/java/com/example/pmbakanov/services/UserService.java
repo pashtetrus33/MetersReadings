@@ -112,9 +112,9 @@ public class UserService {
             return false;
         }
         user.setActivationCode(null);
-        if (user.isActive()) {
-            user.setPassword(passwordEncoder.encode("123"));
-        }
+//        if (user.isActive()) {
+//            user.setPassword(passwordEncoder.encode("123"));
+//        }
         user.setActive(true);
         userRepository.save(user);
         return true;

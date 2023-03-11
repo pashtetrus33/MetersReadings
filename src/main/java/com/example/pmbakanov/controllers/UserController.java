@@ -33,12 +33,6 @@ public class UserController {
         return "profile";
     }
 
-    @GetMapping("/registration")
-    public String registration(Principal principal, Model model) {
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "registration";
-    }
-
     @GetMapping("/reset")
     public String passwordReset(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -53,6 +47,12 @@ public class UserController {
         }
         model.addAttribute("loginalert", "Ссылка для cброса пароля отправлена на указанную почту");
         return "login";
+    }
+
+    @GetMapping("/registration")
+    public String registration(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "registration";
     }
 
     @PostMapping("/registration")
@@ -86,6 +86,7 @@ public class UserController {
         }
         return "login";
     }
+
     @GetMapping("/reset/{code}")
     public String checkCodeForReset(Principal principal, Model model, @PathVariable String code) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
