@@ -46,6 +46,7 @@ public class UserController {
             model.addAttribute("errorMessage", "Пользователь с эл.почтой: " + user.getEmail() + " не найден");
             return "password-reset";
         }
+        model.addAttribute("loginalert", "Ссылка для cброса пароля отправлена на указанную почту");
         return "login";
     }
 
