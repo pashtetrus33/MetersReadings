@@ -6,7 +6,7 @@
     <hr>
     <form action="/admin/user/edit" method="post" style="text-align: center;">
         <div>
-            <label for="role" style="margin: auto;">Тип пользователя</label><br>
+            <label for="role">Изменить тип пользователя</label><br>
             <@enumSelect "key" roles/>
         </div>
         <input type="hidden" value="${user.id}" name="userId">
@@ -16,7 +16,7 @@
 
 
     <form action="/admin/user/password_change" method="post" style="text-align: center">
-        <label for="password">Пароль</label>
+        <label for="password">Изменить пароль</label>
         <input type="password" class="form-control" id="password" required name="password"
                style="width: auto; margin: auto">
         <input type="hidden" value="${user.id}" name="userId">
@@ -42,11 +42,13 @@
 
 <#-- handy macro for this -->
     <#macro enumSelect selectName enumValues>
-        <select name="${selectName}">
-            <#list enumValues as enum>
-                <option value="${enum}">${enum}</option>
-            </#list>
-        </select>
+        <label>
+            <select name="${selectName}">
+                <#list enumValues as enum>
+                    <option value="${enum}">${enum}</option>
+                </#list>
+            </select>
+        </label>
     </#macro>
 
 

@@ -71,9 +71,9 @@ public class RequestController {
         return "redirect:/allusersrequests";
     }
 
-    @GetMapping("/request/statusedit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model) {
-        model.addAttribute("user", user);
+    @GetMapping("/request/statusedit/{request}")
+    public String userEdit(@PathVariable("request") Request request, Model model) {
+        model.addAttribute("request", request);
         model.addAttribute("statuses", Status.values());
         return "statusrequest-edit";
     }

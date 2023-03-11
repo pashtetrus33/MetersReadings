@@ -91,7 +91,7 @@ public class RequestService {
         Set<String> statuses = Arrays.stream(Status.values()).map(Status::toString).collect(Collectors.toSet());
 
         request.getStatuses().clear();
-        for (String key : form.keySet()) {
+        for (String key : form.values()) {
             if (statuses.contains(key)) {
                 //request.getStatuses().add(Status.valueOf(key));
                 Status[] result = Status.values();
