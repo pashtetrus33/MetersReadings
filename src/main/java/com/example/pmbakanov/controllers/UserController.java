@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/password-reset")
     public String passwordReset(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "password-reset";
+        return "password";
     }
     @PostMapping("/password-reset")
     public String passwordReset(User user, Model model) {
