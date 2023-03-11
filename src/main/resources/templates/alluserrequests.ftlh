@@ -10,13 +10,13 @@
         </a>
     </div>
     <br>
-    <table>
-        <col style="width:5%">
-        <col style="width:20%">
-        <col style="width:20%">
-        <col style="width:20%">
+    <table class="table table-hover table-dark">
         <col style="width:10%">
-        <col style="width:5%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:30%">
+        <col style="width:10%">
+        <col style="width:10%">
         <thead>
         <tr>
             <th scope="col">Дата</th>
