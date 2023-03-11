@@ -6,12 +6,10 @@
             <img src="/static/images/avatar.jpg"
                  style="border:2px solid black; border-radius: 20px" height="120">
         <br>
+        <br>
         <h5>${user.name}</h5>
-        <br>
         <h5>${user.address}</h5>
-        <br>
         <h5>${user.email}</h5>
-
 
     </div>
     <div style="margin: 0 auto; text-align: center">
@@ -29,7 +27,7 @@
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
-                        <h5 class="card-title">Дата создания:  ${record.dateOfCreated}</h5>
+                        <h6 class="card-title">Дата создания:  ${record.dateOfCreated}</h6>
                         <p class="card-text"> Холодная вода (кухня):${record.kitchenCold}</p>
                         <p class="card-text"> Горячая вода (кухня):${record.kitchenHot}</p>
                         <p class="card-text"> Холодная вода (ванная):${record.toiletCold}</p>
