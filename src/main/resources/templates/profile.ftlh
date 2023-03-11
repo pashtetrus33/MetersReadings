@@ -37,6 +37,12 @@
                 Заявки
             </a>
         </#if>
+        <#if user.isBuh()>
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allusersrecords">
+                Счетчики
+            </a>
+        </#if>
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample" role="button"
            aria-expanded="true" aria-controls="collapseExample">

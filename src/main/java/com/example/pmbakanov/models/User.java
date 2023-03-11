@@ -14,6 +14,7 @@ public class User implements UserDetails, Comparable<User> {
     public Long getId() {
         return id;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -66,6 +67,7 @@ public class User implements UserDetails, Comparable<User> {
     public String getFlat() {
         return flat;
     }
+
     public void setFlat(String flat) {
         this.flat = flat;
     }
@@ -198,6 +200,10 @@ public class User implements UserDetails, Comparable<User> {
 
     public boolean isSupervisor() {
         return roles.contains(Role.ROLE_SUPERVISOR);
+    }
+
+    public boolean isBuh() {
+        return roles.contains(Role.ROLE_BUH);
     }
 
 
