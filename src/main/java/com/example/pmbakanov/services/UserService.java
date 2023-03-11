@@ -53,7 +53,6 @@ public class UserService {
         return true;
     }
 
-
     public List<User> list() {
         return userRepository.findAll();
     }
@@ -81,6 +80,14 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(form.get("password")));
         userRepository.save(user);
         log.info("Changing password for User with email: {}", user.getEmail());
+    }
+    public boolean resetPassword(User user) {
+        //user.setPassword(passwordEncoder.encode(form.get("password")));
+        //userRepository.save(user);
+        String email = user.getEmail();
+        if (userRepository.findByEmail(email) == null) return false;
+        log.info("Changing password for User with email: {}", user.getEmail());
+        return true;
     }
 
     public void deleteUser(User user) {

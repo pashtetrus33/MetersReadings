@@ -29,6 +29,12 @@
             Регистрация
         </a>
     </div>
+    <div style="margin: 0 auto; text-align: center">
+        <a style=" margin: auto; width:auto" class="btn btn-dark"
+           href="/password-reset" role="button">
+            Забыли пароль?
+        </a>
+    </div>
     <#if loginmessage??>
         <h6 style="color: red">${loginmessage}</h6>
     </#if>
