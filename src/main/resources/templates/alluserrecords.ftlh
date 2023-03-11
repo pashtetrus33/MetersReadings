@@ -11,19 +11,19 @@
     </div>
     <br>
     <h5 style="">${currentMonth} ${currentYear}</h5>
-    <table class="table table-hover table-dark" style="vertical-align: middle">
+    <table class="table table-hover table-dark">
 
-        <tr>
+        <tr style="vertical-align: middle">
             <th scope="col">Дата</th>
             <th scope="col">Имя</th>
             <th scope="col">Адрес</th>
-            <th scope="col">Кухня<br> (холодная вода)</th>
-            <th scope="col">Кухня<br> (горячая вода)</th>
-            <th scope="col">Ванная<br> (холодная вода</th>
-            <th scope="col">Ванная<br> (горячая вода)</th>
+            <th scope="col">Кухня<br>(холодная вода)</th>
+            <th scope="col">Кухня<br>(горячая вода)</th>
+            <th scope="col">Ванная<br>(холодная вода</th>
+            <th scope="col">Ванная<br>(горячая вода)</th>
         </tr>
         <#list users as user >
-                <tr>
+                <tr style="vertical-align: middle">
                     <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreated}<#else>--</#if></th>
                     <th>${user.name}</th>
                     <th>${user.address}</th>
