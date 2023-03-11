@@ -6,10 +6,10 @@
     <p><h3 style="text-align: center">${authorRecord.address} </h3></p>
 
     <hr>
-    <p style="text-align: center">Кухня холодная вода: <b>${record.kitchenCold}</b></p>
-    <p style="text-align: center">Кухня горячая вода: <b>${record.kitchenHot}</b></p>
-    <p style="text-align: center">Санузел холодная вода: <b>${record.toiletCold}</b></p>
-    <p style="text-align: center">Санузел горячая вода: <b>${record.toiletHot}</b></p>
+    <p style="text-align: center">Xолодная вода (кухня): <b>${record.kitchenCold}</b></p>
+    <p style="text-align: center">Горячая вода (кухня): <b>${record.kitchenHot}</b></p>
+    <p style="text-align: center">Холодная вода (ванная): <b>${record.toiletCold}</b></p>
+    <p style="text-align: center">Горячая вода (ванная): <b>${record.toiletHot}</b></p>
 
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center"

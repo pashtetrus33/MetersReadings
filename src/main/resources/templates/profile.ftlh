@@ -4,7 +4,7 @@
     <hr>
     <div style="text-align: center">
         <img src="/static/images/avatar.jpg"
-             style="border:2px solid black; border-radius: 20px" height="120">
+             style="border:2px solid black; border-radius: 20px" height="110">
         <br>
         <h4>${user.name}</h4>
         <h4><b>${user.email}</b></h4>

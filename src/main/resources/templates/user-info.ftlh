@@ -30,10 +30,10 @@
 
                     <div class="card-body">
                         <h5 class="card-title">Дата создания:  ${record.dateOfCreated}</h5>
-                        <p class="card-text"> Кухня (холодная вода):${record.kitchenCold}</p>
-                        <p class="card-text"> Кухня (горячая вода):${record.kitchenHot}</p>
-                        <p class="card-text"> Cанузел (холодная вода):${record.toiletCold}</p>
-                        <p class="card-text"> Cанузел (горячая вода): ${record.toiletHot}</p>
+                        <p class="card-text"> Холодная вода (кухня):${record.kitchenCold}</p>
+                        <p class="card-text"> Горячая вода (кухня):${record.kitchenHot}</p>
+                        <p class="card-text"> Холодная вода (ванная):${record.toiletCold}</p>
+                        <p class="card-text"> Горячая вода (ванная): ${record.toiletHot}</p>
                     </div>
                     <div class="card-footer">
                         ${record.user.name}
