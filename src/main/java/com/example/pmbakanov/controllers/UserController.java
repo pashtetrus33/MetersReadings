@@ -91,6 +91,7 @@ public class UserController {
 
         if (isActivated) {
             model.addAttribute("loginmessage", "Сброс пароля прошел успешно");
+            return "newpassword";
         } else {
             model.addAttribute("loginmessage", "Код сброса не найден");
         }
