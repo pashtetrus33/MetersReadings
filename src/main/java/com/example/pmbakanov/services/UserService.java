@@ -87,9 +87,11 @@ public class UserService {
         if (userRepository.findByEmail(email) == null) return false;
         log.info("Changing password for User with email: {}", user.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(passwordEncoder.encode("123"));
         userRepository.save(user);
         String message = String.format(
                 "Добрый день, %s. \n" +
+                        "После перехода по ссылке будет установлен превичный пароль: 123" +
                         "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/activate/%s",
                 user.getName(),
                 user.getActivationCode()
