@@ -78,9 +78,21 @@ public class UserController {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
-            model.addAttribute("loginmessage", "Операция  прошла успешно");
+            model.addAttribute("loginmessage", "Пользователь успешно активирован");
         } else {
             model.addAttribute("loginmessage", "Код активации не найден");
+        }
+        return "login";
+    }
+    @GetMapping("/reset/{code}")
+    public String checkCodeForReset(Principal principal, Model model, @PathVariable String code) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        boolean isActivated = userService.activateUser(code);
+
+        if (isActivated) {
+            model.addAttribute("loginmessage", "Сброс пароля прошел успешно");
+        } else {
+            model.addAttribute("loginmessage", "Код сброса не найден");
         }
         return "login";
     }

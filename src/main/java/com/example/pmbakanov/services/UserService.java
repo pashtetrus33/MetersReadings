@@ -92,7 +92,7 @@ public class UserService {
         String message = String.format(
                 "Добрый день, %s. \n" +
                         "После перехода по ссылке будет установлен пароль: 123 \n" +
-                        "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/activate/%s",
+                        "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/reset/%s",
                 user.getName(),
                 user.getActivationCode()
         );
