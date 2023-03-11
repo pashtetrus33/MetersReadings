@@ -24,17 +24,18 @@
     </form>
     <hr>
     <div style="margin: 0 auto; text-align: center">
+        <a style=" margin: auto; width:auto" class="btn btn-dark"
+           href="/reset" role="button">
+            Не помню
+        </a>
+    </div>
+    <div style="margin: 0 auto; text-align: center">
         <a style=" margin: 10px; width:auto" class="btn btn-dark"
            href="/registration" role="button">
             Регистрация
         </a>
     </div>
-    <div style="margin: 0 auto; text-align: center">
-        <a style=" margin: auto; width:auto" class="btn btn-dark"
-           href="/forgot" role="button">
-            Не помню
-        </a>
-    </div>
+
     <#if loginmessage??>
         <h6 style="color: red">${loginmessage}</h6>
     </#if>
