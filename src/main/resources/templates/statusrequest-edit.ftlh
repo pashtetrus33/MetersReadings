@@ -7,7 +7,7 @@
     <hr>
     <form action="/request/statusedit" method="post">
         <div>
-            <label for="role" style="margin: auto;">Изменить статус заявки</label><br>
+            <label for="role" style="margin: 10px;">Изменить статус заявки</label><br>
             <@enumStatus "key" statuses/>
         </div>
         <input type="hidden" value="${request.id}" name="requestId">
