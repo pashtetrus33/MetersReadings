@@ -15,8 +15,8 @@
         <col style="width:20%">
         <col style="width:20%">
         <col style="width:30%">
-        <col style="width:10%">
-        <col style="width:10%">
+        <col style="width:12%">
+        <col style="width:8%">
         <thead>
         <tr>
             <th scope="col">Дата</th>
