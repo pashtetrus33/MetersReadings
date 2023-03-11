@@ -6,11 +6,11 @@
             <img src="/static/images/avatar.jpg"
                  style="border:2px solid black; border-radius: 20px" height="120">
         <br>
-        <h4>${user.name}</h4>
+        <h5>${user.name}</h5>
         <br>
-        <b>${user.email}</b>
+        <h5>${user.address}</h5>
         <br>
-        <b>${user.address}</b>
+        <h5>${user.email}</h5>
 
 
     </div>
