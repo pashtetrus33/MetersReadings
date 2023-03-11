@@ -2,6 +2,7 @@
 <@t.template user>
     <h3 style="text-align: center">Редактирование пользователя:</h3>
     <h3 style="text-align: center"> ${user.name}</h3>
+    <h4 style="text-align: center">Текущий тип: ${user.getRoles()}</h4>
 
     <hr>
     <form action="/admin/user/edit" method="post" style="text-align: center;">

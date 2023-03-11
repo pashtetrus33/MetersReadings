@@ -3,6 +3,8 @@
     <h4 style="text-align: center"> ${request.getUser().name}</h4>
     <h4 style="text-align: center"> ${request.dateOfCreated}</h4>
     <h4 style="text-align: center; width: 100%;word-break: break-all;table-layout: fixed"> ${request.description}</h4>
+    <h4 style="text-align: center">Текущий статус: ${request.getStatuses()}</h4>
+
 
     <hr>
     <form action="/request/statusedit" method="post">
