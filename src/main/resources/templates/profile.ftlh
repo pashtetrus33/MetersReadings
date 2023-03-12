@@ -79,12 +79,12 @@
                     <div class="form-group">
                         <label for="neighborCold">Сосед: холодная вода</label>
                         <input type="number" required class="form-control"
-                               id="neighborCold" name="neighborCold">
+                               id="neighborCold" name="neighborCold" placeholder="Спасибо от соседа :)">
                     </div>
                     <div class="form-group">
-                        <label for="neighborHot">Сосед: холодная вода</label>
+                        <label for="neighborHot">Сосед: горячая вода</label>
                         <input type="number" required class="form-control"
-                               id="neighborHot" name="neighborHot">
+                               id="neighborHot" name="neighborHot" placeholder="Спасибо от соседа :)">
                     </div>
                 </#if>
 
