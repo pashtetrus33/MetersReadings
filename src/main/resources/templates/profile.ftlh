@@ -75,6 +75,18 @@
                         <input type="number" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
                 </div>
+                <#if user.isUserWithSpecialAddress()>
+                    <div class="form-group">
+                        <label for="neighborCold">Сосед: холодная вода</label>
+                        <input type="number" required class="form-control"
+                               id="neighborCold" name="neighborCold">
+                    </div>
+                    <div class="form-group">
+                        <label for="neighborHot">Сосед: холодная вода</label>
+                        <input type="number" required class="form-control"
+                               id="neighborHot" name="neighborHot">
+                    </div>
+                </#if>
 
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
@@ -112,10 +124,4 @@
             </button>
         </form>
     </div>
-
-    <#if user.isUserWithSpecialAddress()>
-     Особый адрес
-    </#if>
-
-
 </@t.template>
