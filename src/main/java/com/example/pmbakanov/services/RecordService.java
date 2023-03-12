@@ -31,6 +31,9 @@ public class RecordService {
         record.setUser(getUserByPrincipal(principal));
 
         log.info("Saving new Record.");
+        if(record.getNeighborCold() != null){
+
+        }
         recordRepository.save(record);
         for (User user : userRepository.findAll()) {
             if (user.isAdmin())

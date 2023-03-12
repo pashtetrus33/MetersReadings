@@ -23,7 +23,6 @@ public class User implements UserDetails, Comparable<User> {
     private String flat;
     private String name;
     private boolean active;
-
     @Column(length = 1000)
     private String password;
 
