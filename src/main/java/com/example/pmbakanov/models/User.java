@@ -213,7 +213,11 @@ public class User implements UserDetails, Comparable<User> {
         return this.getAddress().compareTo(o.getAddress());
     }
 
-    public boolean isUserWithSpecialAddress(){
-        return this.address.contains(SpecialAdresses.values().toString());
+    public boolean isUserWithSpecialAddress() {
+        for (SpecialAdresses adress : SpecialAdresses.values()) {
+            if (adress.getTitle().equals(this.address))
+                return true;
+        }
+        return false;
     }
 }
