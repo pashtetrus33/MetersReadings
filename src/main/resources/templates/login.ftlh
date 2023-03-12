@@ -24,15 +24,15 @@
     </form>
     <hr>
     <div style="margin: 0 auto; text-align: center">
-        <a style=" margin: auto; width:auto" class="btn btn-dark"
-           href="/reset" role="button">
-            Забыли пароль?
-        </a>
-    </div>
-    <div style="margin: 0 auto; text-align: center">
         <a style=" margin: 10px; width:auto" class="btn btn-dark"
            href="/registration" role="button">
             Регистрация
+        </a>
+    </div>
+    <div style="margin: 0 auto; text-align: center">
+        <a style=" margin: auto; width:auto" class="btn btn-dark"
+           href="/reset" role="button">
+            Забыли пароль?
         </a>
     </div>
 
