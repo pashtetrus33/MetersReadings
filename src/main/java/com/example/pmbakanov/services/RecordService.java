@@ -51,6 +51,8 @@ public class RecordService {
                 lastRecord.setDateOfCreated(LocalDateTime.now());
                 lastRecord.setKitchenCold(record.getNeighborCold());
                 lastRecord.setKitchenHot(record.getNeighborHot());
+                lastRecord.setToiletCold(0);
+                lastRecord.setToiletHot(0);
                 recordRepository.save(lastRecord);
             }
         }
