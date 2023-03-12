@@ -30,21 +30,40 @@ public class RecordService {
     }
 
     public void saveRecord(Principal principal, Record record) throws IOException {
-        record.setUser(getUserByPrincipal(principal));
+        User currentUser = getUserByPrincipal(principal);
+        record.setUser(currentUser);
 
         log.info("Saving new Record.");
+        Record lastRecord = currentUser.getLastRecord();
+        if (currentUser.areRecords() && (lastRecord.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
+
+            if (lastRecord.getKitchenCold() > record.getKitchenCold()) {
+                record.setKitchenCold(lastRecord.getKitchenCold());
+            }
+            if (lastRecord.getKitchenHot() > record.getKitchenHot()) {
+                record.setKitchenHot(lastRecord.getKitchenHot());
+            }
+        }
         recordRepository.save(record);
+
         User neighborUser = null;
         if (record.getNeighborCold() != null) {
             for (SpecialAdresses address : SpecialAdresses.values()) {
                 if (address.getTitle().equals(record.getUser().getAddress()))
                     neighborUser = userRepository.findByAddress(address.getNeighborAddress());
             }
-            Record lastRecord = neighborUser.getLastRecord();
-            if (neighborUser.areRecords() && (lastRecord.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
-                lastRecord.setKitchenCold(record.getNeighborCold());
-                lastRecord.setKitchenHot(record.getNeighborHot());
-                recordRepository.save(lastRecord);
+
+            if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
+                Record lastNeighborRecord = neighborUser.getLastRecord();
+                if (lastNeighborRecord.getKitchenCold() < record.getNeighborCold()) {
+                    lastNeighborRecord.setKitchenCold(record.getNeighborCold());
+                }
+                if (lastNeighborRecord.getKitchenHot() < record.getNeighborHot()) {
+                    lastNeighborRecord.setKitchenHot(record.getNeighborHot());
+                }
+
+                recordRepository.save(lastNeighborRecord);
+
             } else {
                 lastRecord = new Record();
                 lastRecord.setUser(neighborUser);
