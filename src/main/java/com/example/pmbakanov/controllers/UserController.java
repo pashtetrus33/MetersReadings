@@ -104,6 +104,6 @@ public class UserController {
     public String setNewPassword(@RequestParam("userId") User user, @RequestParam Map<String, String> form, Model model) {
         userService.changeUserPassword(user, form);
         model.addAttribute("loginalert", "Пароль успешно установлен");
-        return "redirect:/login";
+        return "login";
     }
 }
