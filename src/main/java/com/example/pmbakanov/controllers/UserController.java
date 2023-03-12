@@ -95,6 +95,7 @@ public class UserController {
             model.addAttribute("user", userService.findUserByCode(code));
             return "newpassword";
         } else {
+            model.addAttribute("user", userService.getUserByPrincipal(principal));
             model.addAttribute("loginmessage", "Код сброса не найден");
         }
         return "login";
