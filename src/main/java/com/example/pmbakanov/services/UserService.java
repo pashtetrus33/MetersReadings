@@ -82,7 +82,7 @@ public class UserService {
         log.info("Changing password for User with email: {}", user.getEmail());
     }
 
-     public boolean resetPassword(User user) {
+    public boolean resetPassword(User user) {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
         if (userRepository.findByEmail(email) == null) return false;
@@ -91,7 +91,6 @@ public class UserService {
         userRepository.save(user);
         String message = String.format(
                 "Добрый день, %s. \n" +
-                        "После перехода по ссылке будет установлен пароль: 123 \n" +
                         "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/reset/%s",
                 user.getName(),
                 user.getActivationCode()
@@ -104,11 +103,6 @@ public class UserService {
         log.info("Deleting User with email: {}", user.getEmail());
         userRepository.delete(user);
     }
-
-    public User findUserByCode(String code) {
-        return userRepository.findByActivationCode(code);
-    }
-
 
     public User activateUser(String code) {
         User user = userRepository.findByActivationCode(code);
