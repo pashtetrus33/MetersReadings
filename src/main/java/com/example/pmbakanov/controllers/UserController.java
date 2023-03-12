@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @GetMapping("/reset/{code}")
-    public String checkCodeForReset(Model model, @PathVariable String code) {
+    public String checkCodeForReset(Principal principal, Model model, @PathVariable String code) {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
@@ -102,7 +102,7 @@ public class UserController {
 
     @PostMapping("/newpassword")
     public String setNewPassword(@RequestParam("userId") User user, @RequestParam Map<String, String> form, Model model) {
-        userService.changeUserPassword(user,form);
+        userService.changeUserPassword(user, form);
         //model.addAttribute("loginalert", "Пароль успешно установлен");
         return "redirect:/login";
     }
