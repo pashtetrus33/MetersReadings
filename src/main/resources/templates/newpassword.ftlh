@@ -8,6 +8,7 @@
             <input type="password" class="form-control" id="password" required name="password">
         </div>
         <div style="margin: 0 auto; text-align: center">
+            <input type="hidden" value="${user.id}" name="userId">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-danger mb-2">Установить</button>
         </div>

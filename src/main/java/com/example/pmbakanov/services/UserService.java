@@ -82,7 +82,7 @@ public class UserService {
         log.info("Changing password for User with email: {}", user.getEmail());
     }
 
-    public boolean resetPassword(User user) {
+     public boolean resetPassword(User user) {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
         if (userRepository.findByEmail(email) == null) return false;
@@ -104,6 +104,11 @@ public class UserService {
         log.info("Deleting User with email: {}", user.getEmail());
         userRepository.delete(user);
     }
+
+    public User findUserByCode(String code) {
+        return userRepository.findByActivationCode(code);
+    }
+
 
     public boolean activateUser(String code) {
         User user = userRepository.findByActivationCode(code);
