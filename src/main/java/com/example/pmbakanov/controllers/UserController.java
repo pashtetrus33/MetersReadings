@@ -77,9 +77,9 @@ public class UserController {
     @GetMapping("/activate/{code}")
     public String activate(Principal principal, Model model, @PathVariable String code) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        boolean isActivated = userService.activateUser(code);
+        User user = userService.activateUser(code);
 
-        if (isActivated) {
+        if (user != null) {
             model.addAttribute("loginmessage", "Пользователь успешно активирован");
         } else {
             model.addAttribute("loginmessage", "Код активации не найден");
@@ -89,10 +89,9 @@ public class UserController {
 
     @GetMapping("/reset/{code}")
     public String checkCodeForReset(Principal principal, Model model, @PathVariable String code) {
-        boolean isActivated = userService.activateUser(code);
-
-        if (isActivated) {
-            model.addAttribute("user", userService.findUserByCode(code));
+        User user = userService.activateUser(code);
+        if (user != null) {
+            model.addAttribute("user", user);
             return "newpassword";
         } else {
             model.addAttribute("user", userService.getUserByPrincipal(principal));

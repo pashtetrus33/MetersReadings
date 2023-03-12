@@ -110,18 +110,15 @@ public class UserService {
     }
 
 
-    public boolean activateUser(String code) {
+    public User activateUser(String code) {
         User user = userRepository.findByActivationCode(code);
 
         if (user == null) {
-            return false;
+            return null;
         }
         user.setActivationCode(null);
-//        if (user.isActive()) {
-//            user.setPassword(passwordEncoder.encode("123"));
-//        }
         user.setActive(true);
         userRepository.save(user);
-        return true;
+        return user;
     }
 }
