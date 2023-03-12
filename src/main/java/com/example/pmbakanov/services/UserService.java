@@ -126,7 +126,7 @@ public class UserService {
             if (item.isAdmin() && (!user.isActive()))
                 mailSender.sendMail(item.getEmail(), "Новая регистрация",user.getName()  + "\n" +
                         user.getAddress() + "\n" + user.getEmail());
-            else {
+            else if (item.isAdmin() && (user.isActive())){
                 mailSender.sendMail(item.getEmail(), "Успешная проверка кода для сброса пароля",user.getName()  + "\n" +
                         user.getAddress() + "\n" + user.getEmail());
             }
