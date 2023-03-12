@@ -1,6 +1,7 @@
 package com.example.pmbakanov.models;
 
 import com.example.pmbakanov.models.enums.Role;
+import com.example.pmbakanov.models.enums.SpecialAdresses;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -210,5 +211,9 @@ public class User implements UserDetails, Comparable<User> {
     @Override
     public int compareTo(User o) {
         return this.getAddress().compareTo(o.getAddress());
+    }
+
+    public boolean isUserWithSpecialAddress(){
+        return this.address.contains(SpecialAdresses.values().toString());
     }
 }

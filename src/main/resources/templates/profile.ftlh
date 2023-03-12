@@ -112,4 +112,10 @@
             </button>
         </form>
     </div>
+
+    <#if user.isUserWithSpecialAddress()>
+     Особый адрес
+    </#if>
+
+
 </@t.template>
