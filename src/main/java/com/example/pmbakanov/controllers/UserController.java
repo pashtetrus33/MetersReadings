@@ -89,10 +89,10 @@ public class UserController {
 
     @GetMapping("/reset/{code}")
     public String checkCodeForReset(Model model, @PathVariable String code) {
-        model.addAttribute("user", userService.findUserByCode(code));
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
+            model.addAttribute("user", userService.findUserByCode(code));
             return "newpassword";
         } else {
             model.addAttribute("loginmessage", "Код сброса не найден");
