@@ -122,14 +122,19 @@ public class UserService {
             return null;
         }
         user.setActivationCode(null);
+        for (User item: userRepository.findAll()){
+            if (item.isAdmin() && (!user.isActive()))
+                mailSender.sendMail(item.getEmail(), "Новая регистрация",user.getName()  + "\n" +
+                        user.getAddress() + "\n" + user.getEmail());
+            else {
+                mailSender.sendMail(item.getEmail(), "Успешная проверка кода для сброса пароля",user.getName()  + "\n" +
+                        user.getAddress() + "\n" + user.getEmail());
+            }
+        }
         user.setActive(true);
         userRepository.save(user);
         log.info("Creating User with email: {}", user.getEmail());
-        for (User item: userRepository.findAll()){
-            if (item.isAdmin())
-                mailSender.sendMail(item.getEmail(), "Новая регистрация",user.getName()  + "\n" +
-                        user.getAddress() + "\n" + user.getEmail());
-        }
+
         return user;
     }
 }
