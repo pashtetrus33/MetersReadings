@@ -79,13 +79,24 @@ public class UserService {
     public void changeUserPassword(User user, Map<String, String> form) {
         user.setPassword(passwordEncoder.encode(form.get("password")));
         userRepository.save(user);
+        for (User item: userRepository.findAll()){
+            if (item.isAdmin())
+                mailSender.sendMail(item.getEmail(), "Успешная смена пароля",user.getName() +
+                        "\n" + user.getAddress() + "\n" + user.getEmail());
+        }
         log.info("Changing password for User with email: {}", user.getEmail());
     }
 
     public boolean resetPassword(User user) {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
-        if (userRepository.findByEmail(email) == null) return false;
+        if (userRepository.findByEmail(email) == null) {
+            for (User item: userRepository.findAll()){
+                if (item.isAdmin())
+                    mailSender.sendMail(item.getEmail(), "Попытка сброса пароля","Email не найден" + "\n" + email);
+            }
+            return false;
+        }
         log.info("Changing password for User with email: {}", user.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
@@ -113,6 +124,12 @@ public class UserService {
         user.setActivationCode(null);
         user.setActive(true);
         userRepository.save(user);
+        log.info("Creating User with email: {}", user.getEmail());
+        for (User item: userRepository.findAll()){
+            if (item.isAdmin())
+                mailSender.sendMail(item.getEmail(), "Новая регистрация",user.getName()  + "\n" +
+                        user.getAddress() + "\n" + user.getEmail());
+        }
         return user;
     }
 }
