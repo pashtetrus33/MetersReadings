@@ -26,7 +26,7 @@
     <div style="margin: 0 auto; text-align: center">
         <a style=" margin: auto; width:auto" class="btn btn-dark"
            href="/reset" role="button">
-            Не помню
+            Забыли пароль?
         </a>
     </div>
     <div style="margin: 0 auto; text-align: center">
