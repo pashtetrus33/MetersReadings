@@ -209,6 +209,6 @@ public class User implements UserDetails, Comparable<User> {
 
     @Override
     public int compareTo(User o) {
-        return o.getAddress().compareTo(this.getAddress());
+        return this.getAddress().compareTo(o.getAddress());
     }
 }
