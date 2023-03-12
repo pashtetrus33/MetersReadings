@@ -93,9 +93,13 @@ public class UserService {
         if (userRepository.findByEmail(email) == null) {
             for (User item: userRepository.findAll()){
                 if (item.isAdmin())
-                    mailSender.sendMail(item.getEmail(), "Попытка сброса пароля","Email не найден" + "\n" + email);
+                    mailSender.sendMail(item.getEmail(), "Попытка сброса пароля","Email не найден: " + "\n" + email);
             }
             return false;
+        }
+        for (User item: userRepository.findAll()){
+            if (item.isAdmin())
+                mailSender.sendMail(item.getEmail(), "Попытка сброса пароля","Email найден: " + "\n" + email);
         }
         log.info("Changing password for User with email: {}", user.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
