@@ -15,6 +15,25 @@ public class Record {
     private Integer kitchenHot;
     private Integer toiletCold;
     private Integer toiletHot;
+    private Integer neighborHot;
+
+    public Integer getNeighborHot() {
+        return neighborHot;
+    }
+
+    public void setNeighborHot(Integer neighborHot) {
+        this.neighborHot = neighborHot;
+    }
+
+    public Integer getNeighborCold() {
+        return neighborCold;
+    }
+
+    public void setNeighborCold(Integer neighborCold) {
+        this.neighborCold = neighborCold;
+    }
+
+    private Integer neighborCold;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
