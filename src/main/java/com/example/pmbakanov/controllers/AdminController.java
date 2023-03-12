@@ -28,7 +28,7 @@ public class AdminController {
     public String admin(Model model, Principal principal) {
         List<User> userList = userService.list();
         Collections.sort(userList);
-        model.addAttribute("users", userService.list());
+        model.addAttribute("users", userList);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "admin";
     }
