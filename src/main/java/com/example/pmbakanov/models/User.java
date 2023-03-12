@@ -214,8 +214,8 @@ public class User implements UserDetails, Comparable<User> {
     }
 
     public boolean isUserWithSpecialAddress() {
-        for (SpecialAdresses adress : SpecialAdresses.values()) {
-            if (adress.getTitle().equals(this.address))
+        for (SpecialAdresses address : SpecialAdresses.values()) {
+            if (address.getTitle().equals(this.address))
                 return true;
         }
         return false;
