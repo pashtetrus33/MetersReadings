@@ -59,8 +59,7 @@ public class RecordController {
     @GetMapping("/allusersrecords")
     public String alluserrecords(Model model, Principal principal) {
 
-        List<User> userList = new ArrayList<>();
-        userList = userService.list();
+        List<User> userList = userService.list();
         Collections.sort(userList);
 
         model.addAttribute("records", recordService.listRecords(null));

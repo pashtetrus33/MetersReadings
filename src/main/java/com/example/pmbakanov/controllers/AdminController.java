@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +26,8 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String admin(Model model, Principal principal) {
+        List<User> userList = userService.list();
+        Collections.sort(userList);
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "admin";
