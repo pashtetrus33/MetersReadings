@@ -2,6 +2,7 @@ package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.models.Record;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.models.enums.SpecialAdresses;
 import com.example.pmbakanov.repositories.RecordRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,16 +33,37 @@ public class RecordService {
         record.setUser(getUserByPrincipal(principal));
 
         log.info("Saving new Record.");
-        if(record.getNeighborCold() != null){
-
-        }
         recordRepository.save(record);
+        User neighborUser = null;
+        if (record.getNeighborCold() != null) {
+            for (SpecialAdresses address : SpecialAdresses.values()) {
+                if (address.getTitle().equals(record.getUser().getAddress()))
+                    neighborUser = userRepository.findByAddress(address.getNeighborAddress());
+            }
+            Record lastRecord = neighborUser.getLastRecord();
+            if (neighborUser.areRecords() && (lastRecord.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
+                lastRecord.setKitchenCold(record.getNeighborCold());
+                lastRecord.setKitchenHot(record.getNeighborHot());
+                recordRepository.save(lastRecord);
+            } else {
+                lastRecord = new Record();
+                lastRecord.setUser(neighborUser);
+                lastRecord.setDateOfCreated(LocalDateTime.now());
+                lastRecord.setKitchenCold(record.getNeighborCold());
+                lastRecord.setKitchenHot(record.getNeighborHot());
+                recordRepository.save(lastRecord);
+            }
+        }
         for (User user : userRepository.findAll()) {
             if (user.isAdmin())
                 mailSender.sendMail(user.getEmail(), "Новые показания счетчиков", record.getUser().getName() + "\n" +
-                        record.getUser().getAddress() + "\n" + "Kухня (хол.): " + record.getKitchenCold() + "\n" +
-                        "Kухня (гор.): " + + record.getKitchenHot() + "\n" + "Ванная (хол.): " +
-                        record.getToiletCold() + "\n" + "Ванная (гор.): " + record.getToiletHot());
+                        record.getUser().getAddress() + "\n" +
+                        "Kухня (хол.): " + record.getKitchenCold() + "\n" +
+                        "Kухня (гор.): " + +record.getKitchenHot() + "\n" +
+                        "Ванная (хол.): " + record.getToiletCold() + "\n" +
+                        "Ванная (гор.): " + record.getToiletHot() + "\n" +
+                        "Сосед (кухня хол.): " + record.getNeighborCold() + "\n" +
+                        "Сосед (кухня гор.): " + record.getNeighborHot());
         }
     }
 

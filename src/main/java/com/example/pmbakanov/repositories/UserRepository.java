@@ -8,5 +8,6 @@ import java.util.Collections;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByActivationCode(String code);
     User findByEmail(String email);
+    User findByAddress(String address);
 }
 
