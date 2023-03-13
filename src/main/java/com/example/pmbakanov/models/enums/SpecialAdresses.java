@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 public enum SpecialAdresses {
 
+    HOUSE_2_10("Жилой дом №2 кв.№10","Жилой дом №2 кв.№11"),
     HOUSE_2_25("Жилой дом №2 кв.№25","Жилой дом №2 кв.№24"),
     HOUSE_2_31("Жилой дом №2 кв.№31","Жилой дом №2 кв.№32"),
     HOUSE_2_34("Жилой дом №2 кв.№34","Жилой дом №2 кв.№33"),
