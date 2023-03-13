@@ -54,13 +54,12 @@
                     <div class="form-group">
                         <label for="kitchenCold">Холодная вода (кухня)</label>
                         <input type="number" required class="form-control"
-                               id="kitchenCold" name="kitchenCold" placeholder="0 если сведений нет">
+                               id="kitchenCold" name="kitchenCold">
                     </div>
                     <div class="form-group">
                         <label for="kitchenHot">Горячая вода (кухня)</label>
                         <div class="input-group mb-3">
-                            <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot"
-                                   placeholder="0 если сведений нет">
+                            <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot">
                         </div>
                     </div>
                 </#if>
