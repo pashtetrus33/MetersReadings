@@ -44,6 +44,11 @@ public class RecordService {
                 record.setKitchenHot(lastRecord.getKitchenHot());
             }
         }
+
+        if (record.getKitchenHot() == null && record.getKitchenCold() == null){
+            record.setKitchenCold(0);
+            record.setKitchenHot(0);
+        }
         recordRepository.save(record);
 
         User neighborUser = null;
