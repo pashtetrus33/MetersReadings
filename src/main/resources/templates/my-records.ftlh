@@ -10,24 +10,27 @@
     </div>
 
     <br>
-    <div class="card-columns">
-        <#list records as record>
-            <a href="/record/${record.id}" class="record-link">
-                <div class="card text-white bg-dark my-3 record">
 
-                    <div class="card-body">
-                        <p class="card-text"> Кухня (холодная вода): ${record.kitchenCold}</p>
-                        <p class="card-text"> Кухня (горячая вода): ${record.kitchenHot}</p>
-                        <p class="card-text"> Cанузел (холодная вода): ${record.toiletCold}</p>
-                        <p class="card-text"> Cанузел (горячая вода): ${record.toiletHot}</p>
-                    </div>
-                    <div class="card-footer">
-                        ${record.dateOfCreated}
-                    </div>
-                </div>
-            </a>
-        <#else>
-            <h3 style="text-align: center">Не найдено</h3>
+    <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed">
+        <thead>
+        <tr>
+            <th scope="col">Дата</th>
+            <th scope="col">Кухня (холодная вода)</th>
+            <th scope="col">Кухня (холодная вода)</th>
+            <th scope="col">Ванная (холодная вода)</th>
+            <th scope="col">Ванная (горячая вода)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list records as record>
+            <tr>
+                <th>${record.dateOfCreated}</th>
+                <th>${record.kitchenCold}</th>
+                <th>${record.kitchenHot}</th>
+                <th>${record.toiletCold}</th>
+                <th>${record.toiletHot}</th>
+            </tr>
         </#list>
-    </div>
+        </tbody>
+    </table>
 </@t.template>
