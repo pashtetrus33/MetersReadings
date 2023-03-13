@@ -219,4 +219,12 @@ public class User implements UserDetails, Comparable<User> {
         }
         return false;
     }
+
+    public boolean isUserWithReducedData() {
+        for (SpecialAdresses address : SpecialAdresses.values()) {
+            if (address.getNeighborAddress().equals(this.address))
+                return true;
+        }
+        return false;
+    }
 }

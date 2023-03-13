@@ -50,18 +50,20 @@
         </a>
         <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center">
             <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 53%; margin: auto">
-                <div class="form-group">
-                    <label for="kitchenCold">Холодная вода (кухня)</label>
-                    <input type="number" required class="form-control"
-                           id="kitchenCold" name="kitchenCold" placeholder="0 если сведений нет">
-                </div>
-                <div class="form-group">
-                    <label for="kitchenHot">Горячая вода (кухня)</label>
-                    <div class="input-group mb-3">
-                        <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot" placeholder="0 если сведений нет">
+                <#if !user.isUserWithReducedData()>
+                    <div class="form-group">
+                        <label for="kitchenCold">Холодная вода (кухня)</label>
+                        <input type="number" required class="form-control"
+                               id="kitchenCold" name="kitchenCold" placeholder="0 если сведений нет">
                     </div>
-                </div>
-
+                    <div class="form-group">
+                        <label for="kitchenHot">Горячая вода (кухня)</label>
+                        <div class="input-group mb-3">
+                            <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot"
+                                   placeholder="0 если сведений нет">
+                        </div>
+                    </div>
+                </#if>
                 <div class="form-group">
                     <label for="toiletCold">Холодная вода (ванная)</label>
                     <div class="input-group mb-3">
@@ -102,7 +104,7 @@
             <form action="/request/create" method="post" enctype="multipart/form-data">
                 <div class="form-outline">
                     <label for="description" style="margin: auto;">Описание</label>
-                    <textarea class="form-control"  id="description" rows="4"  name="description"></textarea>
+                    <textarea class="form-control" id="description" rows="4" name="description"></textarea>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
