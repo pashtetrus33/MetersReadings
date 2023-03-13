@@ -35,6 +35,10 @@ public class RecordService {
 
         log.info("Saving new Record.");
         Record lastRecord = currentUser.getLastRecord();
+        if (record.getKitchenHot() == null && record.getKitchenCold() == null){
+            record.setKitchenCold(0);
+            record.setKitchenHot(0);
+        }
         if (currentUser.areRecords() && (lastRecord.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
 
             if (lastRecord.getKitchenCold() > record.getKitchenCold()) {
@@ -45,10 +49,7 @@ public class RecordService {
             }
         }
 
-        if (record.getKitchenHot() == null && record.getKitchenCold() == null){
-            record.setKitchenCold(0);
-            record.setKitchenHot(0);
-        }
+
         recordRepository.save(record);
 
         User neighborUser = null;
