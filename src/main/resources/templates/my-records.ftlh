@@ -14,11 +14,11 @@
     <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed">
         <thead>
         <tr>
-            <th scope="col">Дата</th>
-            <th scope="col">Кухня (холодная вода)</th>
-            <th scope="col">Кухня (холодная вода)</th>
-            <th scope="col">Ванная (холодная вода)</th>
-            <th scope="col">Ванная (горячая вода)</th>
+            <th scope="col" style="vertical-align: middle">Дата</th>
+            <th scope="col">Кухня(хол.)</th>
+            <th scope="col">Кухня(гор.)</th>
+            <th scope="col">Ванная(хол.)</th>
+            <th scope="col">Ванная(гор.)</th>
         </tr>
         </thead>
         <tbody>
