@@ -15,20 +15,20 @@
         <thead>
         <tr>
             <th scope="col" style="vertical-align: middle">Дата</th>
-            <th scope="col">Кухня(хол.)</th>
-            <th scope="col">Кухня(гор.)</th>
-            <th scope="col">Ванная(хол.)</th>
-            <th scope="col">Ванная(гор.)</th>
+            <th scope="col" style="vertical-align: middle">Кухня(хол.)</th>
+            <th scope="col" style="vertical-align: middle">Кухня(гор.)</th>
+            <th scope="col" style="vertical-align: middle">Ванная(хол.)</th>
+            <th scope="col" style="vertical-align: middle">Ванная(гор.)</th>
         </tr>
         </thead>
         <tbody>
         <#list records as record>
             <tr>
-                <th>${record.dateOfCreated}</th>
-                <th>${record.kitchenCold}</th>
-                <th>${record.kitchenHot}</th>
-                <th>${record.toiletCold}</th>
-                <th>${record.toiletHot}</th>
+                <th style="vertical-align: middle">${record.dateOfCreated}</th>
+                <th style="vertical-align: middle">${record.kitchenCold}</th>
+                <th style="vertical-align: middle">${record.kitchenHot}</th>
+                <th style="vertical-align: middle">${record.toiletCold}</th>
+                <th style="vertical-align: middle">${record.toiletHot}</th>
             </tr>
         </#list>
         </tbody>
