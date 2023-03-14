@@ -10,7 +10,7 @@
         </a>
     </div>
     <br>
-    <table class="table table-hover table-dark" style="width:100%;word-break: break-all;table-layout: fixed" style="background-color: #03305c">
+    <table class="table table-hover table-dark" style="width:100%;word-break: break-all;table-layout: fixed;background-color: #03305c">
         <thead>
         <tr>
             <th scope="col">Дата</th>
