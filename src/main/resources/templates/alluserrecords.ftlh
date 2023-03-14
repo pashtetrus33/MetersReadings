@@ -27,8 +27,8 @@
                     <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreated}<#else>--</#if></th>
                     <th>${user.name}</th>
                     <th>${user.address}</th>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
+                    <th><#if (user.areRecords()) && (user.getLastRecord().kitchenCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
+                    <th><#if (user.areRecords()) && (user.getLastRecord().kitchenHot != 0)&& (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
                     <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletCold}<#else>--</#if></th>
                     <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletHot}<#else>--</#if></th>
                 </tr>
