@@ -2,6 +2,7 @@ package com.example.pmbakanov.controllers;
 
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.models.enums.Executor;
 import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.services.RequestService;
@@ -70,6 +71,8 @@ public class RequestController {
     @PostMapping("/request/statusedit")
     public String requestStatusEdit(@RequestParam Long requestId, @RequestParam Map<String, String> form) {
         requestService.changeRequestStatus(requestService.getRequestById(requestId), form);
+        requestService.getRequestById(requestId).setExecutor(Executor.valueOf(form.get("executor")));
+
         return "redirect:/allusersrequests";
     }
 
@@ -77,6 +80,7 @@ public class RequestController {
     public String userEdit(@PathVariable("request") Request request, Model model) {
         model.addAttribute("request", request);
         model.addAttribute("statuses", Status.values());
+        model.addAttribute("executors", Executor.values());
         return "statusrequest-edit";
     }
 

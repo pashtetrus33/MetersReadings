@@ -60,7 +60,7 @@ public class RequestService {
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
         for (User user: userRepository.findAll()){
-            if (user.isAdmin() || user.isSupervisor())
+            if (user.isAdmin())
                 mailSender.sendMail(user.getEmail(), "Новая заявка" + ": " + request.getUser().getName(), request.getUser().getAddress() + "\n" +
                         request.getDescription());
         }

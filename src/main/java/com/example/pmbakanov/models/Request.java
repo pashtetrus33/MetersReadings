@@ -1,5 +1,6 @@
 package com.example.pmbakanov.models;
 
+import com.example.pmbakanov.models.enums.Executor;
 import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.models.enums.Status;
 import lombok.Data;
@@ -63,7 +64,16 @@ public class Request {
             joinColumns = @JoinColumn(name = "request_id"))
     @Enumerated(EnumType.STRING)
     private Set<Status> statuses = new HashSet<>();
+    private Executor executor;
     private LocalDateTime dateOfCreated;
+
+    public Executor getExecutor() {
+        return executor;
+    }
+
+    public void setExecutor(Executor executor) {
+        this.executor = executor;
+    }
 
     public Set<Status> getStatuses() {
         return statuses;
