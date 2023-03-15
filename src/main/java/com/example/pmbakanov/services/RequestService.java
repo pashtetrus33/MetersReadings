@@ -104,4 +104,9 @@ public class RequestService {
         }
         requestRepository.save(request);
     }
+
+    public void changeRequestExecutor(Request requestById, Map<String, String> form) {
+        requestById.setExecutor(Executor.valueOf(form.get("executor")));
+        requestRepository.save(requestById);
+    }
 }

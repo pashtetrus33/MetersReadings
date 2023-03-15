@@ -71,7 +71,7 @@ public class RequestController {
     @PostMapping("/request/statusedit")
     public String requestStatusEdit(@RequestParam Long requestId, @RequestParam Map<String, String> form) {
         requestService.changeRequestStatus(requestService.getRequestById(requestId), form);
-        requestService.getRequestById(requestId).setExecutor(Executor.valueOf(form.get("executor")));
+        requestService.changeRequestExecutor(requestService.getRequestById(requestId), form);
 
         return "redirect:/allusersrequests";
     }
