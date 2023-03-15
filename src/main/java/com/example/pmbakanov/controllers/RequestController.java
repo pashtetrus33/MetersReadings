@@ -45,8 +45,10 @@ public class RequestController {
 //    }
 
     @PostMapping("/request/create")
-    public String createRequest(Request request, Principal principal) throws IOException {
+    public String createRequest(Model model, Request request, Principal principal) throws IOException {
         requestService.saveRequest(principal, request);
+        model.addAttribute("user", requestService.getUserByPrincipal(principal));
+        model.addAttribute("successrequest", "Заявка успешно передана");
         return "redirect:/profile";
     }
 
