@@ -43,6 +43,9 @@
                 Счетчики
             </a>
         </#if>
+        <#if successmessage??>
+            <h6 style="color: red">${successmessage}</h6>
+        </#if>
         <a class="btn btn-dark mt-3 mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample" role="button"
            aria-expanded="true" aria-controls="collapseExample">
@@ -125,7 +128,4 @@
             </button>
         </form>
     </div>
-    <#if successmessage??>
-        <h6 style="color: red">${successmessage}</h6>
-    </#if>
 </@t.template>
