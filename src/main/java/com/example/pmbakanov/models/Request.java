@@ -1,9 +1,7 @@
 package com.example.pmbakanov.models;
 
-import com.example.pmbakanov.models.enums.Executor;
-import com.example.pmbakanov.models.enums.Role;
+import com.example.pmbakanov.models.enums.ExecutorName;
 import com.example.pmbakanov.models.enums.Status;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -64,14 +62,14 @@ public class Request {
             joinColumns = @JoinColumn(name = "request_id"))
     @Enumerated(EnumType.STRING)
     private Set<Status> statuses = new HashSet<>();
-    private Executor executor;
+    private ExecutorName executor;
     private LocalDateTime dateOfCreated;
 
-    public Executor getExecutor() {
+    public ExecutorName getExecutor() {
         return executor;
     }
 
-    public void setExecutor(Executor executor) {
+    public void setExecutor(ExecutorName executor) {
         this.executor = executor;
     }
 

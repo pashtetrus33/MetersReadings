@@ -2,8 +2,7 @@ package com.example.pmbakanov.controllers;
 
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
-import com.example.pmbakanov.models.enums.Executor;
-import com.example.pmbakanov.models.enums.Role;
+import com.example.pmbakanov.models.enums.ExecutorName;
 import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.services.RequestService;
 import com.example.pmbakanov.services.UserService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -70,8 +68,9 @@ public class RequestController {
 
     @PostMapping("/request/statusedit")
     public String requestStatusEdit(@RequestParam Long requestId, @RequestParam Map<String, String> form) {
-        requestService.changeRequestStatus(requestService.getRequestById(requestId), form);
-        requestService.changeRequestExecutor(requestService.getRequestById(requestId), form);
+        Request request = requestService.getRequestById(requestId);
+        requestService.changeRequestStatus(request, form);
+        requestService.changeRequestExecutor(request, form);
 
         return "redirect:/allusersrequests";
     }
@@ -80,7 +79,7 @@ public class RequestController {
     public String userEdit(@PathVariable("request") Request request, Model model) {
         model.addAttribute("request", request);
         model.addAttribute("statuses", Status.values());
-        model.addAttribute("executors", Executor.values());
+        model.addAttribute("executors", ExecutorName.values());
         return "statusrequest-edit";
     }
 

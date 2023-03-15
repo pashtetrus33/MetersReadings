@@ -1,10 +1,10 @@
 package com.example.pmbakanov.models.enums;
 
-public enum Executor {
+public enum ExecutorName {
     NEW("Не назначен"), ORLOV("Орлов А."), ZHUKOV("Жуков Д."), SHAYAKHMETOV("Шаяхметов М."), GLUSHKOV("Глушков А.");
     private final String title;
 
-    Executor(String title) {
+    ExecutorName(String title) {
         this.title = title;
     }
 

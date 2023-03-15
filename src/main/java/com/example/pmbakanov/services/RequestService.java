@@ -2,8 +2,7 @@ package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
-import com.example.pmbakanov.models.enums.Executor;
-import com.example.pmbakanov.models.enums.Role;
+import com.example.pmbakanov.models.enums.ExecutorName;
 import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.repositories.RequestRepository;
 import com.example.pmbakanov.repositories.UserRepository;
@@ -58,7 +57,7 @@ public class RequestService {
 
     public void saveRequest(Principal principal, Request request) throws IOException {
         request.setUser(getUserByPrincipal(principal));
-        request.setExecutor(Executor.NEW);
+        request.setExecutor(ExecutorName.NEW);
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
         for (User user: userRepository.findAll()){
@@ -105,8 +104,13 @@ public class RequestService {
         requestRepository.save(request);
     }
 
-    public void changeRequestExecutor(Request requestById, Map<String, String> form) {
-        requestById.setExecutor(Executor.valueOf(form.get("executor")));
-        requestRepository.save(requestById);
+    public void changeRequestExecutor(Request request, Map<String, String> form) {
+        String str = form.get("executor");
+        for (ExecutorName item: ExecutorName.values()) {
+            if (item.getTitle().equals(str)){
+                request.setExecutor(item);
+            }
+        }
+        requestRepository.save(request);
     }
 }
