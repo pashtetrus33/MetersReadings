@@ -15,7 +15,7 @@
         </div>
         <div>
             <label for="executor" style="margin: 10px;">Исполнитель</label><br>
-            <@enumStatus "exucutor" executors/>
+            <@enumStatus "executor" executors/>
         </div>
         <input type="hidden" value="${request.id}" name="requestId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
