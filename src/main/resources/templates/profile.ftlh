@@ -97,6 +97,9 @@
                 <button type="submit" style="width: 100%" class="btn btn-dark">Добавить</button>
             </form>
         </div>
+        <#if successrequest??>
+            <h6 style="color: red">${successrequest}</h6>
+        </#if>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            data-toggle="collapse" href="#collapseExample2" role="button"
            aria-expanded="true" aria-controls="collapseExample">

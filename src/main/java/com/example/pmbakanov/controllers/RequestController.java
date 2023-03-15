@@ -49,7 +49,7 @@ public class RequestController {
         requestService.saveRequest(principal, request);
         model.addAttribute("user", requestService.getUserByPrincipal(principal));
         model.addAttribute("successrequest", "Заявка успешно передана");
-        return "redirect:/profile";
+        return "profile";
     }
 
     @PostMapping("/request/delete/{id}")
