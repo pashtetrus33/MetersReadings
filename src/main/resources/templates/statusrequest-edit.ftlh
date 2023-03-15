@@ -17,6 +17,16 @@
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
+    <div class="form-group">
+        <label for="address" style="margin: auto;">Исполнитель</label>
+        <select id="executor" required name="executor" class="form-control">
+            <option value="">Здание не выбрано</option>
+            <option value="1">Орлов А.</option>
+            <option value="2">Жуков Д.</option>
+            <option value="3">Шаяхметов М.</option>
+            <option value="4">Глушков А.</option>
+        </select>
+    </div>
 
     <div style="margin: 0 auto; text-align: center">
         <a class="btn btn-dark" style="margin: 10px;"
