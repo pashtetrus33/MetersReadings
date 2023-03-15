@@ -20,7 +20,7 @@
     <div class="form-group">
         <label for="address" style="margin: auto;">Исполнитель</label>
         <select id="executor" required name="executor" class="form-control">
-            <option value="">Здание не выбрано</option>
+            <option value="">Исполнитель не выбран</option>
             <option value="1">Орлов А.</option>
             <option value="2">Жуков Д.</option>
             <option value="3">Шаяхметов М.</option>
