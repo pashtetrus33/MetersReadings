@@ -125,4 +125,7 @@
             </button>
         </form>
     </div>
+    <#if successmessage??>
+        <h6 style="color: red">${successsmessage}</h6>
+    </#if>
 </@t.template>

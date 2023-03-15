@@ -35,8 +35,9 @@ public class RecordController {
     }
 
     @PostMapping("/record/create")
-    public String createRecord(Record record, Principal principal) throws IOException {
+    public String createRecord(Record record, Principal principal, Model model) throws IOException {
         recordService.saveRecord(principal, record);
+        model.addAttribute("successmessage", "Спасибо.Данные успешно переданы");
         return "redirect:/profile";
     }
 
