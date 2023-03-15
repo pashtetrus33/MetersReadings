@@ -2,6 +2,7 @@ package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.models.enums.Executor;
 import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.models.enums.Status;
 import com.example.pmbakanov.repositories.RequestRepository;
@@ -57,6 +58,7 @@ public class RequestService {
 
     public void saveRequest(Principal principal, Request request) throws IOException {
         request.setUser(getUserByPrincipal(principal));
+        request.setExecutor(Executor.NEW);
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
         for (User user: userRepository.findAll()){
