@@ -4,8 +4,8 @@
     <h4 style="text-align: center"> ${request.dateOfCreated}</h4>
     <h4 style="text-align: center; width: 100%;word-break: break-all;table-layout: fixed"> ${request.description}</h4>
     <#list request.getStatuses() as status>
-        <h3 style="text-align: center">Текущий статус: ${status}</h3>
-        <h3 style="text-align: center">Текущий исполнитель: ${request.executor}</h3>
+        <h5 style="text-align: center">Текущий статус: ${status}</h5>
+        <h5 style="text-align: center">Текущий исполнитель: ${request.executor}</h5>
     </#list>
 
     <hr>
