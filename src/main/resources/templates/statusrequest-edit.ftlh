@@ -17,8 +17,8 @@
                 <th scope="col" style="vertical-align: middle">Сохранить</th>
             </tr>
             <tr>
-                <th style="vertical-align: middle"><@enumStatus "key" statuses/></th>
-                <th style="vertical-align: middle">  <@enumStatus "executor" executors/></th>
+                <th style="vertical-align: middle"><@enumStatus "key" statuses request.statuses.toString()/></th>
+                <th style="vertical-align: middle">  <@enumStatus "executor" executors request.executor/></th>
                 <th><button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button></th>
             </tr>
         </table>
@@ -35,9 +35,10 @@
     </div>
 
 <#-- handy macro for this -->
-    <#macro enumStatus selectName enumValues>
+    <#macro enumStatus selectName enumValues selected>
         <label>
             <select name="${selectName}">
+                <option value="${selected}">${selected}</option>
                 <#list enumValues as enum>
                     <option value="${enum}">${enum.title}</option>
                 </#list>
