@@ -60,7 +60,7 @@ public class RequestService {
         request.setExecutor(ExecutorName.NEW);
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
-        for (User user: userRepository.findAll()){
+        for (User user : userRepository.findAll()) {
             if (user.isAdmin())
                 mailSender.sendMail(user.getEmail(), "Новая заявка" + ": " + request.getUser().getName(), request.getUser().getAddress() + "\n" +
                         request.getDescription());
@@ -89,30 +89,25 @@ public class RequestService {
     }
 
     public void changeRequestStatus(Request request, Map<String, String> form) {
-        Set<String> statuses = Arrays.stream(Status.values()).map(Status::toString).collect(Collectors.toSet());
-
-        request.getStatuses().clear();
-        for (String key : form.values()) {
-            if (statuses.contains(key)) {
-                Status[] result = Status.values();
-                Status res = Arrays.stream(result).filter(p -> p.getTitle().equals(key)).findFirst().orElse(null);
-                assert res != null;
-                request.getStatuses().add(Status.valueOf(res.name()));
+        String str = form.get("key");
+        for (Status item : Status.values()) {
+            if (item.getTitle().equals(str)) {
+                request.setStatus(item);
             }
+            requestRepository.save(request);
         }
-        requestRepository.save(request);
     }
 
     public void changeRequestExecutor(Request request, Map<String, String> form) {
         String str = form.get("executor");
-        for (ExecutorName item: ExecutorName.values()) {
-            if (item.getTitle().equals(str)){
+        for (ExecutorName item : ExecutorName.values()) {
+            if (item.getTitle().equals(str)) {
                 request.setExecutor(item);
             }
         }
         mailSender.sendMail(request.getUser().getEmail(), "Данные заявки изменены", "Исполнитель: " +
                 request.getExecutor().getTitle() + "\n" +
-                "Статус заявки: " + request.getStatuses().toString() + "\n" + "Заявка: "+ request.getDescription());
+                "Статус заявки: " + request.getStatus() + "\n" + "Заявка: " + request.getDescription());
         requestRepository.save(request);
     }
 }

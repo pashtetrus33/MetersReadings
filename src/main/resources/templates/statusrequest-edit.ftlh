@@ -3,14 +3,14 @@
     <h4 style="text-align: center"> ${request.getUser().name}</h4>
     <h4 style="text-align: center"> ${request.dateOfCreated}</h4>
     <h4 style="text-align: center; width: 100%;word-break: break-all;table-layout: fixed"> ${request.description}</h4>
-    <#list request.getStatuses() as status>
-        <h5 style="text-align: center">Текущий статус: ${status}</h5>
-        <h5 style="text-align: center">Текущий исполнитель: ${request.executor}</h5>
-    </#list>
+    <h5 style="text-align: center">Текущий статус: ${request.status}</h5>
+    <h5 style="text-align: center">Текущий исполнитель: ${request.executor}</h5>
+
 
     <hr>
     <form action="/request/statusedit" method="post">
-        <table class="table table-hover table-dark" style="width:100%;word-break: break-all;table-layout: fixed;background-color: #03305c">
+        <table class="table table-hover table-dark"
+               style="width:100%;word-break: break-all;table-layout: fixed;background-color: #03305c">
             <tr>
                 <th scope="col" style="vertical-align: middle">Статус заявки</th>
                 <th scope="col" style="vertical-align: middle">Исполнитель</th>
@@ -19,7 +19,9 @@
             <tr>
                 <th style="vertical-align: middle"><@enumStatus "key" statuses currentstatus/></th>
                 <th style="vertical-align: middle">  <@enumStatus "executor" executors request.executor/></th>
-                <th><button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button></th>
+                <th>
+                    <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
+                </th>
             </tr>
         </table>
         <input type="hidden" value="${request.id}" name="requestId">

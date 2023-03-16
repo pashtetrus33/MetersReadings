@@ -29,7 +29,7 @@
                             <th>${request.user.name}</th>
                             <th>${request.user.address}</th>
                             <th>${request.description}</th>
-                            <th><#list request.statuses as status><a href="/request/statusedit/${request.id}" style="color: #5feb08">${status}</a></#list></th>
+                            <th><a href="/request/statusedit/${request.id}" style="color: #5feb08">${request.status}</a></th>
                             <th>${request.executor}</th>
                             <th>  <form action="/request/delete/${request.id}" method="post" style="margin: 0 auto; text-align: center">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

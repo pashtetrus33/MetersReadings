@@ -81,7 +81,7 @@ public class RequestController {
         model.addAttribute("request", request);
         model.addAttribute("statuses", Status.values());
         model.addAttribute("executors", ExecutorName.values());
-        model.addAttribute("currentstatus", request.getStatuses().toString());
+        model.addAttribute("currentstatus", request.getStatus());
         return "statusrequest-edit";
     }
 

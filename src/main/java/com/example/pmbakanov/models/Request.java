@@ -57,11 +57,7 @@ public class Request {
         this.images = images;
     }
 
-    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "request_status",
-            joinColumns = @JoinColumn(name = "request_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Status> statuses = new HashSet<>();
+    private Status status;
     private ExecutorName executor;
     private LocalDateTime dateOfCreated;
 
@@ -73,12 +69,12 @@ public class Request {
         this.executor = executor;
     }
 
-    public Set<Status> getStatuses() {
-        return statuses;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatuses(Set<Status> statuses) {
-        this.statuses = statuses;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -87,7 +83,7 @@ public class Request {
     @PrePersist
     private void onCreate() {
         dateOfCreated = LocalDateTime.now().minusHours(3);
-        statuses.add(Status.STATUS_NEW);
+        status = Status.STATUS_NEW;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "request")
