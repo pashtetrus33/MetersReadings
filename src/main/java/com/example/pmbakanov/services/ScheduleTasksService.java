@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScheduleTasksService {
     @Autowired
-
     private MailSender mailSender;
     private UserRepository userRepository;
 
