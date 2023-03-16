@@ -98,7 +98,6 @@ public class RequestService {
                 Status res = Arrays.stream(result).filter(p -> p.getTitle().equals(key)).findFirst().orElse(null);
                 assert res != null;
                 request.getStatuses().add(Status.valueOf(res.name()));
-                mailSender.sendMail(request.getUser().getEmail(), "Статус заявки изменен", request.getDescription() + "\n" + key);
             }
         }
         requestRepository.save(request);
@@ -111,6 +110,9 @@ public class RequestService {
                 request.setExecutor(item);
             }
         }
+        mailSender.sendMail(request.getUser().getEmail(), "Данные заявки изменены", "Исполнитель: " +
+                request.getExecutor().getTitle() + "\n" +
+                "Статус заявки: " + request.getStatuses().toString() + "\n" + request.getDescription());
         requestRepository.save(request);
     }
 }
