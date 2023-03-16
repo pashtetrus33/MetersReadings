@@ -94,9 +94,9 @@ public class RequestService {
         request.getStatuses().clear();
         for (String key : form.values()) {
             if (statuses.contains(key)) {
-                //request.getStatuses().add(Status.valueOf(key));
                 Status[] result = Status.values();
                 Status res = Arrays.stream(result).filter(p -> p.getTitle().equals(key)).findFirst().orElse(null);
+                assert res != null;
                 request.getStatuses().add(Status.valueOf(res.name()));
                 mailSender.sendMail(request.getUser().getEmail(), "Статус заявки изменен", request.getDescription() + "\n" + key);
             }

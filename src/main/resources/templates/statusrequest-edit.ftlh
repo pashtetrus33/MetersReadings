@@ -10,17 +10,20 @@
 
     <hr>
     <form action="/request/statusedit" method="post">
-        <div>
-            <label for="role" style="margin: 10px;">Изменить статус заявки</label><br>
-            <@enumStatus "key" statuses/>
-        </div>
-        <div>
-            <label for="executor" style="margin: 10px;">Исполнитель</label><br>
-            <@enumStatus "executor" executors/>
-        </div>
+        <table class="table table-hover table-dark" style="background-color: #03305c">
+            <tr>
+                <th scope="col" style="vertical-align: middle">Статус заявки</th>
+                <th scope="col" style="vertical-align: middle">Исполнитель</th>
+                <th scope="col" style="vertical-align: middle">Сохранить</th>
+            </tr>
+            <tr>
+                <th><@enumStatus "key" statuses/></th>
+                <th>  <@enumStatus "executor" executors/></th>
+                <th><button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button></th>
+            </tr>
+        </table>
         <input type="hidden" value="${request.id}" name="requestId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
 
 
