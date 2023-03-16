@@ -17,7 +17,7 @@
                 <th scope="col" style="vertical-align: middle">Сохранить</th>
             </tr>
             <tr>
-                <th style="vertical-align: middle"><@enumStatus "key" statuses request.statuses.toString()/></th>
+                <th style="vertical-align: middle"><@enumStatus "key" statuses currentstatus/></th>
                 <th style="vertical-align: middle">  <@enumStatus "executor" executors request.executor/></th>
                 <th><button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button></th>
             </tr>
