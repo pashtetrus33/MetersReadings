@@ -10,7 +10,7 @@
 
     <hr>
     <form action="/request/statusedit" method="post">
-        <table class="table table-hover table-dark" style="background-color: #03305c">
+        <table class="table table-hover table-dark" style="width:100%;word-break: break-all;table-layout: fixed;background-color: #03305c">
             <tr>
                 <th scope="col" style="vertical-align: middle">Статус заявки</th>
                 <th scope="col" style="vertical-align: middle">Исполнитель</th>
