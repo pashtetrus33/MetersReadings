@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 @Controller
@@ -22,7 +23,7 @@ public class UserController {
     @GetMapping("/")
     public String login(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        model.addAttribute("datatime", LocalDateTime.now().minusHours(3));
+        model.addAttribute("datatime", LocalDateTime.now().minusHours(3).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
         return "login";
     }
 
