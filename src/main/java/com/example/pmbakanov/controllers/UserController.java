@@ -49,6 +49,7 @@ public class UserController {
             return "password-reset";
         }
         model.addAttribute("loginalert", "Ссылка для cброса пароля отправлена на указанную почту");
+        model.addAttribute("datatime", LocalDateTime.now().minusHours(3).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
         return "login";
     }
 
@@ -65,6 +66,7 @@ public class UserController {
             return "registration";
         }
         model.addAttribute("loginalert", "Ссылка для активации отправлена на указанную почту");
+        model.addAttribute("datatime", LocalDateTime.now().minusHours(3).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
         return "login";
     }
 
