@@ -2,11 +2,14 @@ package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ScheduleTasksService {
+    @Autowired
+
     private MailSender mailSender;
     private UserRepository userRepository;
 
