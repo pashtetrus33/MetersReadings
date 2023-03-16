@@ -11,7 +11,7 @@
 
     <br>
 
-    <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed; margin: auto">
+    <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
         <thead>
         <tr>
             <th scope="col" style="vertical-align: middle">Дата</th>
