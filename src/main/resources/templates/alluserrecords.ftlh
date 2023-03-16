@@ -24,7 +24,7 @@
         </tr>
         <#list users as user >
                 <tr>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreated}<#else>--</#if></th>
+                    <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreatedString}<#else>--</#if></th>
                     <th>${user.name}</th>
                     <th>${user.address}</th>
                     <th><#if (user.areRecords()) && (user.getLastRecord().kitchenCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>

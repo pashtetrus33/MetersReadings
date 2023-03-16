@@ -5,6 +5,7 @@ import com.example.pmbakanov.models.enums.Status;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -61,6 +62,8 @@ public class Request {
     private ExecutorName executor;
     private LocalDateTime dateOfCreated;
 
+    private String dateOfCreatedString;
+
     public ExecutorName getExecutor() {
         return executor;
     }
@@ -84,6 +87,15 @@ public class Request {
     private void onCreate() {
         dateOfCreated = LocalDateTime.now().minusHours(3);
         status = Status.STATUS_NEW;
+        dateOfCreatedString = dateOfCreated.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+    }
+
+    public String getDateOfCreatedString() {
+        return dateOfCreatedString;
+    }
+
+    public void setDateOfCreatedString(String dateOfCreatedString) {
+        this.dateOfCreatedString = dateOfCreatedString;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "request")

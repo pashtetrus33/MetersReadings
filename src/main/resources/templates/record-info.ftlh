@@ -3,7 +3,7 @@
 
     <hr>
     <p><h5 style="text-align: center">${authorRecord.name} </h5>
-    <p><h5 style="text-align: center">${record.dateOfCreated} </h5>
+    <p><h5 style="text-align: center">${record.dateOfCreatedString} </h5>
     <p><h5 style="text-align: center">${authorRecord.address} </h5>
     <hr>
     <p style="text-align: center">Xолодная вода (кухня): <h5>${record.kitchenCold}</h5>

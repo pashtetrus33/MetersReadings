@@ -3,7 +3,8 @@ package com.example.pmbakanov.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;;
 
 @Entity
 @Table(name = "records")
@@ -40,6 +41,8 @@ public class Record {
     private User user;
 
     private LocalDateTime dateOfCreated;
+
+    private String dateOfCreatedString;
 
     public Long getId() {
         return id;
@@ -99,7 +102,16 @@ public class Record {
 
 
     @PrePersist
-    private void onCreate() { dateOfCreated = LocalDateTime.now().minusHours(3); }
+    private void onCreate() {
+        dateOfCreated = LocalDateTime.now().minusHours(3);
+        dateOfCreatedString = dateOfCreated.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+    }
 
+    public String getDateOfCreatedString() {
+        return dateOfCreatedString;
+    }
 
+    public void setDateOfCreatedString(String dateOfCreatedString) {
+        this.dateOfCreatedString = dateOfCreatedString;
+    }
 }

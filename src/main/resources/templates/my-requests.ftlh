@@ -21,7 +21,7 @@
                         <p class="card-text"> Исполнитель: ${request.executor}</p>
                     </div>
                     <div class="card-footer">
-                        ${request.dateOfCreated}
+                        ${request.dateOfCreatedString}
                     </div>
                 </div>
             </a>

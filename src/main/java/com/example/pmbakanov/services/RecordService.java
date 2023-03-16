@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -74,6 +75,7 @@ public class RecordService {
                 lastRecord = new Record();
                 lastRecord.setUser(neighborUser);
                 lastRecord.setDateOfCreated(LocalDateTime.now());
+                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(3).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                 lastRecord.setKitchenCold(record.getNeighborCold());
                 lastRecord.setKitchenHot(record.getNeighborHot());
                 lastRecord.setToiletCold(0);

@@ -25,7 +25,7 @@
         <tbody>
         <#list requests as request>
                         <tr>
-                            <th>${request.dateOfCreated}</th>
+                            <th>${request.dateOfCreatedString}</th>
                             <th>${request.user.name}</th>
                             <th>${request.user.address}</th>
                             <th>${request.description}</th>

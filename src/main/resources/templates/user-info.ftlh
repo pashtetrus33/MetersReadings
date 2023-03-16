@@ -27,7 +27,7 @@
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
-                        <h6 class="card-title">Дата создания:  ${record.dateOfCreated}</h6>
+                        <h6 class="card-title">Дата создания:  ${record.dateOfCreatedString}</h6>
                         <p class="card-text"> Холодная вода (кухня):${record.kitchenCold}</p>
                         <p class="card-text"> Горячая вода (кухня):${record.kitchenHot}</p>
                         <p class="card-text"> Холодная вода (ванная):${record.toiletCold}</p>
@@ -53,7 +53,7 @@
                 <div class="card text-white bg-dark my-3 request">
 
                     <div class="card-body">
-                        <p class="card-title">Дата создания: <br>${request.dateOfCreated}</p>
+                        <p class="card-title">Дата создания: <br>${request.dateOfCreatedString}</p>
                         <p class="card-text"> Адрес: <br>${user.address}</p>
                         <p class="card-text"> Описание: <br>${request.description}</p>
                         <p class="card-text"> Статус: <br>${request.status}</p>

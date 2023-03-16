@@ -24,7 +24,7 @@
         <tbody>
         <#list records as record>
             <tr>
-                <th style="vertical-align: middle">${record.dateOfCreated}</th>
+                <th style="vertical-align: middle">${record.dateOfCreatedString}</th>
                 <th style="vertical-align: middle">${record.kitchenCold}</th>
                 <th style="vertical-align: middle">${record.kitchenHot}</th>
                 <th style="vertical-align: middle">${record.toiletCold}</th>

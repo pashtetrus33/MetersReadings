@@ -3,7 +3,7 @@
 
     <hr>
     <p><h5 style="text-align: center">${authorRequest.name} </h5>
-    <p><h5 style="text-align: center">${request.dateOfCreated} </h5>
+    <p><h5 style="text-align: center">${request.dateOfCreatedString} </h5>
     <p><h5 style="text-align: center">${authorRequest.address} </h5>
     <hr>
     <p style="text-align: center; width: 100%; word-break: break-all; table-layout: fixed">Описание: <b>${request.description}</b></p>
