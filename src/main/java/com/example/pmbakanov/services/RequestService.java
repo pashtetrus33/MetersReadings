@@ -112,7 +112,7 @@ public class RequestService {
         }
         mailSender.sendMail(request.getUser().getEmail(), "Данные заявки изменены", "Исполнитель: " +
                 request.getExecutor().getTitle() + "\n" +
-                "Статус заявки: " + request.getStatuses().toString() + "\n" + request.getDescription());
+                "Статус заявки: " + request.getStatuses().toString() + "\n" + "Заявка: "+ request.getDescription());
         requestRepository.save(request);
     }
 }
