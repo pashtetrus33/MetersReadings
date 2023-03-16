@@ -18,6 +18,7 @@
                         <p class="card-text"> Адрес: ${user.address}</p>
                         <p class="card-text"> Описание: ${request.description}</p>
                         <p class="card-text"> Статус: ${request.status}</p>
+                        <p class="card-text"> Исполнитель: ${request.executor}</p>
                     </div>
                     <div class="card-footer">
                         ${request.dateOfCreated}
