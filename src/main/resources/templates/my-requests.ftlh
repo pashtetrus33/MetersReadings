@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <p class="card-text"> Адрес: ${user.address}</p>
                         <p class="card-text"> Описание: ${request.description}</p>
-                        <p class="card-text"> Статус: <#list request.statuses as status>${status}</#list></p>
+                        <p class="card-text"> Статус: ${request.status}</p>
                     </div>
                     <div class="card-footer">
                         ${request.dateOfCreated}
