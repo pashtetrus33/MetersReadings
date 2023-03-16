@@ -8,6 +8,7 @@
     <hr>
     <p style="text-align: center; width: 100%; word-break: break-all; table-layout: fixed">Описание: <b>${request.description}</b></p>
     <p style="text-align: center">Статус: <b>${request.status}</b></p>
+    <p style="text-align: center">Исполнитель: <b>${request.executor}</b></p>
 
     <#list images as img>
         <a href="/images/${img.id}"><img src="/images/${img.id} " height="300px"/></a>
