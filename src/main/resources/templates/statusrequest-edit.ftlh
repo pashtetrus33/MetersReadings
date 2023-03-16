@@ -17,8 +17,8 @@
                 <th scope="col" style="vertical-align: middle">Сохранить</th>
             </tr>
             <tr>
-                <th><@enumStatus "key" statuses/></th>
-                <th>  <@enumStatus "executor" executors/></th>
+                <th style="vertical-align: middle"><@enumStatus "key" statuses/></th>
+                <th style="vertical-align: middle">  <@enumStatus "executor" executors/></th>
                 <th><button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button></th>
             </tr>
         </table>
