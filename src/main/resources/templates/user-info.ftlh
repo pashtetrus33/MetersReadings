@@ -56,7 +56,7 @@
                         <p class="card-title">Дата создания: <br>${request.dateOfCreated}</p>
                         <p class="card-text"> Адрес: <br>${user.address}</p>
                         <p class="card-text"> Описание: <br>${request.description}</p>
-                        <p class="card-text"> Статус: <br><#list request.statuses as status>${status}</#list></p>
+                        <p class="card-text"> Статус: <br>${request.status}</p>
 
                     </div>
                     <div class="card-footer">
