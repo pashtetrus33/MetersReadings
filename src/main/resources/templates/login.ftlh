@@ -1,7 +1,8 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h1 style="text-align: center">Авторизация</h1>
     <h4 style="text-align: center; color: red"><#if datatime??>${datatime}</#if></h4>
+    <h2 style="text-align: center">Авторизация</h2>
+
     <hr>
     <form action="/" method="post" style="width: 60%; margin: auto;">
         <div class="form-group" style="text-align: center">
