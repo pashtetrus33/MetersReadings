@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping("/")
     public String login(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        model.addAttribute("datatime", LocalDateTime.now());
+        model.addAttribute("datatime", LocalDateTime.now().minusHours(3));
         return "login";
     }
 

@@ -1,7 +1,7 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
     <h1 style="text-align: center">Авторизация</h1>
-    <h1 style="text-align: center">${datatime}</h1>
+    <h4 style="text-align: center; background-color: red">${datatime}</h4>
     <hr>
     <form action="/" method="post" style="width: 60%; margin: auto;">
         <div class="form-group" style="text-align: center">
