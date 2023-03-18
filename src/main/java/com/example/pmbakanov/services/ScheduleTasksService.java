@@ -29,8 +29,10 @@ public class ScheduleTasksService {
 
     @Scheduled(cron = "${interval-in-cron2}")
     public void periodAlmostFinishedMailNotification() throws InterruptedException {
-        mailSender.sendMail("pashtet_rus@mail.ru", "Начало периода подачи показаний счетчиков воды",
-                "Добрый день, " + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца.");
+        for (User person : userRepository.findAll()) {
+            mailSender.sendMail("pashtet_rus@mail.ru", "Начало периода подачи показаний счетчиков воды",
+                    "Добрый день, " + person.getName() + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца.");
+        }
     }
 //        List<Record> recordList = recordRepository.findAll();
 //        for (User person : userRepository.findAll()) {
