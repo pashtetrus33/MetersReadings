@@ -20,8 +20,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class RecordService {
-    @Autowired
-    private MailSender mailSender;
+    private final MailSender mailSender;
     private final RecordRepository recordRepository;
     private final UserRepository userRepository;
 

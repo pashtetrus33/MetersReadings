@@ -20,9 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class RequestService {
-
-    @Autowired
-    private MailSender mailSender;
+    private final MailSender mailSender;
     private final RequestRepository requestRepository;
     private final UserRepository userRepository;
 

@@ -1,15 +1,11 @@
 package com.example.pmbakanov.services;
 
-import com.example.pmbakanov.models.Record;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.repositories.RecordRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
