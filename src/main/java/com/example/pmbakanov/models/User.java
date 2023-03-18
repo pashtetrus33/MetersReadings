@@ -73,11 +73,7 @@ public class User implements UserDetails, Comparable<User> {
     }
 
     public Record getLastRecord() {
-        Record result = null;
-        if (areRecords())
-            result = records.get(records.size() - 1);
-
-        return result;
+        return areRecords() ? records.get(records.size() - 1):null;
     }
 
     public boolean areRecords() {
