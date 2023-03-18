@@ -37,7 +37,7 @@ public class ScheduleTasksService {
             boolean check = person.areRecords();
             if ((!person.areRecords()) || (person.getLastRecord().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
                 mailSender.sendMail("pashtet_rus@mail.ru", "Окончание периода подачи показаний счетчиков воды",
-                        "Добрый день, " + person.getName() + "\n" +
+                        "Добрый день, " + person.getName() + ".\n" +
                                 "Пожалуйста, передайте показания счетчиков воды.");
             }
         }
