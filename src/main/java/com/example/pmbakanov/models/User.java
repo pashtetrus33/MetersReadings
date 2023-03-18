@@ -52,7 +52,7 @@ public class User implements UserDetails, Comparable<User> {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             mappedBy = "user")
     private List<Record> records = new ArrayList<>();
 
