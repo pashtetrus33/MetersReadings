@@ -67,6 +67,7 @@
                     </div>
                 </#if>
                 <div class="form-group">
+                    <div>Последние показания: ${user.getLastRecord().kitchenHot} ${user.getLastRecord().getDateOfCreatedString()}</div>
                     <label for="toiletCold">Холодная вода (ванная)</label>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletCold" name="toiletCold">
