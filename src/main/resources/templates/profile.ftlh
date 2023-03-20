@@ -55,12 +55,12 @@
             <form action="/record/create" method="post" enctype="multipart/form-data" style="width: 53%; margin: auto">
                 <#if !user.isUserWithReducedData()>
                     <div class="form-group">
-                        <label for="kitchenCold">Холодная вода (кухня)</label>
+                        <label for="kitchenCold"><b>Холодная вода (кухня)</b></label>
                         <input type="number" required class="form-control"
                                id="kitchenCold" name="kitchenCold">
                     </div>
                     <div class="form-group">
-                        <label for="kitchenHot">Горячая вода (кухня)</label>
+                        <label for="kitchenHot"><b>Горячая вода (кухня)</b></label>
                         <div class="input-group mb-3">
                             <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot">
                         </div>
@@ -68,7 +68,7 @@
                 </#if>
                 <div class="form-group">
                     <label for="toiletCold"><b>Холодная вода (ванная)</b></label>
-                    <div>Последние показания: ${user.getLastRecord().toiletCold} ${user.getLastRecord().getDateOfCreatedString()}</div>
+                    <div>${user.getLastRecord().toiletCold} ${user.getLastRecord().getDateOfCreatedString()}</div>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletCold" name="toiletCold">
                     </div>
@@ -76,21 +76,21 @@
 
                 <div class="form-group">
                     <label for="toiletHot"><b>Горячая вода (ванная)</b></label>
-                    <div>Последние показания: ${user.getLastRecord().toiletHot} ${user.getLastRecord().getDateOfCreatedString()}</div>
+                    <div>${user.getLastRecord().toiletHot} ${user.getLastRecord().getDateOfCreatedString()}</div>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
                 </div>
                 <#if user.isUserWithSpecialAddress()>
                     <div class="form-group">
-                        <label for="neighborCold">Сосед: холодная вода</label>
+                        <label for="neighborCold"><b>Сосед: холодная вода</b></label>
                         <input type="number" required class="form-control"
-                               id="neighborCold" name="neighborCold" placeholder="Спасибо от соседа :)">
+                               id="neighborCold" name="neighborCold">
                     </div>
                     <div class="form-group">
-                        <label for="neighborHot">Сосед: горячая вода</label>
+                        <label for="neighborHot"><b>Сосед: горячая вода</b></label>
                         <input type="number" required class="form-control"
-                               id="neighborHot" name="neighborHot" placeholder="Спасибо от соседа :)">
+                               id="neighborHot" name="neighborHot">
                     </div>
                 </#if>
 
