@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group">
                         <label for="neighborHot"><b>Сосед: горячая вода</b></label>
-                        <#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborHot}<#else>--</#if>
+                        <div><#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborHot}<#else>--</#if></div>
                         <input type="number" required class="form-control"
                                id="neighborHot" name="neighborHot">
                     </div>
