@@ -3,7 +3,7 @@
 
     <div class="card-columns">
         <#list records as record>
-            <a href="/record/${record.id}" class="record-link">
+            <a href="/record/${record.id?c}" class="record-link">
                 <div class="card text-white bg-dark my-3 record">
 
                     <img src="/images/${record.previewImageId}"

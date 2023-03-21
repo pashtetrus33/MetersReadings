@@ -13,7 +13,7 @@
             <label for="role">Изменить тип пользователя</label><br>
             <@enumSelect "key" roles/>
         </div>
-        <input type="hidden" value="${user.id}" name="userId">
+        <input type="hidden" value="${user.id?c}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
@@ -23,14 +23,14 @@
         <label for="password">Изменить пароль</label>
         <input type="password" class="form-control" id="password" required name="password"
                style="width: auto; margin: auto">
-        <input type="hidden" value="${user.id}" name="userId">
+        <input type="hidden" value="${user.id?c}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit" class="btn btn-dark" style="margin: 13px;">Сохранить</button>
     </form>
 
 
     <form action="/admin/user/delete" method="post" style="text-align: center;">
-        <input type="hidden" value="${user.id}" name="userId">
+        <input type="hidden" value="${user.id?c}" name="userId">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button type="submit" style="width: auto" class="btn btn-danger mb-2">
             Удалить

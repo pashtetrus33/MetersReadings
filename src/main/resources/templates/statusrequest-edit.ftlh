@@ -24,7 +24,7 @@
                 </th>
             </tr>
         </table>
-        <input type="hidden" value="${request.id}" name="requestId">
+        <input type="hidden" value="${request.id?c}" name="requestId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
     </form>
 

@@ -33,8 +33,8 @@
                 <th>${user.address}</th>
                 <th><#if user.active>true<#else>false</#if></th>
                 <th><#list user.roles as role>${role}</#list></th>
-                <th><a href="/admin/user/edit/${user.id}">Редактировние</a></th>
-                <th><a href="/user/${user.id}">Подробная информация</a></th>
+                <th><a href="/admin/user/edit/${user.id?c}">Редактировние</a></th>
+                <th><a href="/user/${user.id?c}">Подробная информация</a></th>
             </tr>
         <#else>
             <h3>Пользователей нет</h3>
