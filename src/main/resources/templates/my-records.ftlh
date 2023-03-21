@@ -25,10 +25,10 @@
         <#list records as record>
             <tr>
                 <th style="vertical-align: middle">${record.dateOfCreatedString}</th>
-                <th style="vertical-align: middle">${record.kitchenCold}</th>
-                <th style="vertical-align: middle">${record.kitchenHot}</th>
-                <th style="vertical-align: middle">${record.toiletCold}</th>
-                <th style="vertical-align: middle">${record.toiletHot}</th>
+                <th style="vertical-align: middle"><#if record.kitchenCold != 0>${record.kitchenCold}<#else>--</#if></th>
+                <th style="vertical-align: middle"><#if record.kitchenHot != 0>${record.kitchenHot}<#else>--</#if></th>
+                <th style="vertical-align: middle"><#if record.toiletCold != 0>${record.toiletCold}<#else>--</#if></th>
+                <th style="vertical-align: middle"><#if record.toiletHot != 0>${record.toiletHot}<#else>--</#if></th>
             </tr>
         </#list>
         </tbody>
