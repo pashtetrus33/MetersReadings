@@ -79,6 +79,11 @@ public class User implements UserDetails, Comparable<User> {
         return records.size() > 0;
     }
 
+    public boolean areNeighborRecords(){
+        return getLastRecord().getNeighborHot() != null;
+    }
+
+
     public Request getFirstRequest() {
         Request result = null;
         if (areRequests())

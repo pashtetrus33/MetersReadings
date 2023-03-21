@@ -56,11 +56,13 @@
                 <#if !user.isUserWithReducedData()>
                     <div class="form-group">
                         <label for="kitchenCold"><b>Холодная вода (кухня)</b></label>
+                        <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().kitchenCold}<#else>--</#if></div>
                         <input type="number" required class="form-control"
                                id="kitchenCold" name="kitchenCold">
                     </div>
                     <div class="form-group">
                         <label for="kitchenHot"><b>Горячая вода (кухня)</b></label>
+                        <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().kitchenHot}<#else>--</#if></div>
                         <div class="input-group mb-3">
                             <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot">
                         </div>
@@ -84,11 +86,13 @@
                 <#if user.isUserWithSpecialAddress()>
                     <div class="form-group">
                         <label for="neighborCold"><b>Сосед: холодная вода</b></label>
+                        <div><#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborCold}<#else>--</#if></div>
                         <input type="number" required class="form-control"
                                id="neighborCold" name="neighborCold">
                     </div>
                     <div class="form-group">
                         <label for="neighborHot"><b>Сосед: горячая вода</b></label>
+                        <#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborHot}<#else>--</#if>
                         <input type="number" required class="form-control"
                                id="neighborHot" name="neighborHot">
                     </div>
