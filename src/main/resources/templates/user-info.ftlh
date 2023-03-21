@@ -23,7 +23,7 @@
     <br>
     <div class="card-columns">
         <#list records as record>
-            <a href="/record/${record.id}" class="record-link">
+            <a href="/record/${record.id}" >
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
