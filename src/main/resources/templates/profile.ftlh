@@ -70,7 +70,7 @@
                 </#if>
                 <div class="form-group">
                     <label for="toiletCold"><b>Холодная вода (ванная)</b></label>
-                    <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletCold}<#else>--</#if></div>
+                    <div><#if (user.areRecords() && user.getLastRecord().toiletCold != 0)>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletCold}<#else>--</#if></div>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletCold" name="toiletCold">
                     </div>
@@ -78,7 +78,7 @@
 
                 <div class="form-group">
                     <label for="toiletHot"><b>Горячая вода (ванная)</b></label>
-                    <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletHot}<#else>--</#if></div>
+                    <div><#if (user.areRecords() && user.getLastRecord().toiletHot != 0)>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletHot}<#else>--</#if></div>
                     <div class="input-group mb-3">
                         <input type="number" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
