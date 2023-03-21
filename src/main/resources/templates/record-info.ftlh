@@ -19,7 +19,7 @@
     </div>
 
     <#if user.isAdmin()>
-        <form action="/record/delete/${id}" method="post" style="margin: 0 auto; text-align: center">
+        <form action="/record/delete/${record.id?c}" method="post" style="margin: 0 auto; text-align: center">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
                 Удалить запись
