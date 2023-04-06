@@ -1,5 +1,5 @@
 # select parent image
-FROM maven:3.6.3-jdk-11
+FROM maven:3.8.5-openjdk-17-slim
 
 # copy the source tree ant the pom.xml to our new container
 COPY ./ ./
