@@ -11,4 +11,4 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM openjdk:11-jre-slim
 EXPOSE 80
-ENTRYPOINT ["java","-jar","/home/app/target/pmbakanov-1.0.jar"]
+ENTRYPOINT ["java","-jar","target/pmbakanov-1.0.jar"]
