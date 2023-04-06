@@ -1,15 +1,11 @@
-#
-# Build stage
-#
-FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+# select parent image
+FROM maven:3.6.3-jdk-11
 
-#
-# Package stage
-#
-FROM openjdk:11-jre-slim
-COPY --from=build /home/app/target/pmbakanov-1.0.jar /target/pmbakanov-1.0.jar
-EXPOSE 80
-ENTRYPOINT ["java","-jar","/target/pmbakanov-1.0.jar"]
+# copy the source tree ant the pom.xml to our new container
+COPY ./ ./
+
+# package our application code
+RUN mvn clean package
+
+# set the startup command to execute the jar
+CMD ["java","-jar", "target/pmbakanov-1.0.jar"]
