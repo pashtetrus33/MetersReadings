@@ -11,8 +11,8 @@ RUN mvn package -Dmaven.test.skip
 FROM openjdk:11.0.7-jdk-slim
 
 # copy only teh artifacts we need from the first stage and discard the rest
-COPY --from=MAVEN_BUILD /target/pmbakanov.jar /pmbakanov.jar
+COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
 
 
 # set the startup command to execute the jar
-CMD ["java","-jar", "/pmbakanov.jar"]
+CMD ["java","-jar", "/pmbakanov-1.0.jar"]
