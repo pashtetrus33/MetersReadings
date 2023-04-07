@@ -1,5 +1,5 @@
 # select parent image
-FROM maven:3.6.3-jdk-11
+FROM maven:3.9.1-amazoncorretto-19
 
 # copy the source tree ant the pom.xml to our new container
 COPY ./ ./
