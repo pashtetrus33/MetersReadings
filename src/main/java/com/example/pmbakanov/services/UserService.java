@@ -43,7 +43,7 @@ public class UserService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Добро пожаловать, %s. \n" +
-                            "Пожалуйста перейдите по ссылке для активации: https://meters.herokuapp.com/activate/%s",
+                            "Пожалуйста перейдите по ссылке для активации: https://meters.onrender.com/activate/%s",
                     user.getName(),
                     user.getActivationCode()
             );
@@ -105,7 +105,7 @@ public class UserService {
         userRepository.save(user);
         String message = String.format(
                 "Добрый день, %s. \n" +
-                        "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.herokuapp.com/reset/%s",
+                        "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.onrender.com/reset/%s",
                 user.getName(),
                 user.getActivationCode()
         );
