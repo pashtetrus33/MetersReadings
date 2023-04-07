@@ -5,7 +5,7 @@ FROM maven:3.6.3-jdk-11
 COPY ./ ./
 
 # package our application code
-RUN mvn package -am -o -Dmaven.test.skip -T 1C
+RUN mvn package -DskipTests
 
 # set the startup command to execute the jar
 CMD ["java","-jar", "target/pmbakanov-1.0.jar"]
