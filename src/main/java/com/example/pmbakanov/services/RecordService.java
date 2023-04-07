@@ -73,7 +73,7 @@ public class RecordService {
                 lastRecord = new Record();
                 lastRecord.setUser(neighborUser);
                 lastRecord.setDateOfCreated(LocalDateTime.now());
-                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(2).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(4).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                 lastRecord.setKitchenCold(record.getNeighborCold());
                 lastRecord.setKitchenHot(record.getNeighborHot());
                 lastRecord.setToiletCold(0);
