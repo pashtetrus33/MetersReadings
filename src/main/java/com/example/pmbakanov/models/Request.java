@@ -85,7 +85,7 @@ public class Request {
     private User user;
     @PrePersist
     private void onCreate() {
-        dateOfCreated = LocalDateTime.now().minusHours(2);
+        dateOfCreated = LocalDateTime.now().minusHours(4);
         status = Status.STATUS_NEW;
         dateOfCreatedString = dateOfCreated.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
