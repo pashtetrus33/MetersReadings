@@ -64,14 +64,18 @@ public class RecordService {
             }
 
             if (neighborUser != null) {
-                if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
-                    Record lastNeighborRecord = neighborUser.getLastRecord();
+                Record lastNeighborRecord;
+                if (neighborUser.areRecords()) {
+                    lastNeighborRecord = neighborUser.getLastRecord();
                     if ((lastNeighborRecord.getKitchenCold() != null) && (lastNeighborRecord.getKitchenCold() > record.getNeighborCold())) {
                         return false;
                     }
                     if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
                         return false;
                     }
+                }
+                if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
+                    lastNeighborRecord = neighborUser.getLastRecord();
                     lastNeighborRecord.setKitchenCold(record.getNeighborCold());
                     lastNeighborRecord.setKitchenHot(record.getNeighborHot());
                     recordRepository.save(lastNeighborRecord);
