@@ -28,44 +28,46 @@ public class RecordService {
         return recordRepository.findAll();
     }
 
-    public void saveRecord(Principal principal, Record record) {
+    public boolean saveRecord(Principal principal, Record record) {
+
         User currentUser = getUserByPrincipal(principal);
         record.setUser(currentUser);
 
-        log.info("Saving new Record.");
         Record lastRecord = currentUser.getLastRecord();
-        if (record.getKitchenHot() == null && record.getKitchenCold() == null){
+        if (record.getKitchenHot() == null && lastRecord.getKitchenHot() != null){
+            record.setKitchenCold(lastRecord.getKitchenCold());
+            record.setKitchenHot(lastRecord.getKitchenHot());
+        } else if (record.getKitchenHot() == null && lastRecord.getKitchenHot() == null){
+            lastRecord.setKitchenCold(0);
+            lastRecord.setKitchenHot(0);
             record.setKitchenCold(0);
             record.setKitchenHot(0);
         }
-        if (currentUser.areRecords() && (lastRecord.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
 
-            if (lastRecord.getKitchenCold() > record.getKitchenCold()) {
-                record.setKitchenCold(lastRecord.getKitchenCold());
-            }
-            if (lastRecord.getKitchenHot() > record.getKitchenHot()) {
-                record.setKitchenHot(lastRecord.getKitchenHot());
-            }
+        if ((lastRecord.getToiletCold() > record.getToiletCold()) || (lastRecord.getToiletHot() > record.getToiletHot())) {
+            return false;
         }
-
+        if ((lastRecord.getKitchenCold() > record.getKitchenCold()) || (lastRecord.getKitchenHot() > record.getKitchenHot())) {
+            return false;
+        }
 
         recordRepository.save(record);
 
         User neighborUser = null;
         if (record.getNeighborCold() != null) {
             for (SpecialAdresses address : SpecialAdresses.values()) {
-                if (address.getTitle().equals(record.getUser().getAddress()))
+                if (address.getTitle().equals(currentUser.getAddress()))
                     neighborUser = userRepository.findByAddress(address.getNeighborAddress());
             }
 
             assert neighborUser != null;
-            if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
+            if (neighborUser.areRecords()) {
                 Record lastNeighborRecord = neighborUser.getLastRecord();
-                if (lastNeighborRecord.getKitchenCold() < record.getNeighborCold()) {
-                    lastNeighborRecord.setKitchenCold(record.getNeighborCold());
+                if ((lastNeighborRecord.getKitchenCold() != null) && (lastNeighborRecord.getKitchenCold() > record.getNeighborCold())) {
+                    return false;
                 }
-                if (lastNeighborRecord.getKitchenHot() < record.getNeighborHot()) {
-                    lastNeighborRecord.setKitchenHot(record.getNeighborHot());
+                if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
+                    return false;
                 }
 
                 recordRepository.save(lastNeighborRecord);
@@ -93,6 +95,7 @@ public class RecordService {
                         "Сосед (кухня хол.): " + record.getNeighborCold() + "\n" +
                         "Сосед (кухня гор.): " + record.getNeighborHot());
         }
+        return true;
     }
 
     public User getUserByPrincipal(Principal principal) {

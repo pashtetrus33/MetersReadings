@@ -11,11 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,10 +32,14 @@ public class RecordController {
     }
 
     @PostMapping("/record/create")
-    public String createRecord(Model model, Record record, Principal principal) throws IOException {
-        recordService.saveRecord(principal, record);
+    public String createRecord(Model model, Record record, Principal principal) {
+        if (recordService.saveRecord(principal, record)){
+            model.addAttribute("successmessage", "Данные успешно переданы");
+        } else  {
+            model.addAttribute("successmessage", "Данные не переданы, предыдущие показания больше текущих");
+        }
         model.addAttribute("user", recordService.getUserByPrincipal(principal));
-        model.addAttribute("successmessage", "Данные успешно переданы");
+
         return "profile";
     }
 
