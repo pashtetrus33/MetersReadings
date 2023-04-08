@@ -71,15 +71,6 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/user/{user}")
-    public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
-        model.addAttribute("user", user);
-        model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
-        model.addAttribute("records", user.getRecords());
-        model.addAttribute("requests", user.getRequests());
-        return "user-info";
-    }
-
     @GetMapping("/activate/{code}")
     public String activate(Principal principal, Model model, @PathVariable String code) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));

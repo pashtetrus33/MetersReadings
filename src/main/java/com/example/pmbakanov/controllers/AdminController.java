@@ -76,5 +76,14 @@ public class AdminController {
         return "admin";
     }
 
+    @GetMapping("/user/{user}")
+    public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
+        model.addAttribute("user", user);
+        model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
+        model.addAttribute("records", user.getRecords());
+        model.addAttribute("requests", user.getRequests());
+        return "user-info";
+    }
+
 
 }

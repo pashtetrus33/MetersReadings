@@ -56,7 +56,7 @@ public class RequestController {
     public String deleteRequest(@PathVariable Long id) {
         Long userId = requestService.getRequestById(id).getUser().getId();
         requestService.deleteRequest(id);
-        return "redirect:/allusersrequests";
+        return "redirect:/user/" + userId;
     }
 
     @GetMapping("/my/requests")
