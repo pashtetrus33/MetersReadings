@@ -72,7 +72,8 @@ public class RecordService {
                     if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
                         return false;
                     }
-
+                    lastNeighborRecord.setKitchenCold(record.getNeighborCold());
+                    lastNeighborRecord.setKitchenHot(record.getNeighborHot());
                     recordRepository.save(lastNeighborRecord);
 
                 } else {
