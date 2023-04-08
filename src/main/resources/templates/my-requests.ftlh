@@ -11,7 +11,6 @@
     <br>
     <div class="card-columns">
         <#list requests as request>
-            <a href="/request/${request.id?c}" class="request-link">
                 <div class="card text-white bg-dark my-3 request">
 
                     <div class="card-body">
@@ -24,7 +23,6 @@
                         ${request.dateOfCreatedString}
                     </div>
                 </div>
-            </a>
         <#else>
             <h4 style="text-align: center">Не найдено</h4>
         </#list>
