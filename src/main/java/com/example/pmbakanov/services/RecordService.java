@@ -8,6 +8,7 @@ import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,21 +35,23 @@ public class RecordService {
         record.setUser(currentUser);
 
         Record lastRecord = currentUser.getLastRecord();
-        if (record.getKitchenHot() == null && lastRecord.getKitchenHot() != null){
-            record.setKitchenCold(lastRecord.getKitchenCold());
-            record.setKitchenHot(lastRecord.getKitchenHot());
-        } else if (record.getKitchenHot() == null && lastRecord.getKitchenHot() == null){
-            lastRecord.setKitchenCold(0);
-            lastRecord.setKitchenHot(0);
-            record.setKitchenCold(0);
-            record.setKitchenHot(0);
-        }
+        if (lastRecord != null) {
+            if (record.getKitchenHot() == null && lastRecord.getKitchenHot() != null) {
+                record.setKitchenCold(lastRecord.getKitchenCold());
+                record.setKitchenHot(lastRecord.getKitchenHot());
+            } else if (record.getKitchenHot() == null && lastRecord.getKitchenHot() == null) {
+                lastRecord.setKitchenCold(0);
+                lastRecord.setKitchenHot(0);
+                record.setKitchenCold(0);
+                record.setKitchenHot(0);
+            }
 
-        if ((lastRecord.getToiletCold() > record.getToiletCold()) || (lastRecord.getToiletHot() > record.getToiletHot())) {
-            return false;
-        }
-        if ((lastRecord.getKitchenCold() > record.getKitchenCold()) || (lastRecord.getKitchenHot() > record.getKitchenHot())) {
-            return false;
+            if ((lastRecord.getToiletCold() > record.getToiletCold()) || (lastRecord.getToiletHot() > record.getToiletHot())) {
+                return false;
+            }
+            if ((lastRecord.getKitchenCold() > record.getKitchenCold()) || (lastRecord.getKitchenHot() > record.getKitchenHot())) {
+                return false;
+            }
         }
 
         recordRepository.save(record);
@@ -60,29 +63,31 @@ public class RecordService {
                     neighborUser = userRepository.findByAddress(address.getNeighborAddress());
             }
 
-            assert neighborUser != null;
-            if (neighborUser.areRecords()) {
-                Record lastNeighborRecord = neighborUser.getLastRecord();
-                if ((lastNeighborRecord.getKitchenCold() != null) && (lastNeighborRecord.getKitchenCold() > record.getNeighborCold())) {
-                    return false;
-                }
-                if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
-                    return false;
-                }
+            if (neighborUser != null) {
+                if (neighborUser.areRecords()) {
+                    Record lastNeighborRecord = neighborUser.getLastRecord();
+                    if ((lastNeighborRecord.getKitchenCold() != null) && (lastNeighborRecord.getKitchenCold() > record.getNeighborCold())) {
+                        return false;
+                    }
+                    if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
+                        return false;
+                    }
 
-                recordRepository.save(lastNeighborRecord);
+                    recordRepository.save(lastNeighborRecord);
 
-            } else {
-                lastRecord = new Record();
-                lastRecord.setUser(neighborUser);
-                lastRecord.setDateOfCreated(LocalDateTime.now());
-                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-                lastRecord.setKitchenCold(record.getNeighborCold());
-                lastRecord.setKitchenHot(record.getNeighborHot());
-                lastRecord.setToiletCold(0);
-                lastRecord.setToiletHot(0);
-                recordRepository.save(lastRecord);
+                } else {
+                    lastRecord = new Record();
+                    lastRecord.setUser(neighborUser);
+                    lastRecord.setDateOfCreated(LocalDateTime.now());
+                    lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                    lastRecord.setKitchenCold(record.getNeighborCold());
+                    lastRecord.setKitchenHot(record.getNeighborHot());
+                    lastRecord.setToiletCold(0);
+                    lastRecord.setToiletHot(0);
+                    recordRepository.save(lastRecord);
+                }
             }
+
         }
         for (User user : userRepository.findAll()) {
             if (user.isAdmin())
