@@ -8,12 +8,12 @@ import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 
 @Service
 @Slf4j
@@ -28,7 +28,7 @@ public class RecordService {
         return recordRepository.findAll();
     }
 
-    public void saveRecord(Principal principal, Record record) throws IOException {
+    public void saveRecord(Principal principal, Record record) {
         User currentUser = getUserByPrincipal(principal);
         record.setUser(currentUser);
 
@@ -58,6 +58,7 @@ public class RecordService {
                     neighborUser = userRepository.findByAddress(address.getNeighborAddress());
             }
 
+            assert neighborUser != null;
             if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
                 Record lastNeighborRecord = neighborUser.getLastRecord();
                 if (lastNeighborRecord.getKitchenCold() < record.getNeighborCold()) {
@@ -73,7 +74,7 @@ public class RecordService {
                 lastRecord = new Record();
                 lastRecord.setUser(neighborUser);
                 lastRecord.setDateOfCreated(LocalDateTime.now());
-                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(4).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                 lastRecord.setKitchenCold(record.getNeighborCold());
                 lastRecord.setKitchenHot(record.getNeighborHot());
                 lastRecord.setToiletCold(0);
@@ -86,7 +87,7 @@ public class RecordService {
                 mailSender.sendMail(user.getEmail(), "Новые показания счетчиков", record.getUser().getName() + "\n" +
                         record.getUser().getAddress() + "\n" +
                         "Kухня (хол.): " + record.getKitchenCold() + "\n" +
-                        "Kухня (гор.): " + +record.getKitchenHot() + "\n" +
+                        "Kухня (гор.): " + record.getKitchenHot() + "\n" +
                         "Ванная (хол.): " + record.getToiletCold() + "\n" +
                         "Ванная (гор.): " + record.getToiletHot() + "\n" +
                         "Сосед (кухня хол.): " + record.getNeighborCold() + "\n" +

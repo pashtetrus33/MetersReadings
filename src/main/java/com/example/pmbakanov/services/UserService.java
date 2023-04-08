@@ -5,7 +5,6 @@ import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
+    private static final String DEPLOY_WEBSITE = "https://meters.onrender.com";
     private final MailSender mailSender;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -43,7 +43,7 @@ public class UserService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Добро пожаловать, %s. \n" +
-                            "Пожалуйста перейдите по ссылке для активации: https://meters.onrender.com/activate/%s",
+                            "Пожалуйста перейдите по ссылке для активации: " + DEPLOY_WEBSITE + "/activate/%s",
                     user.getName(),
                     user.getActivationCode()
             );
@@ -78,9 +78,9 @@ public class UserService {
     public void changeUserPassword(User user, Map<String, String> form) {
         user.setPassword(passwordEncoder.encode(form.get("password")));
         userRepository.save(user);
-        for (User item: userRepository.findAll()){
+        for (User item : userRepository.findAll()) {
             if (item.isAdmin())
-                mailSender.sendMail(item.getEmail(), "Успешная смена пароля",user.getName() +
+                mailSender.sendMail(item.getEmail(), "Успешная смена пароля", user.getName() +
                         "\n" + user.getAddress() + "\n" + user.getEmail());
         }
         log.info("Changing password for User with email: {}", user.getEmail());
@@ -90,22 +90,22 @@ public class UserService {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
         if (userRepository.findByEmail(email) == null) {
-            for (User item: userRepository.findAll()){
+            for (User item : userRepository.findAll()) {
                 if (item.isAdmin())
-                    mailSender.sendMail(item.getEmail(), "Попытка сброса пароля","Email не найден: " + "\n" + email);
+                    mailSender.sendMail(item.getEmail(), "Попытка сброса пароля", "Email не найден: " + "\n" + email);
             }
             return false;
         }
-        for (User item: userRepository.findAll()){
+        for (User item : userRepository.findAll()) {
             if (item.isAdmin())
-                mailSender.sendMail(item.getEmail(), "Попытка сброса пароля","Email найден: " + "\n" + email);
+                mailSender.sendMail(item.getEmail(), "Попытка сброса пароля", "Email найден: " + "\n" + email);
         }
         log.info("Changing password for User with email: {}", user.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
         String message = String.format(
                 "Добрый день, %s. \n" +
-                        "Пожалуйста перейдите по ссылке для сброса пароля: https://meters.onrender.com/reset/%s",
+                        "Пожалуйста перейдите по ссылке для сброса пароля: " + DEPLOY_WEBSITE + "/reset/%s",
                 user.getName(),
                 user.getActivationCode()
         );
@@ -125,12 +125,12 @@ public class UserService {
             return null;
         }
         user.setActivationCode(null);
-        for (User item: userRepository.findAll()){
+        for (User item : userRepository.findAll()) {
             if (item.isAdmin() && (!user.isActive()))
-                mailSender.sendMail(item.getEmail(), "Новая регистрация",user.getName()  + "\n" +
+                mailSender.sendMail(item.getEmail(), "Новая регистрация", user.getName() + "\n" +
                         user.getAddress() + "\n" + user.getEmail());
-            else if (item.isAdmin() && (user.isActive())){
-                mailSender.sendMail(item.getEmail(), "Успешная проверка кода для сброса пароля",user.getName()  + "\n" +
+            else if (item.isAdmin() && (user.isActive())) {
+                mailSender.sendMail(item.getEmail(), "Успешная проверка кода для сброса пароля", user.getName() + "\n" +
                         user.getAddress() + "\n" + user.getEmail());
             }
         }
@@ -139,5 +139,19 @@ public class UserService {
         log.info("Creating User with email: {}", user.getEmail());
 
         return user;
+    }
+
+    public void sendEmail(String email, String message) {
+        if (!email.equals("all@all.ru")) {
+            mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
+                    "Уважаемый(ая) " + userRepository.findByEmail(email).getName() + ".\n" + message);
+        } else {
+            mailSender.sendMail("pmbakanov@mid.ru", "Информация от системы передачи показаний счетчиков",
+                    "Уважаемый Баканов Павел Михайлович.\n" + message);
+//            for (User person : userRepository.findAll()) {
+//                mailSender.sendMail(person.getEmail(), "Информация от системы передачи показаний счетчиков",
+//                        "Уважаемый(ая) " + person.getName() + ".\n" + message);
+//            }
+        }
     }
 }

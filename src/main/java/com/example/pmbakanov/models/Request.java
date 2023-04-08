@@ -7,9 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 
 @Entity
 @Table(name = "requests")
@@ -85,7 +84,7 @@ public class Request {
     private User user;
     @PrePersist
     private void onCreate() {
-        dateOfCreated = LocalDateTime.now().minusHours(4);
+        dateOfCreated = LocalDateTime.now().minusHours(TIME_SHIFT);
         status = Status.STATUS_NEW;
         dateOfCreatedString = dateOfCreated.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }

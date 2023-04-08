@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -66,4 +65,16 @@ public class AdminController {
         userService.deleteUser(user);
         return "redirect:/admin";
     }
+
+    @PostMapping("/admin/sendmail")
+    public String sendMail(@RequestParam(value = "email") String email, @RequestParam("message") String message, User user, Model model) {
+        userService.sendEmail(email, message);
+        model.addAttribute("loginalert", "Письмо успешно отправлено");
+        List<User> userList = userService.list();
+        Collections.sort(userList);
+        model.addAttribute("users", userList);
+        return "admin";
+    }
+
+
 }
