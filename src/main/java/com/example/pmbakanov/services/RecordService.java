@@ -54,8 +54,6 @@ public class RecordService {
             }
         }
 
-        recordRepository.save(record);
-
         User neighborUser = null;
         if (record.getNeighborCold() != null) {
             for (SpecialAdresses address : SpecialAdresses.values()) {
@@ -104,6 +102,7 @@ public class RecordService {
                         "Сосед (кухня хол.): " + record.getNeighborCold() + "\n" +
                         "Сосед (кухня гор.): " + record.getNeighborHot());
         }
+        recordRepository.save(record);
         return true;
     }
 
