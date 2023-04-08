@@ -64,7 +64,7 @@ public class RecordService {
             }
 
             if (neighborUser != null) {
-                if (neighborUser.areRecords()) {
+                if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
                     Record lastNeighborRecord = neighborUser.getLastRecord();
                     if ((lastNeighborRecord.getKitchenCold() != null) && (lastNeighborRecord.getKitchenCold() > record.getNeighborCold())) {
                         return false;
@@ -72,17 +72,21 @@ public class RecordService {
                     if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
                         return false;
                     }
-                }
-                lastRecord = new Record();
-                lastRecord.setUser(neighborUser);
-                lastRecord.setDateOfCreated(LocalDateTime.now());
-                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-                lastRecord.setKitchenCold(record.getNeighborCold());
-                lastRecord.setKitchenHot(record.getNeighborHot());
-                lastRecord.setToiletCold(0);
-                lastRecord.setToiletHot(0);
-                recordRepository.save(lastRecord);
+                    lastNeighborRecord.setKitchenCold(record.getNeighborCold());
+                    lastNeighborRecord.setKitchenHot(record.getNeighborHot());
+                    recordRepository.save(lastNeighborRecord);
 
+                } else {
+                    lastRecord = new Record();
+                    lastRecord.setUser(neighborUser);
+                    lastRecord.setDateOfCreated(LocalDateTime.now());
+                    lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                    lastRecord.setKitchenCold(record.getNeighborCold());
+                    lastRecord.setKitchenHot(record.getNeighborHot());
+                    lastRecord.setToiletCold(0);
+                    lastRecord.setToiletHot(0);
+                    recordRepository.save(lastRecord);
+                }
             }
         }
         for (User user : userRepository.findAll()) {
