@@ -72,23 +72,18 @@ public class RecordService {
                     if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
                         return false;
                     }
-                    lastNeighborRecord.setKitchenCold(record.getNeighborCold());
-                    lastNeighborRecord.setKitchenHot(record.getNeighborHot());
-                    recordRepository.save(lastNeighborRecord);
-
-                } else {
-                    lastRecord = new Record();
-                    lastRecord.setUser(neighborUser);
-                    lastRecord.setDateOfCreated(LocalDateTime.now());
-                    lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-                    lastRecord.setKitchenCold(record.getNeighborCold());
-                    lastRecord.setKitchenHot(record.getNeighborHot());
-                    lastRecord.setToiletCold(0);
-                    lastRecord.setToiletHot(0);
-                    recordRepository.save(lastRecord);
                 }
-            }
+                lastRecord = new Record();
+                lastRecord.setUser(neighborUser);
+                lastRecord.setDateOfCreated(LocalDateTime.now());
+                lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                lastRecord.setKitchenCold(record.getNeighborCold());
+                lastRecord.setKitchenHot(record.getNeighborHot());
+                lastRecord.setToiletCold(0);
+                lastRecord.setToiletHot(0);
+                recordRepository.save(lastRecord);
 
+            }
         }
         for (User user : userRepository.findAll()) {
             if (user.isAdmin())
