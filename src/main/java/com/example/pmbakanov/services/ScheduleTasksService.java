@@ -1,15 +1,27 @@
 package com.example.pmbakanov.services;
+
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.repositories.UserRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
+import lombok.extern.slf4j.Slf4j;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDateTime;
+
+import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
+@Setter
+@Getter
 public class ScheduleTasksService {
 
     private final MailSender mailSender;
@@ -19,7 +31,8 @@ public class ScheduleTasksService {
     public void periodStartMailNotification() {
         for (User person : userRepository.findAll()) {
             mailSender.sendMail(person.getEmail(), "Начало периода подачи показаний счетчиков воды",
-                    "Добрый день, " + person.getName() + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца.");
+                    "Добрый день, " + person.getName() + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца."
+                            + ".\n" + DEPLOY_WEBSITE);
         }
     }
 
@@ -30,13 +43,31 @@ public class ScheduleTasksService {
             if ((!person.areRecords()) || (person.getLastRecord().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
                 mailSender.sendMail(person.getEmail(), "Окончание периода подачи показаний счетчиков воды",
                         "Добрый день, " + person.getName() + ".\n" +
-                                "Пожалуйста, передайте показания счетчиков воды.");
+                                "Пожалуйста, передайте показания счетчиков воды." + ".\n" + DEPLOY_WEBSITE);
             }
         }
     }
+
+//    @Scheduled(fixedRateString = "${pingtask.period}")
+//    public void testScheduledMail() {
+//        mailSender.sendMail("pashtet_rus@mail.ru", "Тестовое письмо",
+//                "Это тест.");
+//    }
+
+    @Value("${pingtask.url}")
+    private String url;
+
     @Scheduled(fixedRateString = "${pingtask.period}")
-    public void testScheduledMail() {
-            mailSender.sendMail("pashtet_rus@mail.ru", "Тестовое письмо",
-                    "Это тест.");
+    public void pingMe() {
+        try {
+            URL url = new URL(getUrl());
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.connect();
+            log.info("Ping {}, OK: response code {}", url.getHost(), connection.getResponseCode());
+            connection.disconnect();
+        } catch (IOException e) {
+            log.error("Ping FAILED");
+            e.printStackTrace();
+        }
     }
 }
