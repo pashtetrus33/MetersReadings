@@ -9,6 +9,14 @@
             Назад
         </a>
     </div>
+    <#if user.isAdmin() || user.isBuh()>
+        <div style="margin: 0 auto; text-align: center">
+            <a class="btn btn-dark mt-3 mb-3" style="text-align: center"
+               href="/admin/export-to-excel" role="button">
+                Выгрузка в Excel
+            </a>
+        </div>
+    </#if>
     <br>
     <h5 style="">${currentMonth} ${currentYear?c}</h5>
     <table class="table table-hover table-dark" style="background-color: #03305c">
@@ -23,15 +31,15 @@
             <th scope="col" style="vertical-align: middle">Ванная<br>горячая вода</th>
         </tr>
         <#list users as user >
-                <tr>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreatedString}<#else>--</#if></th>
-                    <th>${user.name}</th>
-                    <th>${user.address}</th>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().kitchenCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().kitchenHot != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().toiletCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletCold}<#else>--</#if></th>
-                    <th><#if (user.areRecords()) && (user.getLastRecord().toiletHot != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletHot}<#else>--</#if></th>
-                </tr>
+            <tr>
+                <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreatedString}<#else>--</#if></th>
+                <th>${user.name}</th>
+                <th>${user.address}</th>
+                <th><#if (user.areRecords()) && (user.getLastRecord().kitchenCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
+                <th><#if (user.areRecords()) && (user.getLastRecord().kitchenHot != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
+                <th><#if (user.areRecords()) && (user.getLastRecord().toiletCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletCold}<#else>--</#if></th>
+                <th><#if (user.areRecords()) && (user.getLastRecord().toiletHot != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletHot}<#else>--</#if></th>
+            </tr>
         <#else>
             <h4>Пользователей нет</h4>
         </#list>

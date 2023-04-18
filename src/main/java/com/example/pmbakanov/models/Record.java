@@ -11,7 +11,7 @@ import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 @Entity
 @Table(name = "records")
 @Data
-public class Record {
+public class Record implements Comparable<Record> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +26,11 @@ public class Record {
     private User user;
     private LocalDateTime dateOfCreated;
     private String dateOfCreatedString;
+
+    @Override
+    public int compareTo(Record o) {
+        return this.getUser().getAddress().compareTo(o.getUser().getAddress());
+    }
 
     @PrePersist
     private void onCreate() {

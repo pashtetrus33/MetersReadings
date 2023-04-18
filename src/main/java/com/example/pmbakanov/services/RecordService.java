@@ -1,5 +1,6 @@
 package com.example.pmbakanov.services;
 
+import com.example.pmbakanov.configurations.ExcelExportUtils;
 import com.example.pmbakanov.models.Record;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.SpecialAdresses;
@@ -9,9 +10,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
@@ -29,6 +33,13 @@ public class RecordService {
         return recordRepository.findAll();
     }
 
+    public void exportCustomerToExcel(HttpServletResponse response) throws IOException {
+        List<Record> recordList = recordRepository.findAll();
+        Collections.sort(recordList);
+        ExcelExportUtils exportUtils = new ExcelExportUtils(recordList);
+        exportUtils.exportDataToExcel(response);
+    }
+
     public boolean saveRecord(Principal principal, Record record) {
 
         User currentUser = getUserByPrincipal(principal);
@@ -39,7 +50,7 @@ public class RecordService {
             if (record.getKitchenHot() == null && lastRecord.getKitchenHot() != null) {
                 record.setKitchenCold(lastRecord.getKitchenCold());
                 record.setKitchenHot(lastRecord.getKitchenHot());
-            } else if (record.getKitchenHot() == null && lastRecord.getKitchenHot() == null) {
+            } else if (record.getKitchenHot() == null) {
                 lastRecord.setKitchenCold(0);
                 lastRecord.setKitchenHot(0);
                 record.setKitchenCold(0);
