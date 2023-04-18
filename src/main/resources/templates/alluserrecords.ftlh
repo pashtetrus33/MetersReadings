@@ -12,7 +12,7 @@
     <#if user.isAdmin() || user.isBuh()>
         <div style="margin: 0 auto; text-align: center">
             <a class="btn btn-dark mt-3 mb-3" style="text-align: center"
-               href="/admin/export-to-excel" role="button">
+               href="/export-to-excel" role="button">
                 Выгрузка в Excel
             </a>
         </div>

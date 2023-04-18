@@ -77,7 +77,7 @@ public class RecordController {
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUH')")
-    @GetMapping("/admin/export-to-excel")
+    @GetMapping("/export-to-excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
