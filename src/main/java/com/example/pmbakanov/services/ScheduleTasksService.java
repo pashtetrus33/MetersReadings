@@ -48,12 +48,6 @@ public class ScheduleTasksService {
         }
     }
 
-//    @Scheduled(fixedRateString = "${pingtask.period}")
-//    public void testScheduledMail() {
-//        mailSender.sendMail("pashtet_rus@mail.ru", "Тестовое письмо",
-//                "Это тест.");
-//    }
-
     @Value("${pingtask.url}")
     private String url;
 

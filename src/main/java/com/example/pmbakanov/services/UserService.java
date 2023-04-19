@@ -146,12 +146,10 @@ public class UserService {
             mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
                     "Уважаемый(ая) " + userRepository.findByEmail(email).getName() + ".\n" + message);
         } else {
-            mailSender.sendMail("pmbakanov@mid.ru", "Информация от системы передачи показаний счетчиков",
-                    "Уважаемый Баканов Павел Михайлович.\n" + message);
-//            for (User person : userRepository.findAll()) {
-//                mailSender.sendMail(person.getEmail(), "Информация от системы передачи показаний счетчиков",
-//                        "Уважаемый(ая) " + person.getName() + ".\n" + message);
-//            }
+            for (User person : userRepository.findAll()) {
+                mailSender.sendMail(person.getEmail(), "Информация от системы передачи показаний счетчиков",
+                        "Уважаемый(ая) " + person.getName() + ".\n" + message);
+            }
         }
     }
 }

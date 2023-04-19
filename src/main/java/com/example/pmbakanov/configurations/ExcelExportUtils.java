@@ -28,27 +28,27 @@ public class ExcelExportUtils {
         workbook = new XSSFWorkbook();
     }
 
-    private void createCell(Row row, int columnCount, Object value, CellStyle style){
+    private void createCell(Row row, int columnCount, Object value, CellStyle style) {
         sheet.autoSizeColumn(columnCount);
         sheetCurrentMonth.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
-        if (value instanceof Integer){
+        if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
-        }else if (value instanceof Double){
+        } else if (value instanceof Double) {
             cell.setCellValue((Double) value);
-        }else if (value instanceof Boolean){
+        } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
-        }else if (value instanceof Long){
+        } else if (value instanceof Long) {
             cell.setCellValue((Long) value);
-        }else {
+        } else {
             cell.setCellValue((String) value);
         }
         cell.setCellStyle(style);
     }
 
-    private void createHeaderRow(){
-        sheet   = workbook.createSheet("Все показания");
-        sheetCurrentMonth   = workbook.createSheet(LocalDateTime.now().getMonth().name() + " " + LocalDateTime.now().getYear());
+    private void createHeaderRow() {
+        sheetCurrentMonth = workbook.createSheet(LocalDateTime.now().getMonth().name() + " " + LocalDateTime.now().getYear());
+        sheet = workbook.createSheet("Все показания");
         Row row = sheet.createRow(0);
         Row rowCurrentMonth = sheetCurrentMonth.createRow(0);
         CellStyle style = workbook.createCellStyle();
@@ -78,9 +78,6 @@ public class ExcelExportUtils {
         createCell(row, 8, "Сосед (кухня гор. вода)", style);
 
         rowCurrentMonth = sheetCurrentMonth.createRow(1);
-        font.setBold(true);
-        font.setFontHeight(16);
-        style.setFont(font);
         createCell(rowCurrentMonth, 0, "Дата создания", style);
         createCell(rowCurrentMonth, 1, "Имя", style);
         createCell(rowCurrentMonth, 2, "Адрес", style);
@@ -92,28 +89,17 @@ public class ExcelExportUtils {
         createCell(rowCurrentMonth, 8, "Сосед (кухня гор. вода)", style);
     }
 
-    private void writeCustomerData(){
+    private void writeCustomerData() {
         int rowCount = 2;
+        int rowCountCurrent = 2;
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
         style.setFont(font);
 
-        for (Record record : recordList){
-            if(record.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth()){
-                Row row = sheetCurrentMonth.createRow(rowCount++);
-                int columnCount = 0;
-                createCell(row, columnCount++, record.getDateOfCreatedString(), style);
-                createCell(row, columnCount++, record.getUser().getName(), style);
-                createCell(row, columnCount++, record.getUser().getAddress(), style);
-                createCell(row, columnCount++, record.getKitchenCold(), style);
-                createCell(row, columnCount++, record.getKitchenHot(), style);
-                createCell(row, columnCount++, record.getToiletCold(), style);
-                createCell(row, columnCount++, record.getToiletHot(), style);
-                createCell(row, columnCount++, record.getNeighborCold(), style);
-                createCell(row, columnCount, record.getNeighborHot(), style);
-            } else {
-                Row row = sheet.createRow(rowCount++);
+        for (Record record : recordList) {
+            if (record.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth()) {
+                Row row = sheetCurrentMonth.createRow(rowCountCurrent++);
                 int columnCount = 0;
                 createCell(row, columnCount++, record.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, record.getUser().getName(), style);
@@ -125,8 +111,17 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, record.getNeighborCold(), style);
                 createCell(row, columnCount, record.getNeighborHot(), style);
             }
-
-
+            Row row = sheet.createRow(rowCount++);
+            int columnCount = 0;
+            createCell(row, columnCount++, record.getDateOfCreatedString(), style);
+            createCell(row, columnCount++, record.getUser().getName(), style);
+            createCell(row, columnCount++, record.getUser().getAddress(), style);
+            createCell(row, columnCount++, record.getKitchenCold(), style);
+            createCell(row, columnCount++, record.getKitchenHot(), style);
+            createCell(row, columnCount++, record.getToiletCold(), style);
+            createCell(row, columnCount++, record.getToiletHot(), style);
+            createCell(row, columnCount++, record.getNeighborCold(), style);
+            createCell(row, columnCount, record.getNeighborHot(), style);
         }
     }
 
