@@ -14,10 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ExcelExportUtils {
     private final XSSFWorkbook workbook;
+    private XSSFSheet sheetCurrentMonth;
     private XSSFSheet sheet;
     private final List<Record> recordList;
 
@@ -28,6 +30,7 @@ public class ExcelExportUtils {
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style){
         sheet.autoSizeColumn(columnCount);
+        sheetCurrentMonth.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
         if (value instanceof Integer){
             cell.setCellValue((Integer) value);
@@ -45,7 +48,9 @@ public class ExcelExportUtils {
 
     private void createHeaderRow(){
         sheet   = workbook.createSheet("Все показания");
+        sheetCurrentMonth   = workbook.createSheet(LocalDateTime.now().getMonth().name() + " " + LocalDateTime.now().getYear());
         Row row = sheet.createRow(0);
+        Row rowCurrentMonth = sheetCurrentMonth.createRow(0);
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
@@ -53,7 +58,9 @@ public class ExcelExportUtils {
         style.setFont(font);
         style.setAlignment(HorizontalAlignment.CENTER);
         createCell(row, 0, "Показания индвидуальных приборов учета", style);
+        createCell(rowCurrentMonth, 0, "Показания индвидуальных приборов учета", style);
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
+        sheetCurrentMonth.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
         font.setFontHeightInPoints((short) 10);
 
         row = sheet.createRow(1);
@@ -69,6 +76,20 @@ public class ExcelExportUtils {
         createCell(row, 6, "Ванная (гор. вода)", style);
         createCell(row, 7, "Сосед (кухня хол. вода)", style);
         createCell(row, 8, "Сосед (кухня гор. вода)", style);
+
+        rowCurrentMonth = sheetCurrentMonth.createRow(1);
+        font.setBold(true);
+        font.setFontHeight(16);
+        style.setFont(font);
+        createCell(rowCurrentMonth, 0, "Дата создания", style);
+        createCell(rowCurrentMonth, 1, "Имя", style);
+        createCell(rowCurrentMonth, 2, "Адрес", style);
+        createCell(rowCurrentMonth, 3, "Кухня (ход. вода)", style);
+        createCell(rowCurrentMonth, 4, "Кухня (гор. вода)", style);
+        createCell(rowCurrentMonth, 5, "Ванная (ход. вода)", style);
+        createCell(rowCurrentMonth, 6, "Ванная (гор. вода)", style);
+        createCell(rowCurrentMonth, 7, "Сосед (кухня хол. вода)", style);
+        createCell(rowCurrentMonth, 8, "Сосед (кухня гор. вода)", style);
     }
 
     private void writeCustomerData(){
@@ -79,17 +100,33 @@ public class ExcelExportUtils {
         style.setFont(font);
 
         for (Record record : recordList){
-            Row row = sheet.createRow(rowCount++);
-            int columnCount = 0;
-            createCell(row, columnCount++, record.getDateOfCreatedString(), style);
-            createCell(row, columnCount++, record.getUser().getName(), style);
-            createCell(row, columnCount++, record.getUser().getAddress(), style);
-            createCell(row, columnCount++, record.getKitchenCold(), style);
-            createCell(row, columnCount++, record.getKitchenHot(), style);
-            createCell(row, columnCount++, record.getToiletCold(), style);
-            createCell(row, columnCount++, record.getToiletHot(), style);
-            createCell(row, columnCount++, record.getNeighborCold(), style);
-            createCell(row, columnCount, record.getNeighborHot(), style);
+            if(record.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth()){
+                Row row = sheetCurrentMonth.createRow(rowCount++);
+                int columnCount = 0;
+                createCell(row, columnCount++, record.getDateOfCreatedString(), style);
+                createCell(row, columnCount++, record.getUser().getName(), style);
+                createCell(row, columnCount++, record.getUser().getAddress(), style);
+                createCell(row, columnCount++, record.getKitchenCold(), style);
+                createCell(row, columnCount++, record.getKitchenHot(), style);
+                createCell(row, columnCount++, record.getToiletCold(), style);
+                createCell(row, columnCount++, record.getToiletHot(), style);
+                createCell(row, columnCount++, record.getNeighborCold(), style);
+                createCell(row, columnCount, record.getNeighborHot(), style);
+            } else {
+                Row row = sheet.createRow(rowCount++);
+                int columnCount = 0;
+                createCell(row, columnCount++, record.getDateOfCreatedString(), style);
+                createCell(row, columnCount++, record.getUser().getName(), style);
+                createCell(row, columnCount++, record.getUser().getAddress(), style);
+                createCell(row, columnCount++, record.getKitchenCold(), style);
+                createCell(row, columnCount++, record.getKitchenHot(), style);
+                createCell(row, columnCount++, record.getToiletCold(), style);
+                createCell(row, columnCount++, record.getToiletHot(), style);
+                createCell(row, columnCount++, record.getNeighborCold(), style);
+                createCell(row, columnCount, record.getNeighborHot(), style);
+            }
+
+
         }
     }
 
