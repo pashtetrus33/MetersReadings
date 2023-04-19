@@ -8,7 +8,7 @@ COPY ./ ./
 RUN mvn package -Dmaven.test.skip
 
 # the second stage of our build will use openjdk
-FROM openjdk:11.0.7-jre-slim
+FROM openjdk:19-jdk-slim
 
 # copy only teh artifacts we need from the first stage and discard the rest
 COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
