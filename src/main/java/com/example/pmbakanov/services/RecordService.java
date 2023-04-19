@@ -127,6 +127,17 @@ public class RecordService {
         Record record = recordRepository.findById(id)
                 .orElse(null);
         if (record != null) {
+            if (record.getNeighborCold() != null) {
+                User neighborUser = null;
+                for (SpecialAdresses address : SpecialAdresses.values()) {
+                    if (address.getTitle().equals(record.getUser().getAddress()))
+                        neighborUser = userRepository.findByAddress(address.getNeighborAddress());
+                }
+                assert neighborUser != null;
+                neighborUser.getLastRecord().setKitchenCold(0);
+                neighborUser.getLastRecord().setKitchenHot(0);
+            }
+
             recordRepository.delete(record);
             log.info("Record with id = {} was deleted", id);
 
