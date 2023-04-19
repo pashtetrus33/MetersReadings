@@ -8,11 +8,12 @@ COPY ./ ./
 RUN mvn package -Dmaven.test.skip
 
 # the second stage of our build will use openjdk
-FROM openjdk:19-jdk-slim
+#FROM openjdk:19-jdk-slim
 
 # copy only teh artifacts we need from the first stage and discard the rest
-COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
+#COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
 
-RUN apk add --update fontconfig freetype
+
 # set the startup command to execute the jar
-CMD ["java","-jar", "/pmbakanov-1.0.jar"]
+#CMD ["java","-jar", "/pmbakanov-1.0.jar"]
+CMD ["java","-jar", "/target/pmbakanov-1.0.jar"]
