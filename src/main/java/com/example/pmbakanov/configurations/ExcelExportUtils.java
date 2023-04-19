@@ -53,7 +53,7 @@ public class ExcelExportUtils {
         style.setFont(font);
         style.setAlignment(HorizontalAlignment.CENTER);
         createCell(row, 0, "Показания индвидуальных приборов учета", style);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
         font.setFontHeightInPoints((short) 10);
 
         row = sheet.createRow(1);
