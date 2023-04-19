@@ -1,5 +1,5 @@
 # the first stage of our build will use a maven 3.6.3 parent image
-FROM maven:3.6.3-jdk-11 AS MAVEN_BUILD
+FROM maven:3.8.7-openjdk-18-slim AS MAVEN_BUILD
 
 # copy the source tree and the pom.xml to our new container
 COPY ./ ./
