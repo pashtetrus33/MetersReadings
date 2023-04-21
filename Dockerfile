@@ -13,7 +13,7 @@ RUN mvn package -Dmaven.test.skip
 # set the startup command to execute the jar
 #CMD ["java","-jar", "/pmbakanov-1.0.jar"]
 
-RUN apt-get update -y && apt-get install -y libfreetype6
+#RUN apt-get update -y && apt-get install -y libfreetype6
 RUN apt-get update -y && apt-get install -y libfontconfig1
 
 CMD ["java","-jar", "/target/pmbakanov-1.0.jar"]
