@@ -134,12 +134,18 @@ public class RecordService {
                         neighborUser = userRepository.findByAddress(address.getNeighborAddress());
                 }
                 assert neighborUser != null;
-                neighborUser.getLastRecord().setKitchenCold(0);
-                neighborUser.getLastRecord().setKitchenHot(0);
-            }
+                User currentUser = record.getUser();
+                recordRepository.delete(record);
+                log.info("Record with id = {} was deleted", id);
+                if (neighborUser.getLastRecord() != null && currentUser.getLastRecord() != null) {
+                    neighborUser.getLastRecord().setKitchenCold(currentUser.getLastRecord().getNeighborCold());
+                    neighborUser.getLastRecord().setKitchenHot(currentUser.getLastRecord().getNeighborHot());
+                }
 
-            recordRepository.delete(record);
-            log.info("Record with id = {} was deleted", id);
+            } else {
+                recordRepository.delete(record);
+                log.info("Record with id = {} was deleted", id);
+            }
 
         } else {
             log.error("Record with id = {} is not found", id);
