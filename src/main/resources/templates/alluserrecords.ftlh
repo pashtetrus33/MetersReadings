@@ -62,8 +62,8 @@
         <#list electricityRecords as record >
             <tr>
                 <th style="vertical-align: middle">${record.getDateOfCreatedString()}</th>
-                <th>${record.getUser().getName()}</th>
-                <th>${record.getUser().getAddress()}</th>
+                <th style="vertical-align: middle">${record.getUser().getName()}</th>
+                <th style="vertical-align: middle">${record.getUser().getAddress()}</th>
                 <th style="vertical-align: middle">${record.electricity}</th>
                 <th style="vertical-align: middle">${record.dataProviderName}</th>
                 <th>
