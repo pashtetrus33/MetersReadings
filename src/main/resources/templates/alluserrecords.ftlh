@@ -56,6 +56,7 @@
             <th scope="col" style="vertical-align: middle">Имя</th>
             <th scope="col" style="vertical-align: middle">Адрес</th>
             <th scope="col" style="vertical-align: middle">Электричество</th>
+            <th scope="col" style="vertical-align: middle">Данные внес</th>
             <th scope="col" style="vertical-align: middle">Удалить</th>
         </tr>
         <#list electricityRecords as record >
@@ -64,6 +65,7 @@
                 <th>${record.getUser().getName()}</th>
                 <th>${record.getUser().getAddress()}</th>
                 <th style="vertical-align: middle">${record.electricity}</th>
+                <th style="vertical-align: middle">${record.dataProviderName}</th>
                 <th>
                     <form action="/eletricityrecord/delete/${record.user.id?c}/${record.id?c}" method="post"
                           style="margin: 0 auto; text-align: center">

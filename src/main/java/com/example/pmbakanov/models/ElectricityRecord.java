@@ -22,6 +22,8 @@ public class ElectricityRecord implements Comparable<ElectricityRecord> {
     private LocalDateTime dateOfCreated;
     private String dateOfCreatedString;
 
+    private String dataProviderName;
+
     @Override
     public int compareTo(ElectricityRecord o) {
         return this.getUser().getAddress().compareTo(o.getUser().getAddress());

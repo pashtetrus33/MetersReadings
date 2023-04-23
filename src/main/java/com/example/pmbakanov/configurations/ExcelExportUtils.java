@@ -73,7 +73,7 @@ public class ExcelExportUtils {
         createCell(rowElectricity, 0, "Показания индвидуальных приборов учета", style);
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
         sheetCurrentMonth.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
-        sheetElectricity.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
+        sheetElectricity.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
         font.setFontHeightInPoints((short) 10);
 
         row = sheet.createRow(1);
@@ -106,6 +106,7 @@ public class ExcelExportUtils {
         createCell(rowElectricity, 1, "Имя", style);
         createCell(rowElectricity, 2, "Адрес", style);
         createCell(rowElectricity, 3, "Электричество", style);
+        createCell(rowElectricity, 4, "Данные внес", style);
     }
 
     private void writeCustomerData() {
@@ -151,7 +152,8 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, electricityRecord.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getName(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getAddress(), style);
-                createCell(row, columnCount, electricityRecord.getElectricity(), style);
+                createCell(row, columnCount++, electricityRecord.getElectricity(), style);
+                createCell(row, columnCount, electricityRecord.getDataProviderName(), style);
             }
         }
 

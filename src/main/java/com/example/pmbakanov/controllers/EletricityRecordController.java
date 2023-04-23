@@ -39,10 +39,11 @@ public class EletricityRecordController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHICIAN')")
     @PostMapping("/allelectricity")
     public String electricityDataCreate(Model model, ElectricityRecord electricityRecord, String building, String flat, Principal principal) {
+        electricityRecord.setDataProviderName(userService.getUserByPrincipal(principal).getName());
         if (electricityRecordService.saveElectricityRecord(building, flat, electricityRecord)) {
-            model.addAttribute("successmessage", "Данные электричества успешно переданы");
+            model.addAttribute("successmessage", "Данные электричества успешно переданы, нажмите кнопку обновить");
         } else {
-            model.addAttribute("successmessage", "Данные электричества не переданы, предыдущие показания больше текущих");
+            model.addAttribute("successmessage", "Данные электричества не переданы, предыдущие показания больше текущих, нажмите кнопку обновить");
         }
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("users", userService.list());

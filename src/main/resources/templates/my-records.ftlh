@@ -40,6 +40,7 @@
         <tr>
             <th scope="col" style="vertical-align: middle">Дата (электричество)</th>
             <th scope="col" style="vertical-align: middle">Электричество</th>
+            <th scope="col" style="vertical-align: middle">Данные внес</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@
             <tr>
                 <th style="vertical-align: middle">${electricityRecord.getDateOfCreatedString()}</th>
                 <th style="vertical-align: middle"><#if electricityRecord.electricity != 0>${electricityRecord.electricity}<#else>--</#if></th>
+                <th style="vertical-align: middle">${electricityRecord.dataProviderName}</th>
             </tr>
         </#list>
         </tbody>

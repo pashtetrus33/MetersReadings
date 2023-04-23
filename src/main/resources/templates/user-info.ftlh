@@ -69,6 +69,7 @@
                     <div class="card-body">
                         <h6 class="card-title">Дата создания: ${record.dateOfCreatedString}</h6>
                         <p class="card-text"> Показание: ${record.getElectricity()}</p>
+                        <p class="card-text"> Данные внес: ${record.dataProviderName}</p>
                     </div>
                     <div class="card-footer">
                         ${record.user.name}
