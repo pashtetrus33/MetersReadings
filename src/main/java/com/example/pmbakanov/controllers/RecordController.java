@@ -1,7 +1,9 @@
 package com.example.pmbakanov.controllers;
 
+import com.example.pmbakanov.models.ElectricityRecord;
 import com.example.pmbakanov.models.Record;
 import com.example.pmbakanov.models.User;
+import com.example.pmbakanov.services.ElectricityRecordService;
 import com.example.pmbakanov.services.RecordService;
 import com.example.pmbakanov.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecordController {
     private final RecordService recordService;
+    private final ElectricityRecordService electricityRecordService;
     private final UserService userService;
 
     @GetMapping("/record/{id}")
@@ -58,6 +61,7 @@ public class RecordController {
         User user = recordService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         model.addAttribute("records", user.getRecords());
+        model.addAttribute("electricityRecords", user.getElectricityRecords());
         return "my-records";
     }
 
@@ -67,8 +71,11 @@ public class RecordController {
 
         List<User> userList = userService.list();
         Collections.sort(userList);
-
         model.addAttribute("records", recordService.listRecords(null));
+        model.addAttribute("electricityRecords", electricityRecordService.listElectrcityRecords(null)
+                .stream()
+                .filter(ElectricityRecord::doneInCurrentMonth)
+                .toList());
         model.addAttribute("users", userList);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("currentMonth", LocalDateTime.now().getMonth());

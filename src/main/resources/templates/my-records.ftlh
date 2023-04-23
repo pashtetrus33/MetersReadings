@@ -9,7 +9,6 @@
         </a>
     </div>
 
-    <br>
 
     <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
         <thead>
@@ -29,6 +28,25 @@
                 <th style="vertical-align: middle"><#if record.kitchenHot != 0>${record.kitchenHot}<#else>--</#if></th>
                 <th style="vertical-align: middle"><#if record.toiletCold != 0>${record.toiletCold}<#else>--</#if></th>
                 <th style="vertical-align: middle"><#if record.toiletHot != 0>${record.toiletHot}<#else>--</#if></th>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+
+    <br>
+
+    <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
+        <thead>
+        <tr>
+            <th scope="col" style="vertical-align: middle">Дата (электричество)</th>
+            <th scope="col" style="vertical-align: middle">Электричество</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list electricityRecords as electricityRecord>
+            <tr>
+                <th style="vertical-align: middle">${electricityRecord.getDateOfCreatedString()}</th>
+                <th style="vertical-align: middle"><#if electricityRecord.electricity != 0>${electricityRecord.electricity}<#else>--</#if></th>
             </tr>
         </#list>
         </tbody>

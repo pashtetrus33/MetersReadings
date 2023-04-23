@@ -4,7 +4,7 @@
     <hr>
     <div style="text-align: center">
         <img src="/static/images/avatar.jpg"
-             style="border:2px solid black; border-radius: 20px" height="110">
+             style="border:2px solid black; border-radius: 20px" height="110" alt="logo">
         <br>
         <h4><b>${user.name}</b></h4>
         <h4>${user.address}</h4>
@@ -37,10 +37,21 @@
                 Заявки
             </a>
         </#if>
-        <#if user.isBuh()>
+        <#if user.isSupervisor()>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allusersrecords">
                 Счетчики
+            </a>
+
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allusersrequests">
+                Заявки
+            </a>
+        </#if>
+        <#if user.isTechnician() || user.isSupervisor()|| user.isAdmin()>
+            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
+               href="/allelectricity">
+                Электричество
             </a>
         </#if>
         <#if successmessage??>

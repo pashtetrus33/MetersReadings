@@ -1,6 +1,7 @@
 package com.example.pmbakanov.configurations;
 
 
+import com.example.pmbakanov.models.ElectricityRecord;
 import com.example.pmbakanov.models.Record;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -21,16 +22,22 @@ public class ExcelExportUtils {
     private final XSSFWorkbook workbook;
     private XSSFSheet sheetCurrentMonth;
     private XSSFSheet sheet;
+    private XSSFSheet sheetElectricity;
     private final List<Record> recordList;
 
-    public ExcelExportUtils(List<Record> recordList) {
+    private final List<ElectricityRecord> electricityRecordList;
+
+    public ExcelExportUtils(List<Record> recordList, List<ElectricityRecord> electricityRecordList) {
         this.recordList = recordList;
+        this.electricityRecordList = electricityRecordList;
         workbook = new XSSFWorkbook();
     }
+
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
         sheet.autoSizeColumn(columnCount);
         sheetCurrentMonth.autoSizeColumn(columnCount);
+        sheetElectricity.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
         if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
@@ -49,8 +56,10 @@ public class ExcelExportUtils {
     private void createHeaderRow() {
         sheetCurrentMonth = workbook.createSheet(LocalDateTime.now().getMonth().name() + " " + LocalDateTime.now().getYear());
         sheet = workbook.createSheet("Все показания");
+        sheetElectricity = workbook.createSheet("Электричество");
         Row row = sheet.createRow(0);
         Row rowCurrentMonth = sheetCurrentMonth.createRow(0);
+        Row rowElectricity = sheetElectricity.createRow(0);
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
@@ -59,8 +68,10 @@ public class ExcelExportUtils {
         style.setAlignment(HorizontalAlignment.CENTER);
         createCell(row, 0, "Показания индвидуальных приборов учета", style);
         createCell(rowCurrentMonth, 0, "Показания индвидуальных приборов учета", style);
+        createCell(rowElectricity, 0, "Показания индвидуальных приборов учета", style);
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
         sheetCurrentMonth.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
+        sheetElectricity.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
         font.setFontHeightInPoints((short) 10);
 
         row = sheet.createRow(1);
@@ -87,11 +98,18 @@ public class ExcelExportUtils {
         createCell(rowCurrentMonth, 6, "Ванная (гор. вода)", style);
         createCell(rowCurrentMonth, 7, "Сосед (кухня хол. вода)", style);
         createCell(rowCurrentMonth, 8, "Сосед (кухня гор. вода)", style);
+
+        rowElectricity = sheetElectricity.createRow(1);
+        createCell(rowCurrentMonth, 0, "Дата создания", style);
+        createCell(rowCurrentMonth, 1, "Имя", style);
+        createCell(rowCurrentMonth, 2, "Адрес", style);
+        createCell(rowCurrentMonth, 3, "Электричество", style);
     }
 
     private void writeCustomerData() {
         int rowCount = 2;
         int rowCountCurrent = 2;
+        int rowCountElectricity = 2;
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
@@ -123,6 +141,18 @@ public class ExcelExportUtils {
             createCell(row, columnCount++, record.getNeighborCold(), style);
             createCell(row, columnCount, record.getNeighborHot(), style);
         }
+
+        for (ElectricityRecord electricityRecord : electricityRecordList) {
+            if (electricityRecord.getElectricity() != null) {
+                Row row = sheetElectricity.createRow(rowCountElectricity++);
+                int columnCount = 0;
+                createCell(row, columnCount++, electricityRecord.getDateOfCreatedString(), style);
+                createCell(row, columnCount++, electricityRecord.getUser().getName(), style);
+                createCell(row, columnCount++, electricityRecord.getUser().getAddress(), style);
+                createCell(row, columnCount, electricityRecord.getElectricity(), style);
+            }
+        }
+
     }
 
     public void exportDataToExcel(HttpServletResponse response) throws IOException {

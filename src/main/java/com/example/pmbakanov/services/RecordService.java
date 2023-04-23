@@ -1,9 +1,11 @@
 package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.configurations.ExcelExportUtils;
+import com.example.pmbakanov.models.ElectricityRecord;
 import com.example.pmbakanov.models.Record;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.SpecialAdresses;
+import com.example.pmbakanov.repositories.ElectricityRecordRepository;
 import com.example.pmbakanov.repositories.RecordRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 public class RecordService {
     private final MailSender mailSender;
     private final RecordRepository recordRepository;
+    private final ElectricityRecordRepository electricityRecordRepository;
     private final UserRepository userRepository;
 
     public List<Record> listRecords(String id) {
@@ -35,8 +38,9 @@ public class RecordService {
 
     public void exportCustomerToExcel(HttpServletResponse response) throws IOException {
         List<Record> recordList = recordRepository.findAll();
+        List<ElectricityRecord> electricityRecordList = electricityRecordRepository.findAll();
         Collections.sort(recordList);
-        ExcelExportUtils exportUtils = new ExcelExportUtils(recordList);
+        ExcelExportUtils exportUtils = new ExcelExportUtils(recordList, electricityRecordList);
         exportUtils.exportDataToExcel(response);
     }
 
@@ -155,4 +159,6 @@ public class RecordService {
     public Record getRecordById(Long id) {
         return recordRepository.findById(id).orElse(null);
     }
+
+
 }

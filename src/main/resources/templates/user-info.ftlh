@@ -3,8 +3,8 @@
     <h4 style="text-align: center">Информация о пользователе</h4>
     <hr>
     <div style="text-align: center">
-            <img src="/static/images/avatar.jpg"
-                 style="border:2px solid black; border-radius: 20px" height="120">
+        <img src="/static/images/avatar.jpg"
+             style="border:2px solid black; border-radius: 20px" height="120" alt="avatar">
         <br>
         <br>
         <h5><b>${user.name}</b></h5>
@@ -19,15 +19,17 @@
         </a>
     </div>
     <hr>
+    <br>
+    <hr>
     <h4 style="text-align: center">История показаний счетчиков </h4>
     <br>
     <div class="card-columns">
         <#list records as record>
-            <a href="/record/${record.id?c}" >
+            <a href="/record/${record.id?c}">
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
-                        <h6 class="card-title">Дата создания:  ${record.dateOfCreatedString}</h6>
+                        <h6 class="card-title">Дата создания: ${record.dateOfCreatedString}</h6>
                         <p class="card-text"> Холодная вода (кухня):${record.kitchenCold}</p>
                         <p class="card-text"> Горячая вода (кухня):${record.kitchenHot}</p>
                         <p class="card-text"> Холодная вода (ванная):${record.toiletCold}</p>
@@ -38,7 +40,8 @@
                     </div>
                     <div>
                         <#if userByPrincipal.isAdmin()>
-                            <form action="/record/delete/${record.id?c}" method="post" style="margin: 0 auto; text-align: center">
+                            <form action="/record/delete/${record.id?c}" method="post"
+                                  style="margin: 0 auto; text-align: center">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
                                     Удалить запись
@@ -56,6 +59,37 @@
 
     <br>
     <hr>
+    <h4 style="text-align: center">История показаний счетчиков электричества </h4>
+    <br>
+    <div class="card-columns">
+        <#list electricityRecords as record>
+            <a href="/record/${record.id?c}">
+                <div class="card text-white bg-dark my-3 record">
+
+                    <div class="card-body">
+                        <h6 class="card-title">Дата создания: ${record.dateOfCreatedString}</h6>
+                        <p class="card-text"> Показание: ${record.getElectricity()}</p>
+                    </div>
+                    <div class="card-footer">
+                        ${record.user.name}
+                    </div>
+                    <div>
+                        <#if userByPrincipal.isAdmin()>
+                            <form action="/eletricityrecord/delete/${record.user.id?c}/${record.id?c}" method="post"
+                                  style="margin: 0 auto; text-align: center">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
+                                    Удалить запись
+                                </button>
+                            </form>
+                        </#if>
+                    </div>
+                </div>
+            </a>
+        <#else>
+            <h4 style="text-align: center">Не найдено</h4>
+        </#list>
+    </div>
     <h4 style="text-align: center">История заявок </h4>
     <br>
     <div class="card-columns">
@@ -76,7 +110,8 @@
                     </div>
                     <div>
                         <#if userByPrincipal.isAdmin()>
-                            <form action="/request/delete/${request.id?c}" method="post" style="margin: 0 auto; text-align: center">
+                            <form action="/request/delete/${request.id?c}" method="post"
+                                  style="margin: 0 auto; text-align: center">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
                                     Удалить запись

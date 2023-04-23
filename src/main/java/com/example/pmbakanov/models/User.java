@@ -36,12 +36,23 @@ public class User implements UserDetails, Comparable<User> {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Request> requests = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<ElectricityRecord> electricityRecords = new ArrayList<>();
+
     public Record getLastRecord() {
         return areRecords() ? records.get(records.size() - 1) : null;
     }
 
+    public ElectricityRecord getLastElectricityRecord() {
+        return areElectricityRecords() ? electricityRecords.get(electricityRecords.size() - 1) : null;
+    }
+
     public boolean areRecords() {
         return records.size() > 0;
+    }
+
+    public boolean areElectricityRecords() {
+        return electricityRecords.size() > 0;
     }
 
     public boolean areNeighborRecords() {
@@ -101,6 +112,10 @@ public class User implements UserDetails, Comparable<User> {
 
     public boolean isAdmin() {
         return roles.contains(Role.ROLE_ADMIN);
+    }
+
+    public boolean isTechnician() {
+        return roles.contains(Role.ROLE_TECHNICIAN);
     }
 
     public boolean isSupervisor() {

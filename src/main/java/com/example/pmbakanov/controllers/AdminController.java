@@ -81,6 +81,7 @@ public class AdminController {
         model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
         model.addAttribute("records", user.getRecords());
         model.addAttribute("requests", user.getRequests());
+        model.addAttribute("electricityRecords", user.getElectricityRecords());
         return "user-info";
     }
 }
