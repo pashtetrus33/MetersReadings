@@ -15,12 +15,12 @@ public class Record implements Comparable<Record> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer kitchenCold;
-    private Integer kitchenHot;
-    private Integer toiletCold;
-    private Integer toiletHot;
-    private Integer neighborHot;
-    private Integer neighborCold;
+    private Float kitchenCold;
+    private Float kitchenHot;
+    private Float toiletCold;
+    private Float toiletHot;
+    private Float neighborHot;
+    private Float neighborCold;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;

@@ -15,7 +15,7 @@ public class ElectricityRecord implements Comparable<ElectricityRecord> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer electricity;
+    private Float electricity;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;

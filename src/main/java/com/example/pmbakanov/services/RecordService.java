@@ -55,10 +55,10 @@ public class RecordService {
                 record.setKitchenCold(lastRecord.getKitchenCold());
                 record.setKitchenHot(lastRecord.getKitchenHot());
             } else if (record.getKitchenHot() == null) {
-                lastRecord.setKitchenCold(0);
-                lastRecord.setKitchenHot(0);
-                record.setKitchenCold(0);
-                record.setKitchenHot(0);
+                lastRecord.setKitchenCold(0f);
+                lastRecord.setKitchenHot(0f);
+                record.setKitchenCold(0f);
+                record.setKitchenHot(0f);
             }
 
             if ((lastRecord.getToiletCold() > record.getToiletCold()) || (lastRecord.getToiletHot() > record.getToiletHot())) {
@@ -100,8 +100,8 @@ public class RecordService {
                     lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                     lastRecord.setKitchenCold(record.getNeighborCold());
                     lastRecord.setKitchenHot(record.getNeighborHot());
-                    lastRecord.setToiletCold(0);
-                    lastRecord.setToiletHot(0);
+                    lastRecord.setToiletCold(0f);
+                    lastRecord.setToiletHot(0f);
                     recordRepository.save(lastRecord);
                 }
             }

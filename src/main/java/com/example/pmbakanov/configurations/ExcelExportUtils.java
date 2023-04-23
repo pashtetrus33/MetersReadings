@@ -47,6 +47,8 @@ public class ExcelExportUtils {
             cell.setCellValue((Boolean) value);
         } else if (value instanceof Long) {
             cell.setCellValue((Long) value);
+        } else if (value instanceof Float) {
+            cell.setCellValue((Float) value);
         } else {
             cell.setCellValue((String) value);
         }
@@ -100,10 +102,10 @@ public class ExcelExportUtils {
         createCell(rowCurrentMonth, 8, "Сосед (кухня гор. вода)", style);
 
         rowElectricity = sheetElectricity.createRow(1);
-        createCell(rowCurrentMonth, 0, "Дата создания", style);
-        createCell(rowCurrentMonth, 1, "Имя", style);
-        createCell(rowCurrentMonth, 2, "Адрес", style);
-        createCell(rowCurrentMonth, 3, "Электричество", style);
+        createCell(rowElectricity, 0, "Дата создания", style);
+        createCell(rowElectricity, 1, "Имя", style);
+        createCell(rowElectricity, 2, "Адрес", style);
+        createCell(rowElectricity, 3, "Электричество", style);
     }
 
     private void writeCustomerData() {

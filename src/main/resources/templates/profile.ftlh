@@ -68,14 +68,14 @@
                     <div class="form-group">
                         <label for="kitchenCold"><b>Холодная вода (кухня)</b></label>
                         <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().kitchenCold}<#else>--</#if></div>
-                        <input type="number" required class="form-control"
+                        <input type="number" step="any" required class="form-control"
                                id="kitchenCold" name="kitchenCold">
                     </div>
                     <div class="form-group">
                         <label for="kitchenHot"><b>Горячая вода (кухня)</b></label>
                         <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().kitchenHot}<#else>--</#if></div>
                         <div class="input-group mb-3">
-                            <input type="number" required class="form-control" id="kitchenHot" name="kitchenHot">
+                            <input type="number" step="any" required class="form-control" id="kitchenHot" name="kitchenHot">
                         </div>
                     </div>
                 </#if>
@@ -83,7 +83,7 @@
                     <label for="toiletCold"><b>Холодная вода (ванная)</b></label>
                     <div><#if (user.areRecords() && user.getLastRecord().toiletCold != 0)>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletCold}<#else>--</#if></div>
                     <div class="input-group mb-3">
-                        <input type="number" required class="form-control" id="toiletCold" name="toiletCold">
+                        <input type="number" step="any" required class="form-control" id="toiletCold" name="toiletCold">
                     </div>
                 </div>
 
@@ -91,20 +91,20 @@
                     <label for="toiletHot"><b>Горячая вода (ванная)</b></label>
                     <div><#if (user.areRecords() && user.getLastRecord().toiletHot != 0)>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletHot}<#else>--</#if></div>
                     <div class="input-group mb-3">
-                        <input type="number" required class="form-control" id="toiletHot" name="toiletHot">
+                        <input type="number" step="any" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
                 </div>
                 <#if user.isUserWithSpecialAddress()>
                     <div class="form-group">
                         <label for="neighborCold"><b>Сосед: холодная вода</b></label>
                         <div><#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborCold}<#else>--</#if></div>
-                        <input type="number" required class="form-control"
+                        <input type="number" step="any" required class="form-control"
                                id="neighborCold" name="neighborCold">
                     </div>
                     <div class="form-group">
                         <label for="neighborHot"><b>Сосед: горячая вода</b></label>
                         <div><#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborHot}<#else>--</#if></div>
-                        <input type="number" required class="form-control"
+                        <input type="number" step="any" required class="form-control"
                                id="neighborHot" name="neighborHot">
                     </div>
                 </#if>

@@ -17,7 +17,8 @@
 
     <form action="/allelectricity" method="post" style="margin: 0 auto; width: 60%">
     <div class="form-group">
-        <label for="building">Здание</label><select id="building" required name="building" class="form-control">
+        <label for="building">Здание</label>
+        <select id="building" required name="building" class="form-control">
             <option value="">Здание не выбрано</option>
             <option value="Школьно-жилой дом">Школьно-жилой дом</option>
             <option value="Жилой дом №1">Жилой дом №1</option>
@@ -26,7 +27,8 @@
     </div>
 
     <div class="form-group">
-        <label for="flat">Квартира</label><select id="flat" required name="flat" class="form-control">
+        <label for="flat">Квартира</label>
+        <select id="flat" required name="flat" class="form-control">
             <option value="">Квартира не выбрана</option>
             <option value="кв.№11">кв.№11</option>
             <option value="кв.№21">кв.№21</option>
@@ -56,8 +58,8 @@
     </div>
 
     <div class="form-group">
-        <label for="electricity">Показания</label><input type="number" class="form-control" required id="electricity"
-                                                         name="electricity">
+        <label for="electricity">Показания</label>
+        <input type="number" step="any" class="form-control" required id="electricity" name="electricity">
     </div>
 
     <#if !successmessage??>

@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -31,9 +32,10 @@ public class ElectricityRecordService {
             user.setAddress(address);
             user.setName("Запись без пользователя");
             user.setActive(false);
-            String randomEmail = Math.random() + "@test.test";
+            Random random = new Random();
+            String randomEmail = random.nextInt(70) + "@test.test";
             if (userRepository.findByEmail(randomEmail) != null) {
-                randomEmail+= Math.random();
+                randomEmail = random.nextInt(70) + randomEmail;
                 user.setEmail(randomEmail);
             } else {
                 user.setEmail(randomEmail);
