@@ -15,6 +15,7 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHICIAN')")
 public class EletricityRecordController {
     private final ElectricityRecordService electricityRecordService;
     private final UserService userService;
@@ -28,7 +29,6 @@ public class EletricityRecordController {
     }
 
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHICIAN')")
     @GetMapping("/allelectricity")
     public String allUserElectricity(Model model, Principal principal) {
         model.addAttribute("users", userService.list());
@@ -36,7 +36,6 @@ public class EletricityRecordController {
         return "allelectricity";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHICIAN')")
     @PostMapping("/allelectricity")
     public String electricityDataCreate(Model model, ElectricityRecord electricityRecord, String building, String flat, Principal principal) {
         electricityRecord.setDataProviderName(userService.getUserByPrincipal(principal).getName());
