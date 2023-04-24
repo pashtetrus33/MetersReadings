@@ -88,7 +88,7 @@ public class RecordController {
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Record_Information.xlsx";
+        String headerValue = "attachment; filename=" + LocalDateTime.now().getMonth() + " " + LocalDateTime.now().getYear() + ".xlsx";
         response.setHeader(headerKey, headerValue);
         recordService.exportCustomerToExcel(response);
     }
