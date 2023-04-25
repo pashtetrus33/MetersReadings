@@ -15,6 +15,5 @@ RUN mvn package -Dmaven.test.skip
 
 #RUN apt-get update -y && apt-get install -y libfreetype6
 RUN apt-get update -y && apt-get install -y libfontconfig1
-ENV MAIL="metersapp@mail.ru"
 
 CMD ["java","-jar", "/target/pmbakanov-1.0.jar"]
