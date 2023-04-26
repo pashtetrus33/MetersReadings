@@ -15,7 +15,7 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHICIAN')")
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHNICIAN')")
 public class EletricityRecordController {
     private final ElectricityRecordService electricityRecordService;
     private final UserService userService;
