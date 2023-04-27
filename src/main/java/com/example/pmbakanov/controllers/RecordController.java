@@ -20,6 +20,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -75,7 +76,7 @@ public class RecordController {
         model.addAttribute("electricityRecords", electricityRecordService.listElectrcityRecords(null)
                 .stream()
                 .filter(ElectricityRecord::doneInCurrentMonth)
-                .toList());
+                .collect(Collectors.toList()));
         model.addAttribute("users", userList);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("currentMonth", LocalDateTime.now().getMonth());
