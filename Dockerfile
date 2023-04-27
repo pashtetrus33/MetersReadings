@@ -3,10 +3,9 @@
 FROM maven:3.6.1-jdk-8-alpine AS MAVEN_BUILD
 # copy the pom and src code to the container
 COPY ./ ./
-#RUN mvn clean package
 # package our application code without tests
-RUN mvn package -Dmaven.test.skip
-
+#RUN mvn package -Dmaven.test.skip
+RUN mvn clean package
 #add library for excel export
 RUN apt-get update -y && apt-get install -y libfontconfig1
 
