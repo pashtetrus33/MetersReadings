@@ -1,7 +1,19 @@
-FROM maven:3.8.7-openjdk-18-slim
+# the first stage of our build will use a maven 3.6.1 parent image
+FROM maven:3.8.7-openjdk-18-slim AS MAVEN_BUILD
+# copy the pom and src code to the container
 COPY ./ ./
+#RUN mvn clean package
+# package our application code without tests
 RUN mvn package -Dmaven.test.skip
-RUN apt-get update -y && apt-get install -y libfontconfig1 && \
-    rm -rf /var/lib/apt/lists/*
+
+# the second stage of our build will use open jdk 8 on alpine 3.9
+FROM openjdk:8-jre-alpine3.9
+#add library for excel export
+RUN apt-get update -y && apt-get install -y libfontconfig1
+
+# copy only the artifacts we need from the first stage and discard the rest
+COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
+# instruction for open port
 EXPOSE 8080
-ENTRYPOINT ["java","-jar", "/target/pmbakanov-1.0.jar"]
+# set the startup command to execute the jar
+CMD ["java","-jar", "/pmbakanov-1.0.jar"]
