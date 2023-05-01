@@ -20,6 +20,8 @@ COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
 ENV MAIL
 ENV MAIL_PASSWORD
 ENV DATABASE_URL
+ENV DATABASE_USER
+ENV DATABASE_PASSWORD
 # instruction for open port
 EXPOSE 8080
 # set the startup command to execute the jar
