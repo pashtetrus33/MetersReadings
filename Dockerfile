@@ -16,11 +16,11 @@ RUN apt-get update -y && apt-get install -y libfontconfig1 && \
 
 # copy only the artifacts we need from the first stage and discard the rest
 COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
-ARG MAIL=metersapp@mail.ru
-ARG MAIL_PASSWORD=R5ZubqkRHyfLDLYGDEbn
-ARG DATABASE_URL=mysql://maria_db:3306/meters
-ARG DATABASE_USER=root
-ARG DATABASE_PASSWORD=test123
+ARG MAIL
+ARG MAIL_PASSWORD
+ARG DATABASE_URL
+ARG DATABASE_USER
+ARG DATABASE_PASSWORD
 ENV MAIL=${MAIL}
 ENV MAIL_PASSWORD=${MAIL_PASSWORD}
 ENV DATABASE_URL=${DATABASE_URL}
