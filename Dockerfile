@@ -16,10 +16,14 @@ RUN apt-get update -y && apt-get install -y libfontconfig1 && \
 
 # copy only the artifacts we need from the first stage and discard the rest
 COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
+
+ARG ARG_MAIL=metersapp@mail.ru
+ARG ARG_MAIL_PASSWORD=R5ZubqkRHyfLDLYGDEbn
+ARG ARG_DATABASE_URL=mysql://bdce88d7f43907:3898ed38@us-cdbr-east-06.cleardb.net/heroku_d1e38e1f06f2064?reconnect=true
+ENV MAIL=${ARG_MAIL}
+ENV MAIL_PASSWORD=${ARG_MAIL_PASSWORD}
+ENV DATABASE_URL=${ARG_DATABASE_URL}
 # instruction for open port
-ENV MAIL=metersapp@mail.ru
-ENV MAIL_PASSWORD=R5ZubqkRHyfLDLYGDEbn
-ENV CLEARDB_DATABASE_URL=mysql://bdce88d7f43907:3898ed38@us-cdbr-east-06.cleardb.net/heroku_d1e38e1f06f2064?reconnect=true
 EXPOSE 8080
 # set the startup command to execute the jar
 CMD ["java","-jar", "/pmbakanov-1.0.jar"]
