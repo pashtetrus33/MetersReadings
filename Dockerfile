@@ -18,7 +18,7 @@ RUN apt-get update -y && apt-get install -y libfontconfig1 && \
 COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
 ARG MAIL=metersapp@mail.ru
 ARG MAIL_PASSWORD=R5ZubqkRHyfLDLYGDEbn
-ARG DATABASE_URL=jdbc:mysql://maria_db:3306/meters
+ARG DATABASE_URL=mysql://maria_db:3306/meters
 ARG DATABASE_USER=metersuser
 ARG DATABASE_PASSWORD=test123
 ENV MAIL=${MAIL}
