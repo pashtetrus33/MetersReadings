@@ -54,7 +54,7 @@ public class RecordService {
             if (record.getKitchenHot() == null && lastRecord.getKitchenHot() != null) {
                 record.setKitchenCold(lastRecord.getKitchenCold());
                 record.setKitchenHot(lastRecord.getKitchenHot());
-            } else if (record.getKitchenHot() == null) {
+            } else if ((record.getKitchenHot() == null) || (record.getKitchenCold() == null)) {
                 lastRecord.setKitchenCold(0f);
                 lastRecord.setKitchenHot(0f);
                 record.setKitchenCold(0f);
@@ -116,6 +116,12 @@ public class RecordService {
                         "Ванная (гор.): " + record.getToiletHot() + "\n" +
                         "Сосед (кухня хол.): " + record.getNeighborCold() + "\n" +
                         "Сосед (кухня гор.): " + record.getNeighborHot());
+        }
+        if (record.getKitchenCold() == null){
+            record.setKitchenCold(0f);
+        }
+        if (record.getKitchenHot() == null){
+            record.setKitchenHot(0f);
         }
         recordRepository.save(record);
         return true;
