@@ -29,14 +29,7 @@ public class RecordController {
     private final ElectricityRecordService electricityRecordService;
     private final UserService userService;
 
-    @GetMapping("/record/{id}")
-    public String recordInfo(@PathVariable Long id, Model model, Principal principal) {
-        Record record = recordService.getRecordById(id);
-        model.addAttribute("user", recordService.getUserByPrincipal(principal));
-        model.addAttribute("record", record);
-        model.addAttribute("authorRecord", record.getUser());
-        return "record-info";
-    }
+
 
     @PostMapping("/record/create")
     public String createRecord(Model model, Record record, Principal principal) {

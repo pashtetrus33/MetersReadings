@@ -1,5 +1,6 @@
 package com.example.pmbakanov.services;
 
+import com.example.pmbakanov.models.Image;
 import com.example.pmbakanov.models.Request;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.ExecutorName;
@@ -8,13 +9,13 @@ import com.example.pmbakanov.repositories.RequestRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -29,32 +30,18 @@ public class RequestService {
         return requestRepository.findAll();
     }
 
-    // С фотографиями
-//    public void saveRequest(Principal principal, Request request, MultipartFile file1, MultipartFile file2) throws IOException {
-//        request.setUser(getUserByPrincipal(principal));
-//        Image image1;
-//        Image image2;
-//        if(file1.getSize() !=0) {
-//            image1 = toImageEntity(file1);
-//            request.addImageToRequest(image1);
-//        }
-//        if(file2.getSize() !=0){
-//            image2 = toImageEntity(file2);
-//            request.addImageToRequest(image2);
-//        }
-
-    //    private Image toImageEntity(MultipartFile file) throws IOException {
-//        Image image = new Image();
-//        image.setName(file.getName());
-//        image.setOriginalFileName(file.getOriginalFilename());
-//        image.setContentType(file.getContentType());
-//        image.setSize(file.getSize());
-//        image.setBytes(file.getBytes());
-//        return image;
-//    }
-
-    public void saveRequest(Principal principal, Request request) throws IOException {
+    public void saveRequest(Principal principal, Request request, MultipartFile file1, MultipartFile file2) throws IOException {
         request.setUser(getUserByPrincipal(principal));
+        Image image1;
+        Image image2;
+        if (file1.getSize() != 0) {
+            image1 = toImageEntity(file1);
+            request.addImageToRequest(image1);
+        }
+        if (file2.getSize() != 0) {
+            image2 = toImageEntity(file2);
+            request.addImageToRequest(image2);
+        }
         request.setExecutor(ExecutorName.NEW);
         log.info("Saving new Request. Description: {}", request.getDescription());
         requestRepository.save(request);
@@ -63,6 +50,17 @@ public class RequestService {
                 mailSender.sendMail(user.getEmail(), "Новая заявка" + ": " + request.getUser().getName(), request.getUser().getAddress() + "\n" +
                         request.getDescription());
         }
+
+    }
+
+    private Image toImageEntity(MultipartFile file) throws IOException {
+        Image image = new Image();
+        image.setName(file.getName());
+        image.setOriginalFileName(file.getOriginalFilename());
+        image.setContentType(file.getContentType());
+        image.setSize(file.getSize());
+        image.setBytes(file.getBytes());
+        return image;
     }
 
     public User getUserByPrincipal(Principal principal) {

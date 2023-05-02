@@ -16,6 +16,8 @@
                     <div class="card-body">
                         <p class="card-text"> Адрес: ${user.address}</p>
                         <p class="card-text"> Описание: ${request.description}</p>
+                        <p class="card-text">Фото: <br><#list request.getImages() as image><a href="/images/${image.id}">
+                                Ссылка</a></#list></p>
                         <p class="card-text"> Статус: ${request.status}</p>
                         <p class="card-text"> Исполнитель: ${request.executor}</p>
                     </div>

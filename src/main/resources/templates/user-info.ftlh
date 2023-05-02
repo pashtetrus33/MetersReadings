@@ -25,7 +25,6 @@
     <br>
     <div class="card-columns">
         <#list records as record>
-            <a href="/record/${record.id?c}">
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
@@ -49,9 +48,7 @@
                             </form>
                         </#if>
                     </div>
-
                 </div>
-            </a>
         <#else>
             <h4 style="text-align: center">Не найдено</h4>
         </#list>
@@ -63,7 +60,6 @@
     <br>
     <div class="card-columns">
         <#list electricityRecords as record>
-            <a href="/record/${record.id?c}">
                 <div class="card text-white bg-dark my-3 record">
 
                     <div class="card-body">
@@ -86,7 +82,6 @@
                         </#if>
                     </div>
                 </div>
-            </a>
         <#else>
             <h4 style="text-align: center">Не найдено</h4>
         </#list>
@@ -95,16 +90,16 @@
     <br>
     <div class="card-columns">
         <#list requests as request>
-            <a href="/request/${request.id?c}" class="request-link">
                 <div class="card text-white bg-dark my-3 request">
 
                     <div class="card-body">
                         <p class="card-title">Дата создания: <br>${request.dateOfCreatedString}</p>
                         <p class="card-text"> Адрес: <br>${user.address}</p>
                         <p class="card-text"> Описание: <br>${request.description}</p>
+                        <p class="card-text"> Фото: <br><#list request.getImages() as image>
+                            <a href="/images/${image.id}">Ссылка</a></#list></p>
                         <p class="card-text"> Статус: <br>${request.status}</p>
                         <p class="card-text"> Исполнитель: <br>${request.executor}</p>
-
                     </div>
                     <div class="card-footer">
                         ${request.user.name}
@@ -121,7 +116,6 @@
                         </#if>
                     </div>
                 </div>
-            </a>
         <#else>
             <h4 style="text-align: center">Не найдено</h4>
         </#list>

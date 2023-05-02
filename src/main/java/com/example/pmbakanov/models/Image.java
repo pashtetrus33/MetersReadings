@@ -27,6 +27,6 @@ public class Image {
     private String contentType;
     @Lob
     private byte[] bytes;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Request request;
 }

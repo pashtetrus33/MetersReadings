@@ -124,9 +124,21 @@
         </a>
         <div class="collapse mb-3" id="collapseExample2" style="margin: 0 auto; text-align: center; width: 50%">
             <form action="/request/create" method="post" enctype="multipart/form-data">
-                <div class="form-outline">
+                <div class="form-group">
                     <label for="description" style="margin: auto;">Описание</label>
                     <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="file1" id="file1">
+                        <label class="custom-file-label" for="file1">Фото 1 (необязательно)</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="file2" id="file2">
+                        <label class="custom-file-label" for="file2">Фото 2 (необязательно)</label>
+                    </div>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
