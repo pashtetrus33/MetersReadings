@@ -17,8 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
-    //static final String DEPLOY_WEBSITE = "https://chile.onrender.com";
-    static final String DEPLOY_WEBSITE = "http://185.87.51.45";
+    static final String DEPLOY_WEBSITE = "http://chilemeters.ru";
 
     private final MailSender mailSender;
     private final UserRepository userRepository;
