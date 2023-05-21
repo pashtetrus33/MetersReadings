@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 
 import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE;
+import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE_REDIRECT;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class ScheduleTasksService {
         for (User person : userRepository.findAll()) {
             mailSender.sendMail(person.getEmail(), "Начало периода подачи показаний счетчиков воды",
                     "Добрый день, " + person.getName() + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца."
-                            + ".\n" + DEPLOY_WEBSITE);
+                            + ".\n" + DEPLOY_WEBSITE_REDIRECT);
         }
     }
 
@@ -44,7 +45,7 @@ public class ScheduleTasksService {
             if ((!person.areRecords()) || (person.getLastRecord().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
                 mailSender.sendMail(person.getEmail(), "Окончание периода подачи показаний счетчиков воды",
                         "Добрый день, " + person.getName() + ".\n" +
-                                "Пожалуйста, передайте показания счетчиков воды." + ".\n" + DEPLOY_WEBSITE);
+                                "Пожалуйста, передайте показания счетчиков воды." + ".\n" + DEPLOY_WEBSITE_REDIRECT);
             }
         }
     }
