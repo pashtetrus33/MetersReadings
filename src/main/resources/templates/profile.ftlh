@@ -37,17 +37,6 @@
                 Заявки
             </a>
         </#if>
-        <#if user.isSupervisor()>
-            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
-               href="/allusersrecords">
-                Счетчики
-            </a>
-
-            <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
-               href="/allusersrequests">
-                Заявки
-            </a>
-        </#if>
         <#if user.isTechnician() || user.isSupervisor()|| user.isAdmin()>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
                href="/allelectricity">
