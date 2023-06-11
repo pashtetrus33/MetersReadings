@@ -25,7 +25,8 @@ public class EletricityRecordController {
     public String deleteEletricityRecord(@PathVariable Long user, @PathVariable Long id) {
         Long userId = electricityRecordService.getElectricityRecordById(id).getUser().getId();
         electricityRecordService.deleteElectricityRecord(id);
-        return "redirect:/user/{user}";
+        //return "redirect:/user/{user}";
+        return "redirect:/allusersrecords";
     }
 
 
@@ -37,15 +38,18 @@ public class EletricityRecordController {
     }
 
     @PostMapping("/allelectricity")
-    public String electricityDataCreate(Model model, ElectricityRecord electricityRecord, String building, String flat, Principal principal) {
+    public String electricityDataCreate(Model model, ElectricityRecord electricityRecord, String building1, String building2, String school, Principal principal) {
         electricityRecord.setDataProviderName(userService.getUserByPrincipal(principal).getName());
-        if (electricityRecordService.saveElectricityRecord(building, flat, electricityRecord)) {
+        if (electricityRecordService.saveElectricityRecord(building1, building2, school, electricityRecord)) {
             model.addAttribute("successmessage", "Данные электричества успешно переданы, нажмите кнопку обновить");
         } else {
-            model.addAttribute("successmessage", "Данные электричества не переданы, предыдущие показания больше текущих, нажмите кнопку обновить");
+            model.addAttribute("successmessage", "Данные электричества не переданы, предыдущие показания больше текущих или введен некорректный адрес, нажмите кнопку обновить");
+            model.addAttribute("user", userService.getUserByPrincipal(principal));
+            model.addAttribute("users", userService.list());
+            return "allelectricity";
         }
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("users", userService.list());
-        return "allelectricity";
+        return "redirect:/allelectricity";
     }
 }

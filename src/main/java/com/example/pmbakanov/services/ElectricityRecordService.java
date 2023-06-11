@@ -24,8 +24,24 @@ public class ElectricityRecordService {
         return electricityRecordRepository.findAll();
     }
 
-    public boolean saveElectricityRecord(String building, String flat, ElectricityRecord electricityRecord) {
-        String address = building + " " + flat;
+    public boolean saveElectricityRecord(String building1, String building2, String school, ElectricityRecord electricityRecord) {
+        if (building1.equals("empty") && building2.equals("empty") && school.equals("empty")) {
+            return false;
+        }
+        if ((!building1.equals("empty") && !building2.equals("empty")) || (!building1.equals("empty") && !school.equals("empty"))
+                || (!building2.equals("empty") && !school.equals("empty"))) {
+            return false;
+        }
+        String address = null;
+        if (!building1.equals("empty")) {
+            address = "Жилой дом №1 " + building1;
+        } else if (!building2.equals("empty")) {
+            address = "Жилой дом №2 " + building2;
+        } else {
+            address = "Школьно-жилой дом " + school;
+        }
+
+
         User user = userRepository.findByAddress(address);
         if (user == null) {
             user = new User();
