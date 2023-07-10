@@ -52,6 +52,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/admin/user/rename")
+    public String userRename(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
+        userService.userRename(user, form);
+        return "redirect:/admin";
+    }
+
     @PostMapping("/admin/user/delete")
     public String userDelete(@RequestParam("userId") User user) {
         userService.deleteUser(user);

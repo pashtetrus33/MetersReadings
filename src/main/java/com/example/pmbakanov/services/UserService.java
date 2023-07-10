@@ -154,4 +154,15 @@ public class UserService {
             }
         }
     }
+
+    public void userRename(User user, Map<String, String> form) {
+        user.setName((form.get("name")));
+        userRepository.save(user);
+        for (User item : userRepository.findAll()) {
+            if (item.isAdmin())
+                mailSender.sendMail(item.getEmail(), "Успешная смена имени", user.getName() +
+                        "\n" + user.getAddress() + "\n" + user.getEmail());
+        }
+        log.info("Rename user with email: {}", user.getEmail());
+    }
 }

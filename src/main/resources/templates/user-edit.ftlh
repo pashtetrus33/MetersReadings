@@ -18,6 +18,15 @@
         <button type="submit" class="btn btn-dark" style="margin: 10px;">Сохранить</button>
     </form>
 
+    <form action="/admin/user/rename" method="post" style="text-align: center">
+        <label for="name">Переименовать пользователя</label>
+        <input type="text" class="form-control" id="name" required name="name"
+               style="width: auto; margin: auto">
+        <input type="hidden" value="${user.id?c}" name="userId">
+        <input type="hidden" value="${_csrf.token}" name="_csrf">
+        <button type="submit" class="btn btn-dark" style="margin: 13px;">Сохранить</button>
+    </form>
+
 
     <form action="/admin/user/password_change" method="post" style="text-align: center">
         <label for="password">Изменить пароль</label>
