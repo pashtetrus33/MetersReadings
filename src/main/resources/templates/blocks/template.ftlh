@@ -1,3 +1,4 @@
+
 <#macro template user>
     <!doctype html>
     <html lang="ru">
@@ -20,7 +21,7 @@
             <a href="/">
                 <span class="navbar-brand mb-0 h1">METERS READINGS</span>
             </a>
-            <#if user.login??>
+            <#if user.email??>
                 <div class="dropdown text-end">
                     <a href="/profile">
                         <img src="/static/images/avatar.jpg" alt="mdo"

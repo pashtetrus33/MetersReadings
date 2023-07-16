@@ -58,6 +58,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * Метод для изменения роли пользователя
+     * @param user пользователь из контроллера
+     * @param form форма, в виде мапы из контроллера
+     */
     public void changeUserRoles(User user, Map<String, String> form) {
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
@@ -77,6 +82,11 @@ public class UserService {
         return userRepository.findByEmail(principal.getName());
     }
 
+    /**
+     * Метод для изменения пароля пользователя
+     * @param user пользователь из контроллера
+     * @param form форма, в виде мапы из контроллера
+     */
     public void changeUserPassword(User user, Map<String, String> form) {
         user.setPassword(passwordEncoder.encode(form.get("password")));
         userRepository.save(user);
@@ -115,6 +125,10 @@ public class UserService {
         return true;
     }
 
+    /**
+     * Метод для удаления пользователя
+     * @param user пользователь из контроллера
+     */
     public void deleteUser(User user) {
         log.info("Deleting User with email: {}", user.getEmail());
         userRepository.delete(user);
@@ -142,7 +156,11 @@ public class UserService {
 
         return user;
     }
-
+    /**
+     * Метод отправки электронной почты
+     * @param email адрес эл. почты из формы
+     * @param message сообщение из формы
+     */
     public void sendEmail(String email, String message) {
         if (!email.equals("all@all.ru")) {
             mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
@@ -155,6 +173,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Метод для изменения имени пользователя
+     * @param user пользователь из контроллера
+     * @param form форма, в виде мапы из контроллера
+     */
     public void userRename(User user, Map<String, String> form) {
         user.setName((form.get("name")));
         userRepository.save(user);

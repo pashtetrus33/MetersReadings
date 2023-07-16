@@ -23,6 +23,12 @@ import java.util.Map;
 public class AdminController {
     private final UserService userService;
 
+    /**
+     * Метод возвращает представление страницы администрирования
+     * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @param principal текущий пользователь
+     * @return представелние панели администартора
+     */
     @GetMapping("/admin")
     public String admin(Model model, Principal principal) {
         List<User> userList = userService.list();
@@ -32,7 +38,13 @@ public class AdminController {
         return "admin";
     }
 
-
+    /**
+     * Метод возвращает представление страницы редактирования пользователя
+     * @param user обьект пользователя, приходящий из URL
+     * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @param principal текущий пользователь
+     * @return представелние страницы редактирования пользователя
+     */
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
@@ -40,30 +52,61 @@ public class AdminController {
         return "user-edit";
     }
 
+    /**
+     * Метод изменения роли пользователя
+     * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
+     * @param form форма, приходящая с POST запросом
+     * @return перенаправление на страницу администрирования
+     */
     @PostMapping("/admin/user/edit")
     public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);
         return "redirect:/admin";
     }
 
+    /**
+     * Метод изменения пароля пользователя
+     * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
+     * @param form форма, приходящая с POST запросом
+     * @return перенаправление на страницу администрирования
+     */
     @PostMapping("/admin/user/password_change")
     public String userPasswordChange(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserPassword(user, form);
         return "redirect:/admin";
     }
 
+    /**
+     * Метод изменения имени пользователя
+     * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
+     * @param form форма, приходящая с POST запросом
+     * @return перенаправление на страницу администрирования
+     */
     @PostMapping("/admin/user/rename")
     public String userRename(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.userRename(user, form);
         return "redirect:/admin";
     }
 
+    /**
+     * Метод удаления пользователя
+     * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
+     * @return перенаправление на страницу администрирования
+     */
     @PostMapping("/admin/user/delete")
     public String userDelete(@RequestParam("userId") User user) {
         userService.deleteUser(user);
         return "redirect:/admin";
     }
 
+    /**
+     * Метод отправки электронной почты
+     * @param email адрес эл. почты из формы
+     * @param message сообщение из формы
+     * @param user пользователь, необходим для корректного отображения представления
+     * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @return возвращает страницу администрирования
+     */
     @PostMapping("/admin/sendmail")
     public String sendMail(@RequestParam(value = "email") String email, @RequestParam("message") String message, User user, Model model) {
         userService.sendEmail(email, message);
@@ -74,6 +117,13 @@ public class AdminController {
         return "admin";
     }
 
+    /**
+     * Метод возвращает представление страницы информации о пользователе
+     * @param user обьект пользователя, приходящий из URL
+     * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @param principal текущий пользователь
+     * @return представление с информацией о пользователе
+     */
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
