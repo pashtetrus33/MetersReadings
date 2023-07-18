@@ -29,8 +29,14 @@ public class RecordController {
     private final ElectricityRecordService electricityRecordService;
     private final UserService userService;
 
-
-
+    /**
+     * Метод сохранения записи счетчиков воды
+     *
+     * @param model     интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @param record    сущность запись счетчика воды
+     * @param principal текущий залогинившийся пользователь
+     * @return представление профиля пользователя
+     */
     @PostMapping("/record/create")
     public String createRecord(Model model, Record record, Principal principal) {
         if (recordService.saveRecord(principal, record)) {
@@ -43,6 +49,12 @@ public class RecordController {
         return "profile";
     }
 
+    /**
+     * Метод удаления записи по идентификатору
+     *
+     * @param id идентификатор записи
+     * @return перенаправление на страницу с информацией пользователя
+     */
     @PostMapping("/record/delete/{id}")
     public String deleteRecord(@PathVariable Long id) {
         Long userId = recordService.getRecordById(id).getUser().getId();
@@ -50,6 +62,13 @@ public class RecordController {
         return "redirect:/user/" + userId;
     }
 
+    /**
+     * Метод возвращает представление страницы с информацией о внесенных показаниях
+     *
+     * @param principal текущий залогинившийся пользователь
+     * @param model     интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @return представление страницы с информацей о внесенных показаниях
+     */
     @GetMapping("/my/records")
     public String userRecords(Principal principal, Model model) {
         User user = recordService.getUserByPrincipal(principal);
@@ -59,9 +78,16 @@ public class RecordController {
         return "my-records";
     }
 
+    /**
+     * Метод возвращает представление страницы со всеми внесенными записями (требуется админ права)
+     *
+     * @param model     интерфейс фреймворка для упаковки аттрибутов и передачи в представление
+     * @param principal текущий залогинившийся пользователь
+     * @return представление страницы со всеми внесенными записями
+     */
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_BUH')")
     @GetMapping("/allusersrecords")
-    public String alluserrecords(Model model, Principal principal) {
+    public String allUserRecords(Model model, Principal principal) {
 
         List<User> userList = userService.list();
         Collections.sort(userList);
@@ -77,6 +103,12 @@ public class RecordController {
         return "alluserrecords";
     }
 
+    /**
+     * Метод экспорта данных в формат Excel документа
+     *
+     * @param response интерфейс ответа сервлета
+     * @throws IOException исключение ввода-вывода
+     */
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUH')")
     @GetMapping("/export-to-excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {

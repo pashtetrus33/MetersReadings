@@ -26,8 +26,8 @@ public class AdminController {
     /**
      * Метод возвращает представление страницы администрирования
      * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @param principal текущий пользователь
-     * @return представелние панели администартора
+     * @param principal текущий залогинившийся пользователь
+     * @return представелние страниуы администрирования
      */
     @GetMapping("/admin")
     public String admin(Model model, Principal principal) {
@@ -40,9 +40,9 @@ public class AdminController {
 
     /**
      * Метод возвращает представление страницы редактирования пользователя
-     * @param user обьект пользователя, приходящий из URL
+     * @param user пользователь, получаемый из URL
      * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @param principal текущий пользователь
+     * @param principal текущий залогинившийся пользователь
      * @return представелние страницы редактирования пользователя
      */
     @GetMapping("/admin/user/edit/{user}")
@@ -105,7 +105,7 @@ public class AdminController {
      * @param message сообщение из формы
      * @param user пользователь, необходим для корректного отображения представления
      * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @return возвращает страницу администрирования
+     * @return представление страницы администрирования
      */
     @PostMapping("/admin/sendmail")
     public String sendMail(@RequestParam(value = "email") String email, @RequestParam("message") String message, User user, Model model) {
@@ -121,8 +121,8 @@ public class AdminController {
      * Метод возвращает представление страницы информации о пользователе
      * @param user обьект пользователя, приходящий из URL
      * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @param principal текущий пользователь
-     * @return представление с информацией о пользователе
+     * @param principal текущий залогинившийся пользователь
+     * @return представление страницы с информацией о пользователе
      */
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {

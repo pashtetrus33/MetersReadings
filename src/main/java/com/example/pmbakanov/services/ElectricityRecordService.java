@@ -24,6 +24,14 @@ public class ElectricityRecordService {
         return electricityRecordRepository.findAll();
     }
 
+    /**
+     * Метод сохранения записи счетчика электричества
+     * @param building1 здание 1
+     * @param building2 задние 2
+     * @param school школьно-жилое здание
+     * @param electricityRecord запись счечика электричества
+     * @return булевое значение успеха сохранения записи
+     */
     public boolean saveElectricityRecord(String building1, String building2, String school, ElectricityRecord electricityRecord) {
         if (building1.equals("empty") && building2.equals("empty") && school.equals("empty")) {
             return false;

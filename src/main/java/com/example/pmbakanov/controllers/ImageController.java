@@ -17,6 +17,12 @@ import java.io.ByteArrayInputStream;
 public class ImageController {
     private final ImageRepository imageRepository;
 
+
+    /**
+     * Метод возварщает изображение по запрошенному идентификатору
+     * @param id идентификатор изображения
+     * @return объект представляющий собой оболочку для Java классов, благодаря которой мы в полной мере сможем реализовать RESTfull архитектуру
+     */
     @GetMapping("/images/{id}")
     private ResponseEntity<?> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id).orElse(null);

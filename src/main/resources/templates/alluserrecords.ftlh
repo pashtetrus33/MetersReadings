@@ -67,7 +67,7 @@
                 <th style="vertical-align: middle">${record.electricity}</th>
                 <th style="vertical-align: middle">${record.dataProviderName}</th>
                 <th>
-                    <form action="/eletricityrecord/delete/${record.user.id?c}/${record.id?c}" method="post"
+                    <form action="/electricityrecord/delete/${record.id?c}" method="post"
                           style="margin: 0 auto; text-align: center">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
