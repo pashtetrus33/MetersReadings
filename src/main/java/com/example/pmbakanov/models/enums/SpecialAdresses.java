@@ -3,7 +3,7 @@ package com.example.pmbakanov.models.enums;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum SpecialAdresses {
-
+    //Адреса, где в квартирах находятся счетчики соседа (холодная и горячая вода на кухне)
     HOUSE_2_10("Жилой дом №2 кв.№10","Жилой дом №2 кв.№11"),
     HOUSE_2_25("Жилой дом №2 кв.№25","Жилой дом №2 кв.№24"),
     HOUSE_2_31("Жилой дом №2 кв.№31","Жилой дом №2 кв.№32"),

@@ -26,9 +26,10 @@ public class ElectricityRecordService {
 
     /**
      * Метод сохранения записи счетчика электричества
-     * @param building1 здание 1
-     * @param building2 задние 2
-     * @param school школьно-жилое здание
+     *
+     * @param building1         здание 1
+     * @param building2         задние 2
+     * @param school            школьно-жилое здание
      * @param electricityRecord запись счечика электричества
      * @return булевое значение успеха сохранения записи
      */
@@ -41,12 +42,16 @@ public class ElectricityRecordService {
             return false;
         }
         String address = null;
+        String flat = null;
         if (!building1.equals("empty")) {
             address = "Жилой дом №1 " + building1;
+            flat = building1;
         } else if (!building2.equals("empty")) {
             address = "Жилой дом №2 " + building2;
+            flat = building2;
         } else {
             address = "Школьно-жилой дом " + school;
+            flat = school;
         }
 
 
@@ -54,6 +59,7 @@ public class ElectricityRecordService {
         if (user == null) {
             user = new User();
             user.setAddress(address);
+            user.setFlat(flat);
             user.setName("Запись без пользователя");
             user.setActive(false);
             Random random = new Random();

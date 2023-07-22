@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE;
 import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE_REDIRECT;
@@ -31,7 +32,8 @@ public class ScheduleTasksService {
 
     @Scheduled(cron = "${interval-in-cron}")
     public void periodStartMailNotification() {
-        for (User person : userRepository.findAll()) {
+        List<User> activeUsersList = userRepository.findAllByActiveIsTrue();
+        for (User person : activeUsersList) {
             mailSender.sendMail(person.getEmail(), "Начало периода подачи показаний счетчиков воды",
                     "Добрый день, " + person.getName() + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца."
                             + ".\n" + DEPLOY_WEBSITE_REDIRECT);
@@ -41,7 +43,8 @@ public class ScheduleTasksService {
     @Scheduled(cron = "${interval-in-cron2}")
     @Transactional
     public void periodAlmostFinishedMailNotification() {
-        for (User person : userRepository.findAll()) {
+        List<User> activeUsersList = userRepository.findAllByActiveIsTrue();
+        for (User person : activeUsersList) {
             if ((!person.areRecords()) || (person.getLastRecord().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
                 mailSender.sendMail(person.getEmail(), "Окончание периода подачи показаний счетчиков воды",
                         "Добрый день, " + person.getName() + ".\n" +
@@ -50,6 +53,7 @@ public class ScheduleTasksService {
         }
     }
 
+    // Метод периодического пинга бывшего распложения системы для корректной работы (ONRENDER.COM)
     @Value("${pingtask.url}")
     private String url;
 

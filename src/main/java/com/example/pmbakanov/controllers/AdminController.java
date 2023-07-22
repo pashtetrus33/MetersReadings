@@ -87,6 +87,29 @@ public class AdminController {
         userService.userRename(user, form);
         return "redirect:/admin";
     }
+    /**
+     * Метод изменения статуса активности пользователя
+     * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
+     * @param form форма, приходящая с POST запросом
+     * @return перенаправление на страницу администрирования
+     */
+    @PostMapping("/admin/user/change-status")
+    public String userChangeStatus(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
+        userService.userChangeStatus(user, form);
+        return "redirect:/admin";
+    }
+
+    /**
+     * Метод изменения ящика эл.почты пользователя
+     * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
+     * @param form форма, приходящая с POST запросом
+     * @return перенаправление на страницу администрирования
+     */
+    @PostMapping("/admin/user/change-email")
+    public String userChangeEmail(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
+        userService.userChangeEmail(user, form);
+        return "redirect:/admin";
+    }
 
     /**
      * Метод удаления пользователя

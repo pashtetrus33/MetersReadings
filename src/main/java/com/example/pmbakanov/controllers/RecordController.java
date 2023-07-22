@@ -30,7 +30,7 @@ public class RecordController {
     private final UserService userService;
 
     /**
-     * Метод сохранения записи счетчиков воды
+     * Метод создания записи счетчиков воды
      *
      * @param model     интерфейс фреймворка для упаковки аттрибутов и передачи в представление
      * @param record    сущность запись счетчика воды

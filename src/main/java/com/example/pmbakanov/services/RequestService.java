@@ -80,10 +80,20 @@ public class RequestService {
         }
     }
 
+    /**
+     * Метод получения заявки на тех. работы по идентификатору
+     * @param id идентификатор заявки на тех. работы
+     * @return cущность заявки на тех. работы или null
+     */
     public Request getRequestById(Long id) {
         return requestRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Метод изменения статуса заявки на тех. работы
+     * @param request сущность заявки на тех. работы
+     * @param form форма из представления
+     */
     public void changeRequestStatus(Request request, Map<String, String> form) {
         String str = form.get("key");
         for (Status item : Status.values()) {
@@ -92,8 +102,14 @@ public class RequestService {
             }
             requestRepository.save(request);
         }
+        changeRequestExecutor(request, form);
     }
 
+    /**
+     * Метод изменения исполнителя заявки на тех. работы
+     * @param request сущность заявки на тех. работы
+     * @param form форма из представления
+     */
     public void changeRequestExecutor(Request request, Map<String, String> form) {
         String str = form.get("executor");
         for (ExecutorName item : ExecutorName.values()) {

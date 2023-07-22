@@ -17,8 +17,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
-    static final String DEPLOY_WEBSITE = "http://185.87.51.45";
-    static final String DEPLOY_WEBSITE_REDIRECT = "http://chilemeters.ru";
+    static final String DEPLOY_WEBSITE = "http://185.87.51.45";  // ip адрес текущего распложения сервиса
+    static final String DEPLOY_WEBSITE_REDIRECT = "http://chilemeters.ru";  // адрес текущего распложения сервиса
+    private static final String ADMIN_EMAIL = "pashtet_rus@mail.ru";
 
     private final MailSender mailSender;
     private final UserRepository userRepository;
@@ -32,7 +33,7 @@ public class UserService {
         user.setActive(false);
         user.setAddress(address + " " + flat);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (email.equals("pashtet_rus@mail.ru")) {
+        if (email.equals(ADMIN_EMAIL)) {
             user.getRoles().add(Role.ROLE_ADMIN);
             log.info("Saving new Admin with email: {}", email);
         } else {
@@ -60,6 +61,7 @@ public class UserService {
 
     /**
      * Метод для изменения роли пользователя
+     *
      * @param user пользователь из контроллера
      * @param form форма, в виде мапы из контроллера
      */
@@ -84,14 +86,14 @@ public class UserService {
 
     /**
      * Метод для изменения пароля пользователя
+     *
      * @param user пользователь из контроллера
      * @param form форма, в виде мапы из контроллера
      */
     public void changeUserPassword(User user, Map<String, String> form) {
         user.setPassword(passwordEncoder.encode(form.get("password")));
         userRepository.save(user);
-        for (User item : userRepository.findAll()) {
-            if (item.isAdmin())
+        for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
                 mailSender.sendMail(item.getEmail(), "Успешная смена пароля", user.getName() +
                         "\n" + user.getAddress() + "\n" + user.getEmail());
         }
@@ -102,14 +104,12 @@ public class UserService {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
         if (userRepository.findByEmail(email) == null) {
-            for (User item : userRepository.findAll()) {
-                if (item.isAdmin())
+            for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
                     mailSender.sendMail(item.getEmail(), "Попытка сброса пароля", "Email не найден: " + "\n" + email);
             }
             return false;
         }
-        for (User item : userRepository.findAll()) {
-            if (item.isAdmin())
+        for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
                 mailSender.sendMail(item.getEmail(), "Попытка сброса пароля", "Email найден: " + "\n" + email);
         }
         log.info("Changing password for User with email: {}", user.getEmail());
@@ -127,6 +127,7 @@ public class UserService {
 
     /**
      * Метод для удаления пользователя
+     *
      * @param user пользователь из контроллера
      */
     public void deleteUser(User user) {
@@ -141,24 +142,25 @@ public class UserService {
             return null;
         }
         user.setActivationCode(null);
-        for (User item : userRepository.findAll()) {
-            if (item.isAdmin() && (!user.isActive()))
+        user.setActive(true);
+        userRepository.save(user);
+        log.info("Creating User with email: {}", user.getEmail());
+        for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
+            if (!user.isActive())
                 mailSender.sendMail(item.getEmail(), "Новая регистрация", user.getName() + "\n" +
                         user.getAddress() + "\n" + user.getEmail());
-            else if (item.isAdmin() && (user.isActive())) {
+            else {
                 mailSender.sendMail(item.getEmail(), "Успешная проверка кода для сброса пароля", user.getName() + "\n" +
                         user.getAddress() + "\n" + user.getEmail());
             }
         }
-        user.setActive(true);
-        userRepository.save(user);
-        log.info("Creating User with email: {}", user.getEmail());
-
         return user;
     }
+
     /**
      * Метод отправки электронной почты
-     * @param email адрес эл. почты из формы
+     *
+     * @param email   адрес эл. почты из формы
      * @param message сообщение из формы
      */
     public void sendEmail(String email, String message) {
@@ -166,7 +168,7 @@ public class UserService {
             mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
                     "Уважаемый(ая) " + userRepository.findByEmail(email).getName() + ".\n" + message);
         } else {
-            for (User person : userRepository.findAll()) {
+            for (User person : userRepository.findAllByActiveIsTrue()) {
                 mailSender.sendMail(person.getEmail(), "Информация от системы передачи показаний счетчиков",
                         "Уважаемый(ая) " + person.getName() + ".\n" + message);
             }
@@ -175,17 +177,58 @@ public class UserService {
 
     /**
      * Метод для изменения имени пользователя
+     *
      * @param user пользователь из контроллера
      * @param form форма, в виде мапы из контроллера
      */
     public void userRename(User user, Map<String, String> form) {
         user.setName((form.get("name")));
         userRepository.save(user);
-        for (User item : userRepository.findAll()) {
-            if (item.isAdmin())
-                mailSender.sendMail(item.getEmail(), "Успешная смена имени", user.getName() +
-                        "\n" + user.getAddress() + "\n" + user.getEmail());
+        for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
+            mailSender.sendMail(item.getEmail(), "Успешная смена имени", user.getName() +
+                    "\n" + user.getAddress() + "\n" + user.getEmail());
         }
         log.info("Rename user with email: {}", user.getEmail());
+    }
+
+
+    /**
+     * Метод для изменения статуса активности пользователя
+     *
+     * @param user пользователь из контроллера
+     * @param form форма, в виде мапы из контроллера
+     */
+    public void userChangeStatus(User user, Map<String, String> form) {
+        if (form.get("status").equals("true")) {
+            user.setActive(true);
+        } else {
+            user.setActive(false);
+        }
+
+        userRepository.save(user);
+        for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
+
+            mailSender.sendMail(item.getEmail(), "Успешная смена статуса активности пользователя ", user.getName() +
+                    "\n" + user.getAddress() + "\n" + user.getEmail() + "\n" + user.isActive());
+        }
+        log.info("User activity status changed with email: {}", user.getEmail());
+    }
+
+    /**
+     * Метод для изменения ящика эл. почты пользователя
+     *
+     * @param user пользователь из контроллера
+     * @param form форма, в виде мапы из контроллера
+     */
+    public void userChangeEmail(User user, Map<String, String> form) {
+
+        user.setEmail(form.get("email"));
+        userRepository.save(user);
+        for (User item : userRepository.findAllByRoles(Role.ROLE_ADMIN)) {
+
+            mailSender.sendMail(item.getEmail(), "Успешная смена ящика эл. почты пользователя ", user.getName() +
+                    "\n" + user.getAddress() + "\n" + user.getEmail() + "\n" + user.isActive());
+        }
+        log.info("Email changed to: {}", user.getEmail());
     }
 }
