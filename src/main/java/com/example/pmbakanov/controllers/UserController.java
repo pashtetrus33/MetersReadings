@@ -18,7 +18,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
-    public static final int TIME_SHIFT = 4; // смещение в часах для корректного отображения локального времени
+    public static int TIME_SHIFT = 4; // смещение в часах для корректного отображения локального времени
     private final UserService userService;
 
     /**

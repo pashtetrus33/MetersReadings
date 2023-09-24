@@ -30,6 +30,16 @@
         <button type="submit" class="btn btn-dark" style="margin: 5px">Отправить письмо</button>
     </form>
     <hr>
+
+    <form action="/admin/settimeshift" method="post" style="margin: 0 auto; width: 14%">
+        <div class="form-group">
+            <label for="timeshift" style="margin: auto;">Смещение в часах</label>
+            <input type="number" class="form-control" id="timeshift" required name="timeshift" >
+        </div>
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-dark" style="margin: 5px">Сохранить</button>
+    </form>
+    <hr>
     <#if loginalert??>
         <h6 style="color: red">${loginalert}</h6>
     </#if>
