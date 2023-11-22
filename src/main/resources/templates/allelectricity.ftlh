@@ -20,6 +20,7 @@
         <label for="school">Школьно-жилой дом</label>
         <select id="school" required name="school" class="form-control">
             <option value="empty" selected>Квартира не выбрана</option>
+            <option value="кв.№30">кв.№29</option>
             <option value="кв.№30">кв.№30</option>
             <option value="кв.№31">кв.№31</option>
             <option value="кв.№32">кв.№32</option>
