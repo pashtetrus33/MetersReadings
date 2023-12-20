@@ -27,6 +27,6 @@ ENV DATABASE_URL=${DATABASE_URL}
 ENV DATABASE_USER=${DATABASE_USER}
 ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
 # instruction for open port
-EXPOSE 8080
+EXPOSE 443
 # set the startup command to execute the jar
 CMD ["java","-jar", "/pmbakanov-1.0.jar"]
