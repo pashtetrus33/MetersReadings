@@ -120,24 +120,24 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, record.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, record.getUser().getName(), style);
                 createCell(row, columnCount++, record.getUser().getAddress(), style);
-                createCell(row, columnCount++, Math.floor(record.getKitchenCold() * 100) / 100, style);
-                createCell(row, columnCount++, Math.floor(record.getKitchenHot() * 100) / 100, style);
-                createCell(row, columnCount++, Math.floor(record.getToiletCold() * 100) / 100, style);
-                createCell(row, columnCount++, Math.floor(record.getToiletHot() * 100) / 100, style);
-                createCell(row, columnCount++, Math.floor(record.getNeighborCold() * 100) / 100, style);
-                createCell(row, columnCount, Math.floor(record.getNeighborHot() * 100) / 100, style);
+                createCell(row, columnCount++, record.getKitchenCold(), style);
+                createCell(row, columnCount++, record.getKitchenHot(), style);
+                createCell(row, columnCount++, record.getToiletCold(), style);
+                createCell(row, columnCount++, record.getToiletHot(), style);
+                createCell(row, columnCount++, record.getNeighborCold(), style);
+                createCell(row, columnCount, record.getNeighborHot(), style);
             }
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, record.getDateOfCreatedString(), style);
             createCell(row, columnCount++, record.getUser().getName(), style);
             createCell(row, columnCount++, record.getUser().getAddress(), style);
-            createCell(row, columnCount++, Math.floor(record.getKitchenCold() * 100) / 100, style);
-            createCell(row, columnCount++, Math.floor(record.getKitchenHot() * 100) / 100, style);
-            createCell(row, columnCount++, Math.floor(record.getToiletCold() * 100) / 100, style);
-            createCell(row, columnCount++, Math.floor(record.getToiletHot() * 100) / 100, style);
-            createCell(row, columnCount++, Math.floor(record.getNeighborCold() * 100) / 100, style);
-            createCell(row, columnCount, Math.floor(record.getNeighborHot() * 100) / 100, style);
+            createCell(row, columnCount++, record.getKitchenCold(), style);
+            createCell(row, columnCount++, record.getKitchenHot(), style);
+            createCell(row, columnCount++, record.getToiletCold(), style);
+            createCell(row, columnCount++, record.getToiletHot(), style);
+            createCell(row, columnCount++, record.getNeighborCold(), style);
+            createCell(row, columnCount, record.getNeighborHot(), style);
         }
 
         for (ElectricityRecord electricityRecord : electricityRecordList) {
@@ -147,10 +147,11 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, electricityRecord.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getName(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getAddress(), style);
-                createCell(row, columnCount++, Math.floor(electricityRecord.getElectricity() * 100) / 100, style);
+                createCell(row, columnCount++, electricityRecord.getElectricity(), style);
                 createCell(row, columnCount, electricityRecord.getDataProviderName(), style);
             }
         }
+
     }
 
     public void exportDataToExcel(HttpServletResponse response) throws IOException {
