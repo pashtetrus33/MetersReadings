@@ -3,10 +3,7 @@ package com.example.pmbakanov.configurations;
 
 import com.example.pmbakanov.models.ElectricityRecord;
 import com.example.pmbakanov.models.Record;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -68,6 +65,7 @@ public class ExcelExportUtils {
         font.setFontHeight(20);
         style.setFont(font);
         style.setAlignment(HorizontalAlignment.CENTER);
+        style.setDataFormat((short) BuiltinFormats.getBuiltinFormat("#,##0"));
         createCell(row, 0, "Показания индвидуальных приборов учета", style);
         createCell(rowCurrentMonth, 0, "Показания индвидуальных приборов учета", style);
         createCell(rowElectricity, 0, "Показания индвидуальных приборов учета", style);
