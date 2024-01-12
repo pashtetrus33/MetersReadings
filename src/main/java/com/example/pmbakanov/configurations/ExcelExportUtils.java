@@ -22,7 +22,6 @@ public class ExcelExportUtils {
     private XSSFSheet sheet;
     private XSSFSheet sheetElectricity;
     private final List<Record> recordList;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
     private final List<ElectricityRecord> electricityRecordList;
 
     public ExcelExportUtils(List<Record> recordList, List<ElectricityRecord> electricityRecordList) {
@@ -123,24 +122,24 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, record.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, record.getUser().getName(), style);
                 createCell(row, columnCount++, record.getUser().getAddress(), style);
-                createCell(row, columnCount++, df.format(record.getKitchenCold()), style);
-                createCell(row, columnCount++, df.format(record.getKitchenHot()), style);
-                createCell(row, columnCount++, df.format(record.getToiletCold()), style);
-                createCell(row, columnCount++, df.format(record.getToiletHot()), style);
-                createCell(row, columnCount++, df.format(record.getNeighborCold()), style);
-                createCell(row, columnCount, df.format(record.getNeighborHot()), style);
+                createCell(row, columnCount++, record.getKitchenCold(), style);
+                createCell(row, columnCount++, record.getKitchenHot(), style);
+                createCell(row, columnCount++, record.getToiletCold(), style);
+                createCell(row, columnCount++, record.getToiletHot(), style);
+                createCell(row, columnCount++, record.getNeighborCold(), style);
+                createCell(row, columnCount, record.getNeighborHot(), style);
             }
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, record.getDateOfCreatedString(), style);
             createCell(row, columnCount++, record.getUser().getName(), style);
             createCell(row, columnCount++, record.getUser().getAddress(), style);
-            createCell(row, columnCount++, df.format(record.getKitchenCold()), style);
-            createCell(row, columnCount++, df.format(record.getKitchenHot()), style);
-            createCell(row, columnCount++, df.format(record.getToiletCold()), style);
-            createCell(row, columnCount++, df.format(record.getToiletHot()), style);
-            createCell(row, columnCount++, df.format(record.getNeighborCold()), style);
-            createCell(row, columnCount, df.format(record.getNeighborHot()), style);
+            createCell(row, columnCount++, record.getKitchenCold(), style);
+            createCell(row, columnCount++, record.getKitchenHot(), style);
+            createCell(row, columnCount++, record.getToiletCold(), style);
+            createCell(row, columnCount++, record.getToiletHot(), style);
+            createCell(row, columnCount++, record.getNeighborCold(), style);
+            createCell(row, columnCount, record.getNeighborHot(), style);
         }
 
         for (ElectricityRecord electricityRecord : electricityRecordList) {
@@ -150,7 +149,7 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, electricityRecord.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getName(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getAddress(), style);
-                createCell(row, columnCount++, df.format(electricityRecord.getElectricity()), style);
+                createCell(row, columnCount++, electricityRecord.getElectricity(), style);
                 createCell(row, columnCount, electricityRecord.getDataProviderName(), style);
             }
         }
