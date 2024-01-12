@@ -37,13 +37,13 @@ public class ExcelExportUtils {
         if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
         } else if (value instanceof Double) {
-            cell.setCellValue((Double) value);
+            cell.setCellValue(Math.round((Double) value * 100.0) / 100.0);
         } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
         } else if (value instanceof Long) {
             cell.setCellValue((Long) value);
         } else if (value instanceof Float) {
-            cell.setCellValue((Float) value);
+            cell.setCellValue(Math.round((Float) value * 100.0) / 100.0);
         } else {
             cell.setCellValue((String) value);
         }
