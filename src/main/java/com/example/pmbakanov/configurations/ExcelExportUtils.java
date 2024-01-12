@@ -1,6 +1,5 @@
 package com.example.pmbakanov.configurations;
 
-
 import com.example.pmbakanov.models.ElectricityRecord;
 import com.example.pmbakanov.models.Record;
 import org.apache.poi.ss.usermodel.*;
@@ -12,7 +11,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +21,6 @@ public class ExcelExportUtils {
     private XSSFSheet sheetElectricity;
     private final List<Record> recordList;
     private final List<ElectricityRecord> electricityRecordList;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public ExcelExportUtils(List<Record> recordList, List<ElectricityRecord> electricityRecordList) {
         this.recordList = recordList;
@@ -123,24 +120,24 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, record.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, record.getUser().getName(), style);
                 createCell(row, columnCount++, record.getUser().getAddress(), style);
-                createCell(row, columnCount++, df.format(record.getKitchenCold()), style);
-                createCell(row, columnCount++, df.format(record.getKitchenHot()), style);
-                createCell(row, columnCount++, df.format(record.getToiletCold()), style);
-                createCell(row, columnCount++, df.format(record.getToiletHot()), style);
-                createCell(row, columnCount++, df.format(record.getNeighborCold()), style);
-                createCell(row, columnCount, df.format(record.getNeighborHot()), style);
+                createCell(row, columnCount++, Math.floor(record.getKitchenCold() * 100) / 100, style);
+                createCell(row, columnCount++, Math.floor(record.getKitchenHot() * 100) / 100, style);
+                createCell(row, columnCount++, Math.floor(record.getToiletCold() * 100) / 100, style);
+                createCell(row, columnCount++, Math.floor(record.getToiletHot() * 100) / 100, style);
+                createCell(row, columnCount++, Math.floor(record.getNeighborCold() * 100) / 100, style);
+                createCell(row, columnCount, Math.floor(record.getNeighborHot() * 100) / 100, style);
             }
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, record.getDateOfCreatedString(), style);
             createCell(row, columnCount++, record.getUser().getName(), style);
             createCell(row, columnCount++, record.getUser().getAddress(), style);
-            createCell(row, columnCount++, df.format(record.getKitchenCold()), style);
-            createCell(row, columnCount++, df.format(record.getKitchenHot()), style);
-            createCell(row, columnCount++, df.format(record.getToiletCold()), style);
-            createCell(row, columnCount++, df.format(record.getToiletHot()), style);
-            createCell(row, columnCount++, df.format(record.getNeighborCold()), style);
-            createCell(row, columnCount, df.format(record.getNeighborHot()), style);
+            createCell(row, columnCount++, Math.floor(record.getKitchenCold() * 100) / 100, style);
+            createCell(row, columnCount++, Math.floor(record.getKitchenHot() * 100) / 100, style);
+            createCell(row, columnCount++, Math.floor(record.getToiletCold() * 100) / 100, style);
+            createCell(row, columnCount++, Math.floor(record.getToiletHot() * 100) / 100, style);
+            createCell(row, columnCount++, Math.floor(record.getNeighborCold() * 100) / 100, style);
+            createCell(row, columnCount, Math.floor(record.getNeighborHot() * 100) / 100, style);
         }
 
         for (ElectricityRecord electricityRecord : electricityRecordList) {
@@ -150,11 +147,10 @@ public class ExcelExportUtils {
                 createCell(row, columnCount++, electricityRecord.getDateOfCreatedString(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getName(), style);
                 createCell(row, columnCount++, electricityRecord.getUser().getAddress(), style);
-                createCell(row, columnCount++, df.format(electricityRecord.getElectricity()), style);
+                createCell(row, columnCount++, Math.floor(electricityRecord.getElectricity() * 100) / 100, style);
                 createCell(row, columnCount, electricityRecord.getDataProviderName(), style);
             }
         }
-
     }
 
     public void exportDataToExcel(HttpServletResponse response) throws IOException {
@@ -165,5 +161,4 @@ public class ExcelExportUtils {
         workbook.close();
         outputStream.close();
     }
-
 }
