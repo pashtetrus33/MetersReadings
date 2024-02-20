@@ -24,7 +24,7 @@
     <h4 style="text-align: center">История показаний счетчиков </h4>
     <br>
     <div class="card-columns">
-        <#list records as meterReading>
+        <#list meterReadings as meterReading>
                 <div class="card text-white bg-dark my-3 meterReading">
 
                     <div class="card-body">
@@ -59,7 +59,7 @@
     <h4 style="text-align: center">История показаний счетчиков электричества </h4>
     <br>
     <div class="card-columns">
-        <#list electricityRecords as meterReading>
+        <#list electricityMeterReadings as meterReading>
                 <div class="card text-white bg-dark my-3 meterReading">
 
                     <div class="card-body">
@@ -72,7 +72,7 @@
                     </div>
                     <div>
                         <#if userByPrincipal.isAdmin()>
-                            <form action="/electricityrecord/delete/${meterReading.id?c}" method="post"
+                            <form action="/electricitymeterreading/delete/${meterReading.id?c}" method="post"
                                   style="margin: 0 auto; text-align: center">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button type="submit" style="text-align: center" class="btn btn-danger mb-2">

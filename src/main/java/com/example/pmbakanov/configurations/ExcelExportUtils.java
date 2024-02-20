@@ -1,6 +1,6 @@
 package com.example.pmbakanov.configurations;
 
-import com.example.pmbakanov.models.ElectricityRecord;
+import com.example.pmbakanov.models.ElectricityMeterReading;
 import com.example.pmbakanov.models.MeterReading;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -20,11 +20,11 @@ public class ExcelExportUtils {
     private XSSFSheet sheet;
     private XSSFSheet sheetElectricity;
     private final List<MeterReading> meterReadingList;
-    private final List<ElectricityRecord> electricityRecordList;
+    private final List<ElectricityMeterReading> electricityMeterReadingList;
 
-    public ExcelExportUtils(List<MeterReading> meterReadingList, List<ElectricityRecord> electricityRecordList) {
+    public ExcelExportUtils(List<MeterReading> meterReadingList, List<ElectricityMeterReading> electricityMeterReadingList) {
         this.meterReadingList = meterReadingList;
-        this.electricityRecordList = electricityRecordList;
+        this.electricityMeterReadingList = electricityMeterReadingList;
         workbook = new XSSFWorkbook();
     }
 
@@ -140,15 +140,15 @@ public class ExcelExportUtils {
             createCell(row, columnCount, meterReading.getNeighborHot(), style);
         }
 
-        for (ElectricityRecord electricityRecord : electricityRecordList) {
-            if (electricityRecord.getElectricity() != null) {
+        for (ElectricityMeterReading electricityMeterReading : electricityMeterReadingList) {
+            if (electricityMeterReading.getElectricity() != null) {
                 Row row = sheetElectricity.createRow(rowCountElectricity++);
                 int columnCount = 0;
-                createCell(row, columnCount++, electricityRecord.getDateOfCreatedString(), style);
-                createCell(row, columnCount++, electricityRecord.getUser().getName(), style);
-                createCell(row, columnCount++, electricityRecord.getUser().getAddress(), style);
-                createCell(row, columnCount++, electricityRecord.getElectricity(), style);
-                createCell(row, columnCount, electricityRecord.getDataProviderName(), style);
+                createCell(row, columnCount++, electricityMeterReading.getDateOfCreatedString(), style);
+                createCell(row, columnCount++, electricityMeterReading.getUser().getName(), style);
+                createCell(row, columnCount++, electricityMeterReading.getUser().getAddress(), style);
+                createCell(row, columnCount++, electricityMeterReading.getElectricity(), style);
+                createCell(row, columnCount, electricityMeterReading.getDataProviderName(), style);
             }
         }
 

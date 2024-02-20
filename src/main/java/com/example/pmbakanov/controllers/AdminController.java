@@ -107,7 +107,7 @@ public class AdminController {
     }
 
     /**
-     * Метод изменения ящика эл.почты пользователя
+     * Метод изменения ящика эл. Почты пользователя
      *
      * @param user пользователь, получаемый фреймвороком с помощью идентификатора пользователя
      * @param form форма, приходящая с POST запросом
@@ -181,9 +181,9 @@ public class AdminController {
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
-        model.addAttribute("records", user.getMeterReadings());
+        model.addAttribute("meterReadings", user.getMeterReadings());
         model.addAttribute("requests", user.getRequests());
-        model.addAttribute("electricityRecords", user.getElectricityRecords());
+        model.addAttribute("electricityMeterReadings", user.getElectricityMeterReadings());
         return "user-info";
     }
 }

@@ -33,13 +33,13 @@
         </tr>
         <#list users as user >
             <tr>
-                <th><#if (user.areRecords()) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().dateOfCreatedString}<#else>--</#if></th>
+                <th><#if (user.areMeterReadings()) && (user.getLastMeterReading().dateOfCreated.month.equals(currentMonth))>${user.getLastMeterReading().dateOfCreatedString}<#else>--</#if></th>
                 <th>${user.name}</th>
                 <th>${user.address}</th>
-                <th><#if (user.areRecords()) && (user.getLastRecord().kitchenCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenCold}<#else>--</#if></th>
-                <th><#if (user.areRecords()) && (user.getLastRecord().kitchenHot != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().kitchenHot}<#else>--</#if></th>
-                <th><#if (user.areRecords()) && (user.getLastRecord().toiletCold != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletCold}<#else>--</#if></th>
-                <th><#if (user.areRecords()) && (user.getLastRecord().toiletHot != 0) && (user.getLastRecord().dateOfCreated.month.equals(currentMonth))>${user.getLastRecord().toiletHot}<#else>--</#if></th>
+                <th><#if (user.areMeterReadings()) && (user.getLastMeterReading().kitchenCold != 0) && (user.getLastMeterReading().dateOfCreated.month.equals(currentMonth))>${user.getLastMeterReading().kitchenCold}<#else>--</#if></th>
+                <th><#if (user.areMeterReadings()) && (user.getLastMeterReading().kitchenHot != 0) && (user.getLastMeterReading().dateOfCreated.month.equals(currentMonth))>${user.getLastMeterReading().kitchenHot}<#else>--</#if></th>
+                <th><#if (user.areMeterReadings()) && (user.getLastMeterReading().toiletCold != 0) && (user.getLastMeterReading().dateOfCreated.month.equals(currentMonth))>${user.getLastMeterReading().toiletCold}<#else>--</#if></th>
+                <th><#if (user.areMeterReadings()) && (user.getLastMeterReading().toiletHot != 0) && (user.getLastMeterReading().dateOfCreated.month.equals(currentMonth))>${user.getLastMeterReading().toiletHot}<#else>--</#if></th>
             </tr>
         <#else>
             <h4>Пользователей нет</h4>
@@ -59,7 +59,7 @@
             <th scope="col" style="vertical-align: middle">Данные внес</th>
             <th scope="col" style="vertical-align: middle">Удалить</th>
         </tr>
-        <#list electricityRecords as meterReading >
+        <#list electricityMeterReadings as meterReading >
             <tr>
                 <th style="vertical-align: middle">${meterReading.getDateOfCreatedString()}</th>
                 <th style="vertical-align: middle">${meterReading.getUser().getName()}</th>
@@ -67,7 +67,7 @@
                 <th style="vertical-align: middle">${meterReading.electricity}</th>
                 <th style="vertical-align: middle">${meterReading.dataProviderName}</th>
                 <th>
-                    <form action="/electricityrecord/delete/${meterReading.id?c}" method="post"
+                    <form action="/electricitymeterreading/delete/${meterReading.id?c}" method="post"
                           style="margin: 0 auto; text-align: center">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <button type="submit" style="text-align: center" class="btn btn-danger mb-2">

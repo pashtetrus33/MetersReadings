@@ -33,7 +33,7 @@ public class RequestController {
      * @param request сущность заявки на тех. работы
      * @param principal текущий залогинившийся пользователь
      * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @return редставление профиля пользователя
+     * @return представление профиля пользователя
      * @throws IOException исключение ввода вывода
      */
     @PostMapping("/request/create")

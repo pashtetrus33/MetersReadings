@@ -42,26 +42,26 @@ public class User implements UserDetails, Comparable<User> {
     private List<Request> requests = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<ElectricityRecord> electricityRecords = new ArrayList<>();
+    private List<ElectricityMeterReading> electricityMeterReadings = new ArrayList<>();
 
-    public MeterReading getLastRecord() {
-        return areRecords() ? meterReadings.get(meterReadings.size() - 1) : null;
+    public MeterReading getLastMeterReading() {
+        return areMeterReadings() ? meterReadings.get(meterReadings.size() - 1) : null;
     }
 
-    public ElectricityRecord getLastElectricityRecord() {
-        return areElectricityRecords() ? electricityRecords.get(electricityRecords.size() - 1) : null;
+    public ElectricityMeterReading getLastElectricityMeterReading() {
+        return areElectricityMeterReadings() ? electricityMeterReadings.get(electricityMeterReadings.size() - 1) : null;
     }
 
-    public boolean areRecords() {
+    public boolean areMeterReadings() {
         return meterReadings.size() > 0;
     }
 
-    public boolean areElectricityRecords() {
-        return electricityRecords.size() > 0;
+    public boolean areElectricityMeterReadings() {
+        return electricityMeterReadings.size() > 0;
     }
 
-    public boolean areNeighborRecords() {
-        return getLastRecord().getNeighborHot() != null;
+    public boolean areNeighborMeterReadings() {
+        return getLastMeterReading().getNeighborHot() != null;
     }
 
     public Request getFirstRequest() {

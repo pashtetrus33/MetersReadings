@@ -1,11 +1,11 @@
 package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.configurations.ExcelExportUtils;
-import com.example.pmbakanov.models.ElectricityRecord;
+import com.example.pmbakanov.models.ElectricityMeterReading;
 import com.example.pmbakanov.models.MeterReading;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.SpecialAdresses;
-import com.example.pmbakanov.repositories.ElectricityRecordRepository;
+import com.example.pmbakanov.repositories.ElectricityMeterReadingRepository;
 import com.example.pmbakanov.repositories.MeterReadingRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,31 +25,31 @@ import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class RecordService {
+public class MeterReadingService {
     private final MailSender mailSender;
     private final MeterReadingRepository meterReadingRepository;
-    private final ElectricityRecordRepository electricityRecordRepository;
+    private final ElectricityMeterReadingRepository electricityMeterReadingRepository;
     private final UserRepository userRepository;
 
-    public List<MeterReading> listRecords(String id) {
+    public List<MeterReading> listMeterReadings(String id) {
         if (id != null) return meterReadingRepository.findById(id);
         return meterReadingRepository.findAll();
     }
 
     public void exportCustomerToExcel(HttpServletResponse response) throws IOException {
         List<MeterReading> meterReadingList = meterReadingRepository.findAll();
-        List<ElectricityRecord> electricityRecordList = electricityRecordRepository.findAll();
+        List<ElectricityMeterReading> electricityMeterReadingList = electricityMeterReadingRepository.findAll();
         Collections.sort(meterReadingList);
-        ExcelExportUtils exportUtils = new ExcelExportUtils(meterReadingList, electricityRecordList);
+        ExcelExportUtils exportUtils = new ExcelExportUtils(meterReadingList, electricityMeterReadingList);
         exportUtils.exportDataToExcel(response);
     }
 
-    public boolean saveRecord(Principal principal, MeterReading meterReading) {
+    public boolean saveMeterReading(Principal principal, MeterReading meterReading) {
 
         User currentUser = getUserByPrincipal(principal);
         meterReading.setUser(currentUser);
 
-        MeterReading lastMeterReading = currentUser.getLastRecord();
+        MeterReading lastMeterReading = currentUser.getLastMeterReading();
         if (lastMeterReading != null) {
             if (meterReading.getKitchenHot() == null && lastMeterReading.getKitchenHot() != null) {
                 meterReading.setKitchenCold(lastMeterReading.getKitchenCold());
@@ -78,8 +78,8 @@ public class RecordService {
 
             if (neighborUser != null) {
                 MeterReading lastNeighborMeterReading;
-                if (neighborUser.areRecords()) {
-                    lastNeighborMeterReading = neighborUser.getLastRecord();
+                if (neighborUser.areMeterReadings()) {
+                    lastNeighborMeterReading = neighborUser.getLastMeterReading();
                     if ((lastNeighborMeterReading.getKitchenCold() != null) && (lastNeighborMeterReading.getKitchenCold() > meterReading.getNeighborCold())) {
                         return false;
                     }
@@ -87,8 +87,8 @@ public class RecordService {
                         return false;
                     }
                 }
-                if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
-                    lastNeighborMeterReading = neighborUser.getLastRecord();
+                if (neighborUser.areMeterReadings() && (neighborUser.getLastMeterReading().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
+                    lastNeighborMeterReading = neighborUser.getLastMeterReading();
                     lastNeighborMeterReading.setKitchenCold(meterReading.getNeighborCold());
                     lastNeighborMeterReading.setKitchenHot(meterReading.getNeighborHot());
                     meterReadingRepository.save(lastNeighborMeterReading);
@@ -117,10 +117,10 @@ public class RecordService {
                         "Сосед (кухня хол.): " + meterReading.getNeighborCold() + "\n" +
                         "Сосед (кухня гор.): " + meterReading.getNeighborHot());
         }
-        if (meterReading.getKitchenCold() == null){
+        if (meterReading.getKitchenCold() == null) {
             meterReading.setKitchenCold(0f);
         }
-        if (meterReading.getKitchenHot() == null){
+        if (meterReading.getKitchenHot() == null) {
             meterReading.setKitchenHot(0f);
         }
         meterReadingRepository.save(meterReading);
@@ -133,7 +133,7 @@ public class RecordService {
     }
 
 
-    public void deleteRecord(Long id) {
+    public void deleteMeterReading(Long id) {
         MeterReading meterReading = meterReadingRepository.findById(id)
                 .orElse(null);
         if (meterReading != null) {
@@ -147,9 +147,9 @@ public class RecordService {
                 User currentUser = meterReading.getUser();
                 meterReadingRepository.delete(meterReading);
                 log.info("MeterReading with id = {} was deleted", id);
-                if (neighborUser.getLastRecord() != null && currentUser.getLastRecord() != null) {
-                    neighborUser.getLastRecord().setKitchenCold(currentUser.getLastRecord().getNeighborCold());
-                    neighborUser.getLastRecord().setKitchenHot(currentUser.getLastRecord().getNeighborHot());
+                if (neighborUser.getLastMeterReading() != null && currentUser.getLastMeterReading() != null) {
+                    neighborUser.getLastMeterReading().setKitchenCold(currentUser.getLastMeterReading().getNeighborCold());
+                    neighborUser.getLastMeterReading().setKitchenHot(currentUser.getLastMeterReading().getNeighborHot());
                 }
 
             } else {
@@ -162,9 +162,7 @@ public class RecordService {
         }
     }
 
-    public MeterReading getRecordById(Long id) {
+    public MeterReading getMeterReadingById(Long id) {
         return meterReadingRepository.findById(id).orElse(null);
     }
-
-
 }

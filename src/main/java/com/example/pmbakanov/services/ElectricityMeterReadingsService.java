@@ -1,9 +1,9 @@
 package com.example.pmbakanov.services;
 
-import com.example.pmbakanov.models.ElectricityRecord;
+import com.example.pmbakanov.models.ElectricityMeterReading;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.Role;
-import com.example.pmbakanov.repositories.ElectricityRecordRepository;
+import com.example.pmbakanov.repositories.ElectricityMeterReadingRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,13 +15,13 @@ import java.util.Random;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ElectricityRecordService {
-    private final ElectricityRecordRepository electricityRecordRepository;
+public class ElectricityMeterReadingsService {
+    private final ElectricityMeterReadingRepository electricityMeterReadingRepository;
     private final UserRepository userRepository;
 
-    public List<ElectricityRecord> listElectrcityRecords(String id) {
-        if (id != null) return electricityRecordRepository.findById(id);
-        return electricityRecordRepository.findAll();
+    public List<ElectricityMeterReading> listElectrcityMeterReadings(String id) {
+        if (id != null) return electricityMeterReadingRepository.findById(id);
+        return electricityMeterReadingRepository.findAll();
     }
 
     /**
@@ -30,10 +30,10 @@ public class ElectricityRecordService {
      * @param building1         здание 1
      * @param building2         задние 2
      * @param school            школьно-жилое здание
-     * @param electricityRecord запись счечика электричества
+     * @param electricityMeterReading запись счечика электричества
      * @return булевое значение успеха сохранения записи
      */
-    public boolean saveElectricityRecord(String building1, String building2, String school, ElectricityRecord electricityRecord) {
+    public boolean saveElectricityMeterReading(String building1, String building2, String school, ElectricityMeterReading electricityMeterReading) {
         if (building1.equals("empty") && building2.equals("empty") && school.equals("empty")) {
             return false;
         }
@@ -73,28 +73,28 @@ public class ElectricityRecordService {
             user.getRoles().add(Role.ROLE_USER);
             userRepository.save(user);
         }
-        if (user.areElectricityRecords()) {
-            if (user.getLastElectricityRecord().getElectricity() > electricityRecord.getElectricity()) {
+        if (user.areElectricityMeterReadings()) {
+            if (user.getLastElectricityMeterReading().getElectricity() > electricityMeterReading.getElectricity()) {
                 return false;
             }
         }
-        electricityRecord.setUser(user);
-        electricityRecordRepository.save(electricityRecord);
+        electricityMeterReading.setUser(user);
+        electricityMeterReadingRepository.save(electricityMeterReading);
         return true;
     }
 
-    public void deleteElectricityRecord(Long id) {
-        ElectricityRecord electricityRecord = electricityRecordRepository.findById(id)
+    public void deleteElectricityMeterReading(Long id) {
+        ElectricityMeterReading electricityMeterReading = electricityMeterReadingRepository.findById(id)
                 .orElse(null);
-        if (electricityRecord != null) {
-            electricityRecordRepository.delete(electricityRecord);
+        if (electricityMeterReading != null) {
+            electricityMeterReadingRepository.delete(electricityMeterReading);
         } else {
             log.error("Electricity MeterReading with id = {} is not found", id);
         }
     }
 
-    public ElectricityRecord getElectricityRecordById(Long id) {
-        return electricityRecordRepository.findById(id).orElse(null);
+    public ElectricityMeterReading getElectricityMeterReadingById(Long id) {
+        return electricityMeterReadingRepository.findById(id).orElse(null);
     }
 
 }

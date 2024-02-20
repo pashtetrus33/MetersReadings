@@ -42,7 +42,7 @@ public class ScheduleTasksService {
     public void periodAlmostFinishedMailNotification() {
         List<User> activeUsersList = userRepository.findAllByActiveIsTrue();
         for (User person : activeUsersList) {
-            if ((!person.areRecords()) || (person.getLastRecord().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
+            if ((!person.areMeterReadings()) || (person.getLastMeterReading().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
                 mailSender.sendMail(person.getEmail(), "Окончание периода подачи показаний счетчиков воды",
                         "Добрый день, " + person.getName() + ".\n" +
                                 "Пожалуйста, передайте показания счетчиков воды." + ".\n" + DEPLOY_WEBSITE);

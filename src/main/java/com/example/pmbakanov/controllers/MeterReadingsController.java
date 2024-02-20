@@ -1,10 +1,10 @@
 package com.example.pmbakanov.controllers;
 
-import com.example.pmbakanov.models.ElectricityRecord;
+import com.example.pmbakanov.models.ElectricityMeterReading;
 import com.example.pmbakanov.models.MeterReading;
 import com.example.pmbakanov.models.User;
-import com.example.pmbakanov.services.ElectricityRecordService;
-import com.example.pmbakanov.services.RecordService;
+import com.example.pmbakanov.services.ElectricityMeterReadingsService;
+import com.example.pmbakanov.services.MeterReadingService;
 import com.example.pmbakanov.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,9 +24,9 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-public class RecordController {
-    private final RecordService recordService;
-    private final ElectricityRecordService electricityRecordService;
+public class MeterReadingsController {
+    private final MeterReadingService meterReadingService;
+    private final ElectricityMeterReadingsService electricityMeterReadingsService;
     private final UserService userService;
 
     /**
@@ -37,14 +37,14 @@ public class RecordController {
      * @param principal текущий залогинившийся пользователь
      * @return представление профиля пользователя
      */
-    @PostMapping("/record/create")
-    public String createRecord(Model model, MeterReading meterReading, Principal principal) {
-        if (recordService.saveRecord(principal, meterReading)) {
+    @PostMapping("/meterreading/create")
+    public String createMeterReading(Model model, MeterReading meterReading, Principal principal) {
+        if (meterReadingService.saveMeterReading(principal, meterReading)) {
             model.addAttribute("successmessage", "Данные успешно переданы");
         } else {
             model.addAttribute("successmessage", "Данные не переданы, предыдущие показания больше текущих");
         }
-        model.addAttribute("user", recordService.getUserByPrincipal(principal));
+        model.addAttribute("user", meterReadingService.getUserByPrincipal(principal));
 
         return "profile";
     }
@@ -55,10 +55,10 @@ public class RecordController {
      * @param id идентификатор записи
      * @return перенаправление на страницу с информацией пользователя
      */
-    @PostMapping("/record/delete/{id}")
-    public String deleteRecord(@PathVariable Long id) {
-        Long userId = recordService.getRecordById(id).getUser().getId();
-        recordService.deleteRecord(id);
+    @PostMapping("/meterreading/delete/{id}")
+    public String deleteMeterReading(@PathVariable Long id) {
+        Long userId = meterReadingService.getMeterReadingById(id).getUser().getId();
+        meterReadingService.deleteMeterReading(id);
         return "redirect:/user/" + userId;
     }
 
@@ -69,13 +69,13 @@ public class RecordController {
      * @param model     интерфейс фреймворка для упаковки аттрибутов и передачи в представление
      * @return представление страницы с информацей о внесенных показаниях
      */
-    @GetMapping("/my/records")
-    public String userRecords(Principal principal, Model model) {
-        User user = recordService.getUserByPrincipal(principal);
+    @GetMapping("/my/meterreadings")
+    public String userMeterReadings(Principal principal, Model model) {
+        User user = meterReadingService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        model.addAttribute("records", user.getMeterReadings());
-        model.addAttribute("electricityRecords", user.getElectricityRecords());
-        return "my-records";
+        model.addAttribute("meterReadings", user.getMeterReadings());
+        model.addAttribute("electricityMeterReadings", user.getElectricityMeterReadings());
+        return "my-meterreadings";
     }
 
     /**
@@ -86,21 +86,21 @@ public class RecordController {
      * @return представление страницы со всеми внесенными записями
      */
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_BUH')")
-    @GetMapping("/allusersrecords")
-    public String allUserRecords(Model model, Principal principal) {
+    @GetMapping("/allusersmeterreadings")
+    public String allUserMeterReadings(Model model, Principal principal) {
 
         List<User> userList = userService.list();
         Collections.sort(userList);
-        model.addAttribute("records", recordService.listRecords(null));
-        model.addAttribute("electricityRecords", electricityRecordService.listElectrcityRecords(null)
+        model.addAttribute("meterReadings", meterReadingService.listMeterReadings(null));
+        model.addAttribute("electricityMeterReadings", electricityMeterReadingsService.listElectrcityMeterReadings(null)
                 .stream()
-                .filter(ElectricityRecord::doneInCurrentMonth)
+                .filter(ElectricityMeterReading::doneInCurrentMonth)
                 .collect(Collectors.toList()));
         model.addAttribute("users", userList);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("currentMonth", LocalDateTime.now().getMonth());
         model.addAttribute("currentYear", LocalDateTime.now().getYear());
-        return "alluserrecords";
+        return "allusersmeterreadings";
     }
 
     /**
@@ -116,6 +116,6 @@ public class RecordController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + LocalDateTime.now().getMonth() + " " + LocalDateTime.now().getYear() + ".xlsx";
         response.setHeader(headerKey, headerValue);
-        recordService.exportCustomerToExcel(response);
+        meterReadingService.exportCustomerToExcel(response);
     }
 }

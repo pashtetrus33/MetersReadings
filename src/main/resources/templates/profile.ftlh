@@ -17,7 +17,7 @@
                 Админка
             </a>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
-               href="/allusersrecords">
+               href="/allusersmeterreadings">
                 Счетчики
             </a>
 
@@ -28,7 +28,7 @@
         </#if>
         <#if user.isSupervisor()>
             <a class="btn btn-danger mb-2" style="text-align: center; width: 50%"
-               href="/allusersrecords">
+               href="/allusersmeterreadings">
                 Счетчики
             </a>
 
@@ -56,13 +56,13 @@
                 <#if !user.isUserWithReducedData()>
                     <div class="form-group">
                         <label for="kitchenCold"><b>Холодная вода (кухня)</b></label>
-                        <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().kitchenCold}<#else>--</#if></div>
+                        <div><#if user.areMeterReadings()>${user.getLastMeterReading().getDateOfCreatedString()}: ${user.getLastMeterReading().kitchenCold}<#else>--</#if></div>
                         <input type="number" step="any" required class="form-control"
                                id="kitchenCold" name="kitchenCold">
                     </div>
                     <div class="form-group">
                         <label for="kitchenHot"><b>Горячая вода (кухня)</b></label>
-                        <div><#if user.areRecords()>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().kitchenHot}<#else>--</#if></div>
+                        <div><#if user.areMeterReadings()>${user.getLastMeterReading().getDateOfCreatedString()}: ${user.getLastMeterReading().kitchenHot}<#else>--</#if></div>
                         <div class="input-group mb-3">
                             <input type="number" step="any" required class="form-control" id="kitchenHot" name="kitchenHot">
                         </div>
@@ -70,7 +70,7 @@
                 </#if>
                 <div class="form-group">
                     <label for="toiletCold"><b>Холодная вода (ванная)</b></label>
-                    <div><#if (user.areRecords() && user.getLastRecord().toiletCold != 0)>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletCold}<#else>--</#if></div>
+                    <div><#if (user.areMeterReadings() && user.getLastMeterReading().toiletCold != 0)>${user.getLastMeterReading().getDateOfCreatedString()}: ${user.getLastMeterReading().toiletCold}<#else>--</#if></div>
                     <div class="input-group mb-3">
                         <input type="number" step="any" required class="form-control" id="toiletCold" name="toiletCold">
                     </div>
@@ -78,7 +78,7 @@
 
                 <div class="form-group">
                     <label for="toiletHot"><b>Горячая вода (ванная)</b></label>
-                    <div><#if (user.areRecords() && user.getLastRecord().toiletHot != 0)>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().toiletHot}<#else>--</#if></div>
+                    <div><#if (user.areMeterReadings() && user.getLastMeterReading().toiletHot != 0)>${user.getLastMeterReading().getDateOfCreatedString()}: ${user.getLastMeterReading().toiletHot}<#else>--</#if></div>
                     <div class="input-group mb-3">
                         <input type="number" step="any" required class="form-control" id="toiletHot" name="toiletHot">
                     </div>
@@ -86,13 +86,13 @@
                 <#if user.isUserWithSpecialAddress()>
                     <div class="form-group">
                         <label for="neighborCold"><b>Сосед: холодная вода</b></label>
-                        <div><#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborCold}<#else>--</#if></div>
+                        <div><#if (user.areMeterReadings() && user.areNeighborMeterReadings())>${user.getLastMeterReading().getDateOfCreatedString()}: ${user.getLastMeterReading().neighborCold}<#else>--</#if></div>
                         <input type="number" step="any" required class="form-control"
                                id="neighborCold" name="neighborCold">
                     </div>
                     <div class="form-group">
                         <label for="neighborHot"><b>Сосед: горячая вода</b></label>
-                        <div><#if (user.areRecords() && user.areNeighborRecords())>${user.getLastRecord().getDateOfCreatedString()}: ${user.getLastRecord().neighborHot}<#else>--</#if></div>
+                        <div><#if (user.areMeterReadings() && user.areNeighborMeterReadings())>${user.getLastMeterReading().getDateOfCreatedString()}: ${user.getLastMeterReading().neighborHot}<#else>--</#if></div>
                         <input type="number" step="any" required class="form-control"
                                id="neighborHot" name="neighborHot">
                     </div>
@@ -135,7 +135,7 @@
             </form>
         </div>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
-           href="/my/records">
+           href="/my/meterreadings">
             История показаний
         </a>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"

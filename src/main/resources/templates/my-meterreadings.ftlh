@@ -10,7 +10,8 @@
     </div>
 
 
-    <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
+    <table class="table table-hover table-dark"
+           style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
         <thead>
         <tr>
             <th scope="col" style="vertical-align: middle">Дата</th>
@@ -21,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <#list records as meterReading>
+        <#list meterReadings as meterReading>
             <tr>
                 <th style="vertical-align: middle">${meterReading.dateOfCreatedString}</th>
                 <th style="vertical-align: middle"><#if meterReading.kitchenCold != 0>${meterReading.kitchenCold}<#else>--</#if></th>
@@ -35,7 +36,8 @@
 
     <br>
 
-    <table class="table table-hover table-dark" style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
+    <table class="table table-hover table-dark"
+           style="width:auto;word-break: break-all;table-layout: fixed; margin: auto; background-color: #03305c">
         <thead>
         <tr>
             <th scope="col" style="vertical-align: middle">Дата (электричество)</th>
@@ -44,11 +46,11 @@
         </tr>
         </thead>
         <tbody>
-        <#list electricityRecords as electricityRecord>
+        <#list electricityMeterReadings as electricityMeterReading>
             <tr>
-                <th style="vertical-align: middle">${electricityRecord.getDateOfCreatedString()}</th>
-                <th style="vertical-align: middle"><#if electricityRecord.electricity != 0>${electricityRecord.electricity}<#else>--</#if></th>
-                <th style="vertical-align: middle">${electricityRecord.dataProviderName}</th>
+                <th style="vertical-align: middle">${electricityMeterReading.getDateOfCreatedString()}</th>
+                <th style="vertical-align: middle"><#if electricityMeterReading.electricity != 0>${electricityMeterReading.electricity}<#else>--</#if></th>
+                <th style="vertical-align: middle">${electricityMeterReading.dataProviderName}</th>
             </tr>
         </#list>
         </tbody>

@@ -1,8 +1,7 @@
 package com.example.pmbakanov.controllers;
 
-import com.example.pmbakanov.models.ElectricityRecord;
-import com.example.pmbakanov.models.User;
-import com.example.pmbakanov.services.ElectricityRecordService;
+import com.example.pmbakanov.models.ElectricityMeterReading;
+import com.example.pmbakanov.services.ElectricityMeterReadingsService;
 import com.example.pmbakanov.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,8 +16,8 @@ import java.security.Principal;
 @Controller
 @RequiredArgsConstructor
 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_TECHNICIAN')")
-public class ElectricityRecordController {
-    private final ElectricityRecordService electricityRecordService;
+public class ElectricityMeterReadingController {
+    private final ElectricityMeterReadingsService electricityMeterReadingsService;
     private final UserService userService;
 
     /**
@@ -40,10 +39,10 @@ public class ElectricityRecordController {
      * @param id идентификатор записи
      * @return перенаправление на представелние стариницы с показаниями всех пользователей за месяц
      */
-    @PostMapping("/electricityrecord/delete/{id}")
-    public String deleteElectricityRecord(@PathVariable Long id) {
-        electricityRecordService.deleteElectricityRecord(id);
-        return "redirect:/allusersrecords";
+    @PostMapping("/electricitymeterreading/delete/{id}")
+    public String deleteElectricityMeterReading(@PathVariable Long id) {
+        electricityMeterReadingsService.deleteElectricityMeterReading(id);
+        return "redirect:/allusersmeterreadings";
     }
 
 
@@ -51,7 +50,7 @@ public class ElectricityRecordController {
      * Метод получения переданных счетчиков электричества из формы
      *
      * @param model интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @param electricityRecord запись счетчика электричества
+     * @param electricityMeterReading запись счетчика электричества
      * @param building1 квартира из здания 1
      * @param building2 квартира из здания 2
      * @param school квартира из школьно-жилого здания
@@ -59,9 +58,9 @@ public class ElectricityRecordController {
      * @return представление страницы с формой для ввода счетчиков электричества
      */
     @PostMapping("/allelectricity")
-    public String electricityDataCreate(Model model, ElectricityRecord electricityRecord, String building1, String building2, String school, Principal principal) {
-        electricityRecord.setDataProviderName(userService.getUserByPrincipal(principal).getName());
-        if (electricityRecordService.saveElectricityRecord(building1, building2, school, electricityRecord)) {
+    public String electricityDataCreate(Model model, ElectricityMeterReading electricityMeterReading, String building1, String building2, String school, Principal principal) {
+        electricityMeterReading.setDataProviderName(userService.getUserByPrincipal(principal).getName());
+        if (electricityMeterReadingsService.saveElectricityMeterReading(building1, building2, school, electricityMeterReading)) {
             return "redirect:/allelectricity";
         } else {
             model.addAttribute("successmessage", "Данные электричества не переданы, предыдущие показания больше текущих или введен некорректный адрес, нажмите кнопку обновить");

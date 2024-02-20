@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
 import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 
 @Entity
-@Table(name = "electricity_records")
+@Table(name = "electricity_readings")
 @Data
-public class ElectricityRecord implements Comparable<ElectricityRecord> {
+public class ElectricityMeterReading implements Comparable<ElectricityMeterReading> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class ElectricityRecord implements Comparable<ElectricityRecord> {
     private String dataProviderName;
 
     @Override
-    public int compareTo(ElectricityRecord o) {
+    public int compareTo(ElectricityMeterReading o) {
         return this.getUser().getAddress().compareTo(o.getUser().getAddress());
     }
 
