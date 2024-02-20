@@ -52,7 +52,7 @@
             Добавить показания
         </a>
         <div class="collapse mb-3" id="collapseExample" style="margin: 0 auto; text-align: center">
-            <form action="/meterReading/create" method="post" enctype="multipart/form-data" style="width: 53%; margin: auto">
+            <form action="/meterreading/create" method="post" enctype="multipart/form-data" style="width: 53%; margin: auto">
                 <#if !user.isUserWithReducedData()>
                     <div class="form-group">
                         <label for="kitchenCold"><b>Холодная вода (кухня)</b></label>

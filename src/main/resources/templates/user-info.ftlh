@@ -39,7 +39,7 @@
                     </div>
                     <div>
                         <#if userByPrincipal.isAdmin()>
-                            <form action="/meterReading/delete/${meterReading.id?c}" method="post"
+                            <form action="/meterreading/delete/${meterReading.id?c}" method="post"
                                   style="margin: 0 auto; text-align: center">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
