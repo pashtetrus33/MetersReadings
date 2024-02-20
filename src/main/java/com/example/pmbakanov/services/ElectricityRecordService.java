@@ -89,7 +89,7 @@ public class ElectricityRecordService {
         if (electricityRecord != null) {
             electricityRecordRepository.delete(electricityRecord);
         } else {
-            log.error("Electricity Record with id = {} is not found", id);
+            log.error("Electricity MeterReading with id = {} is not found", id);
         }
     }
 

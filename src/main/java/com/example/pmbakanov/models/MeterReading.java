@@ -1,6 +1,9 @@
 package com.example.pmbakanov.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -8,10 +11,13 @@ import java.time.format.DateTimeFormatter;
 
 import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "records")
+@Table(name = "readings")
 @Data
-public class Record implements Comparable<Record> {
+public class MeterReading implements Comparable<MeterReading> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +34,7 @@ public class Record implements Comparable<Record> {
     private String dateOfCreatedString;
 
     @Override
-    public int compareTo(Record o) {
+    public int compareTo(MeterReading o) {
         return this.getUser().getAddress().compareTo(o.getUser().getAddress());
     }
 

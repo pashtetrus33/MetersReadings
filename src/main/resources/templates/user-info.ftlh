@@ -24,22 +24,22 @@
     <h4 style="text-align: center">История показаний счетчиков </h4>
     <br>
     <div class="card-columns">
-        <#list records as record>
-                <div class="card text-white bg-dark my-3 record">
+        <#list records as meterReading>
+                <div class="card text-white bg-dark my-3 meterReading">
 
                     <div class="card-body">
-                        <h6 class="card-title">Дата создания: ${record.dateOfCreatedString}</h6>
-                        <p class="card-text"> Холодная вода (кухня):${record.kitchenCold}</p>
-                        <p class="card-text"> Горячая вода (кухня):${record.kitchenHot}</p>
-                        <p class="card-text"> Холодная вода (ванная):${record.toiletCold}</p>
-                        <p class="card-text"> Горячая вода (ванная): ${record.toiletHot}</p>
+                        <h6 class="card-title">Дата создания: ${meterReading.dateOfCreatedString}</h6>
+                        <p class="card-text"> Холодная вода (кухня):${meterReading.kitchenCold}</p>
+                        <p class="card-text"> Горячая вода (кухня):${meterReading.kitchenHot}</p>
+                        <p class="card-text"> Холодная вода (ванная):${meterReading.toiletCold}</p>
+                        <p class="card-text"> Горячая вода (ванная): ${meterReading.toiletHot}</p>
                     </div>
                     <div class="card-footer">
-                        ${record.user.name}
+                        ${meterReading.user.name}
                     </div>
                     <div>
                         <#if userByPrincipal.isAdmin()>
-                            <form action="/record/delete/${record.id?c}" method="post"
+                            <form action="/meterReading/delete/${meterReading.id?c}" method="post"
                                   style="margin: 0 auto; text-align: center">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button type="submit" style="text-align: center" class="btn btn-danger mb-2">
@@ -59,20 +59,20 @@
     <h4 style="text-align: center">История показаний счетчиков электричества </h4>
     <br>
     <div class="card-columns">
-        <#list electricityRecords as record>
-                <div class="card text-white bg-dark my-3 record">
+        <#list electricityRecords as meterReading>
+                <div class="card text-white bg-dark my-3 meterReading">
 
                     <div class="card-body">
-                        <h6 class="card-title">Дата создания: ${record.dateOfCreatedString}</h6>
-                        <p class="card-text"> Показание: ${record.getElectricity()}</p>
-                        <p class="card-text"> Данные внес: ${record.dataProviderName}</p>
+                        <h6 class="card-title">Дата создания: ${meterReading.dateOfCreatedString}</h6>
+                        <p class="card-text"> Показание: ${meterReading.getElectricity()}</p>
+                        <p class="card-text"> Данные внес: ${meterReading.dataProviderName}</p>
                     </div>
                     <div class="card-footer">
-                        ${record.user.name}
+                        ${meterReading.user.name}
                     </div>
                     <div>
                         <#if userByPrincipal.isAdmin()>
-                            <form action="/electricityrecord/delete/${record.id?c}" method="post"
+                            <form action="/electricityrecord/delete/${meterReading.id?c}" method="post"
                                   style="margin: 0 auto; text-align: center">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button type="submit" style="text-align: center" class="btn btn-danger mb-2">

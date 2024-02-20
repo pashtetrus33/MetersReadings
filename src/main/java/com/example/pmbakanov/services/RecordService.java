@@ -2,11 +2,11 @@ package com.example.pmbakanov.services;
 
 import com.example.pmbakanov.configurations.ExcelExportUtils;
 import com.example.pmbakanov.models.ElectricityRecord;
-import com.example.pmbakanov.models.Record;
+import com.example.pmbakanov.models.MeterReading;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.models.enums.SpecialAdresses;
 import com.example.pmbakanov.repositories.ElectricityRecordRepository;
-import com.example.pmbakanov.repositories.RecordRepository;
+import com.example.pmbakanov.repositories.MeterReadingRepository;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,103 +27,103 @@ import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 @RequiredArgsConstructor
 public class RecordService {
     private final MailSender mailSender;
-    private final RecordRepository recordRepository;
+    private final MeterReadingRepository meterReadingRepository;
     private final ElectricityRecordRepository electricityRecordRepository;
     private final UserRepository userRepository;
 
-    public List<Record> listRecords(String id) {
-        if (id != null) return recordRepository.findById(id);
-        return recordRepository.findAll();
+    public List<MeterReading> listRecords(String id) {
+        if (id != null) return meterReadingRepository.findById(id);
+        return meterReadingRepository.findAll();
     }
 
     public void exportCustomerToExcel(HttpServletResponse response) throws IOException {
-        List<Record> recordList = recordRepository.findAll();
+        List<MeterReading> meterReadingList = meterReadingRepository.findAll();
         List<ElectricityRecord> electricityRecordList = electricityRecordRepository.findAll();
-        Collections.sort(recordList);
-        ExcelExportUtils exportUtils = new ExcelExportUtils(recordList, electricityRecordList);
+        Collections.sort(meterReadingList);
+        ExcelExportUtils exportUtils = new ExcelExportUtils(meterReadingList, electricityRecordList);
         exportUtils.exportDataToExcel(response);
     }
 
-    public boolean saveRecord(Principal principal, Record record) {
+    public boolean saveRecord(Principal principal, MeterReading meterReading) {
 
         User currentUser = getUserByPrincipal(principal);
-        record.setUser(currentUser);
+        meterReading.setUser(currentUser);
 
-        Record lastRecord = currentUser.getLastRecord();
-        if (lastRecord != null) {
-            if (record.getKitchenHot() == null && lastRecord.getKitchenHot() != null) {
-                record.setKitchenCold(lastRecord.getKitchenCold());
-                record.setKitchenHot(lastRecord.getKitchenHot());
-            } else if ((record.getKitchenHot() == null) || (record.getKitchenCold() == null)) {
-                lastRecord.setKitchenCold(0f);
-                lastRecord.setKitchenHot(0f);
-                record.setKitchenCold(0f);
-                record.setKitchenHot(0f);
+        MeterReading lastMeterReading = currentUser.getLastRecord();
+        if (lastMeterReading != null) {
+            if (meterReading.getKitchenHot() == null && lastMeterReading.getKitchenHot() != null) {
+                meterReading.setKitchenCold(lastMeterReading.getKitchenCold());
+                meterReading.setKitchenHot(lastMeterReading.getKitchenHot());
+            } else if ((meterReading.getKitchenHot() == null) || (meterReading.getKitchenCold() == null)) {
+                lastMeterReading.setKitchenCold(0f);
+                lastMeterReading.setKitchenHot(0f);
+                meterReading.setKitchenCold(0f);
+                meterReading.setKitchenHot(0f);
             }
 
-            if ((lastRecord.getToiletCold() > record.getToiletCold()) || (lastRecord.getToiletHot() > record.getToiletHot())) {
+            if ((lastMeterReading.getToiletCold() > meterReading.getToiletCold()) || (lastMeterReading.getToiletHot() > meterReading.getToiletHot())) {
                 return false;
             }
-            if ((lastRecord.getKitchenCold() > record.getKitchenCold()) || (lastRecord.getKitchenHot() > record.getKitchenHot())) {
+            if ((lastMeterReading.getKitchenCold() > meterReading.getKitchenCold()) || (lastMeterReading.getKitchenHot() > meterReading.getKitchenHot())) {
                 return false;
             }
         }
 
         User neighborUser = null;
-        if (record.getNeighborCold() != null) {
+        if (meterReading.getNeighborCold() != null) {
             for (SpecialAdresses address : SpecialAdresses.values()) {
                 if (address.getTitle().equals(currentUser.getAddress()))
                     neighborUser = userRepository.findByAddress(address.getNeighborAddress());
             }
 
             if (neighborUser != null) {
-                Record lastNeighborRecord;
+                MeterReading lastNeighborMeterReading;
                 if (neighborUser.areRecords()) {
-                    lastNeighborRecord = neighborUser.getLastRecord();
-                    if ((lastNeighborRecord.getKitchenCold() != null) && (lastNeighborRecord.getKitchenCold() > record.getNeighborCold())) {
+                    lastNeighborMeterReading = neighborUser.getLastRecord();
+                    if ((lastNeighborMeterReading.getKitchenCold() != null) && (lastNeighborMeterReading.getKitchenCold() > meterReading.getNeighborCold())) {
                         return false;
                     }
-                    if ((lastNeighborRecord.getKitchenHot() != null) && (lastNeighborRecord.getKitchenHot() > record.getNeighborHot())) {
+                    if ((lastNeighborMeterReading.getKitchenHot() != null) && (lastNeighborMeterReading.getKitchenHot() > meterReading.getNeighborHot())) {
                         return false;
                     }
                 }
                 if (neighborUser.areRecords() && (neighborUser.getLastRecord().getDateOfCreated().getMonth() == LocalDateTime.now().getMonth())) {
-                    lastNeighborRecord = neighborUser.getLastRecord();
-                    lastNeighborRecord.setKitchenCold(record.getNeighborCold());
-                    lastNeighborRecord.setKitchenHot(record.getNeighborHot());
-                    recordRepository.save(lastNeighborRecord);
+                    lastNeighborMeterReading = neighborUser.getLastRecord();
+                    lastNeighborMeterReading.setKitchenCold(meterReading.getNeighborCold());
+                    lastNeighborMeterReading.setKitchenHot(meterReading.getNeighborHot());
+                    meterReadingRepository.save(lastNeighborMeterReading);
 
                 } else {
-                    lastRecord = new Record();
-                    lastRecord.setUser(neighborUser);
-                    lastRecord.setDateOfCreated(LocalDateTime.now());
-                    lastRecord.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-                    lastRecord.setKitchenCold(record.getNeighborCold());
-                    lastRecord.setKitchenHot(record.getNeighborHot());
-                    lastRecord.setToiletCold(0f);
-                    lastRecord.setToiletHot(0f);
-                    recordRepository.save(lastRecord);
+                    lastMeterReading = new MeterReading();
+                    lastMeterReading.setUser(neighborUser);
+                    lastMeterReading.setDateOfCreated(LocalDateTime.now());
+                    lastMeterReading.setDateOfCreatedString(LocalDateTime.now().minusHours(TIME_SHIFT).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+                    lastMeterReading.setKitchenCold(meterReading.getNeighborCold());
+                    lastMeterReading.setKitchenHot(meterReading.getNeighborHot());
+                    lastMeterReading.setToiletCold(0f);
+                    lastMeterReading.setToiletHot(0f);
+                    meterReadingRepository.save(lastMeterReading);
                 }
             }
         }
         for (User user : userRepository.findAll()) {
             if (user.isAdmin())
-                mailSender.sendMail(user.getEmail(), "Новые показания счетчиков", record.getUser().getName() + "\n" +
-                        record.getUser().getAddress() + "\n" +
-                        "Kухня (хол.): " + record.getKitchenCold() + "\n" +
-                        "Kухня (гор.): " + record.getKitchenHot() + "\n" +
-                        "Ванная (хол.): " + record.getToiletCold() + "\n" +
-                        "Ванная (гор.): " + record.getToiletHot() + "\n" +
-                        "Сосед (кухня хол.): " + record.getNeighborCold() + "\n" +
-                        "Сосед (кухня гор.): " + record.getNeighborHot());
+                mailSender.sendMail(user.getEmail(), "Новые показания счетчиков", meterReading.getUser().getName() + "\n" +
+                        meterReading.getUser().getAddress() + "\n" +
+                        "Kухня (хол.): " + meterReading.getKitchenCold() + "\n" +
+                        "Kухня (гор.): " + meterReading.getKitchenHot() + "\n" +
+                        "Ванная (хол.): " + meterReading.getToiletCold() + "\n" +
+                        "Ванная (гор.): " + meterReading.getToiletHot() + "\n" +
+                        "Сосед (кухня хол.): " + meterReading.getNeighborCold() + "\n" +
+                        "Сосед (кухня гор.): " + meterReading.getNeighborHot());
         }
-        if (record.getKitchenCold() == null){
-            record.setKitchenCold(0f);
+        if (meterReading.getKitchenCold() == null){
+            meterReading.setKitchenCold(0f);
         }
-        if (record.getKitchenHot() == null){
-            record.setKitchenHot(0f);
+        if (meterReading.getKitchenHot() == null){
+            meterReading.setKitchenHot(0f);
         }
-        recordRepository.save(record);
+        meterReadingRepository.save(meterReading);
         return true;
     }
 
@@ -134,36 +134,36 @@ public class RecordService {
 
 
     public void deleteRecord(Long id) {
-        Record record = recordRepository.findById(id)
+        MeterReading meterReading = meterReadingRepository.findById(id)
                 .orElse(null);
-        if (record != null) {
-            if (record.getNeighborCold() != null) {
+        if (meterReading != null) {
+            if (meterReading.getNeighborCold() != null) {
                 User neighborUser = null;
                 for (SpecialAdresses address : SpecialAdresses.values()) {
-                    if (address.getTitle().equals(record.getUser().getAddress()))
+                    if (address.getTitle().equals(meterReading.getUser().getAddress()))
                         neighborUser = userRepository.findByAddress(address.getNeighborAddress());
                 }
                 assert neighborUser != null;
-                User currentUser = record.getUser();
-                recordRepository.delete(record);
-                log.info("Record with id = {} was deleted", id);
+                User currentUser = meterReading.getUser();
+                meterReadingRepository.delete(meterReading);
+                log.info("MeterReading with id = {} was deleted", id);
                 if (neighborUser.getLastRecord() != null && currentUser.getLastRecord() != null) {
                     neighborUser.getLastRecord().setKitchenCold(currentUser.getLastRecord().getNeighborCold());
                     neighborUser.getLastRecord().setKitchenHot(currentUser.getLastRecord().getNeighborHot());
                 }
 
             } else {
-                recordRepository.delete(record);
-                log.info("Record with id = {} was deleted", id);
+                meterReadingRepository.delete(meterReading);
+                log.info("MeterReading with id = {} was deleted", id);
             }
 
         } else {
-            log.error("Record with id = {} is not found", id);
+            log.error("MeterReading with id = {} is not found", id);
         }
     }
 
-    public Record getRecordById(Long id) {
-        return recordRepository.findById(id).orElse(null);
+    public MeterReading getRecordById(Long id) {
+        return meterReadingRepository.findById(id).orElse(null);
     }
 
 

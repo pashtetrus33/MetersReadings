@@ -181,7 +181,7 @@ public class AdminController {
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
-        model.addAttribute("records", user.getRecords());
+        model.addAttribute("records", user.getMeterReadings());
         model.addAttribute("requests", user.getRequests());
         model.addAttribute("electricityRecords", user.getElectricityRecords());
         return "user-info";

@@ -59,15 +59,15 @@
             <th scope="col" style="vertical-align: middle">Данные внес</th>
             <th scope="col" style="vertical-align: middle">Удалить</th>
         </tr>
-        <#list electricityRecords as record >
+        <#list electricityRecords as meterReading >
             <tr>
-                <th style="vertical-align: middle">${record.getDateOfCreatedString()}</th>
-                <th style="vertical-align: middle">${record.getUser().getName()}</th>
-                <th style="vertical-align: middle">${record.getUser().getAddress()}</th>
-                <th style="vertical-align: middle">${record.electricity}</th>
-                <th style="vertical-align: middle">${record.dataProviderName}</th>
+                <th style="vertical-align: middle">${meterReading.getDateOfCreatedString()}</th>
+                <th style="vertical-align: middle">${meterReading.getUser().getName()}</th>
+                <th style="vertical-align: middle">${meterReading.getUser().getAddress()}</th>
+                <th style="vertical-align: middle">${meterReading.electricity}</th>
+                <th style="vertical-align: middle">${meterReading.dataProviderName}</th>
                 <th>
-                    <form action="/electricityrecord/delete/${record.id?c}" method="post"
+                    <form action="/electricityrecord/delete/${meterReading.id?c}" method="post"
                           style="margin: 0 auto; text-align: center">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <button type="submit" style="text-align: center" class="btn btn-danger mb-2">

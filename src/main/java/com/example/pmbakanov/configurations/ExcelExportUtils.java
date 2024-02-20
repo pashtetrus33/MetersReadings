@@ -1,7 +1,7 @@
 package com.example.pmbakanov.configurations;
 
 import com.example.pmbakanov.models.ElectricityRecord;
-import com.example.pmbakanov.models.Record;
+import com.example.pmbakanov.models.MeterReading;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -19,11 +19,11 @@ public class ExcelExportUtils {
     private XSSFSheet sheetCurrentMonth;
     private XSSFSheet sheet;
     private XSSFSheet sheetElectricity;
-    private final List<Record> recordList;
+    private final List<MeterReading> meterReadingList;
     private final List<ElectricityRecord> electricityRecordList;
 
-    public ExcelExportUtils(List<Record> recordList, List<ElectricityRecord> electricityRecordList) {
-        this.recordList = recordList;
+    public ExcelExportUtils(List<MeterReading> meterReadingList, List<ElectricityRecord> electricityRecordList) {
+        this.meterReadingList = meterReadingList;
         this.electricityRecordList = electricityRecordList;
         workbook = new XSSFWorkbook();
     }
@@ -113,31 +113,31 @@ public class ExcelExportUtils {
         font.setFontHeight(14);
         style.setFont(font);
 
-        for (Record record : recordList) {
-            if (record.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth()) {
+        for (MeterReading meterReading : meterReadingList) {
+            if (meterReading.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth()) {
                 Row row = sheetCurrentMonth.createRow(rowCountCurrent++);
                 int columnCount = 0;
-                createCell(row, columnCount++, record.getDateOfCreatedString(), style);
-                createCell(row, columnCount++, record.getUser().getName(), style);
-                createCell(row, columnCount++, record.getUser().getAddress(), style);
-                createCell(row, columnCount++, record.getKitchenCold(), style);
-                createCell(row, columnCount++, record.getKitchenHot(), style);
-                createCell(row, columnCount++, record.getToiletCold(), style);
-                createCell(row, columnCount++, record.getToiletHot(), style);
-                createCell(row, columnCount++, record.getNeighborCold(), style);
-                createCell(row, columnCount, record.getNeighborHot(), style);
+                createCell(row, columnCount++, meterReading.getDateOfCreatedString(), style);
+                createCell(row, columnCount++, meterReading.getUser().getName(), style);
+                createCell(row, columnCount++, meterReading.getUser().getAddress(), style);
+                createCell(row, columnCount++, meterReading.getKitchenCold(), style);
+                createCell(row, columnCount++, meterReading.getKitchenHot(), style);
+                createCell(row, columnCount++, meterReading.getToiletCold(), style);
+                createCell(row, columnCount++, meterReading.getToiletHot(), style);
+                createCell(row, columnCount++, meterReading.getNeighborCold(), style);
+                createCell(row, columnCount, meterReading.getNeighborHot(), style);
             }
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
-            createCell(row, columnCount++, record.getDateOfCreatedString(), style);
-            createCell(row, columnCount++, record.getUser().getName(), style);
-            createCell(row, columnCount++, record.getUser().getAddress(), style);
-            createCell(row, columnCount++, record.getKitchenCold(), style);
-            createCell(row, columnCount++, record.getKitchenHot(), style);
-            createCell(row, columnCount++, record.getToiletCold(), style);
-            createCell(row, columnCount++, record.getToiletHot(), style);
-            createCell(row, columnCount++, record.getNeighborCold(), style);
-            createCell(row, columnCount, record.getNeighborHot(), style);
+            createCell(row, columnCount++, meterReading.getDateOfCreatedString(), style);
+            createCell(row, columnCount++, meterReading.getUser().getName(), style);
+            createCell(row, columnCount++, meterReading.getUser().getAddress(), style);
+            createCell(row, columnCount++, meterReading.getKitchenCold(), style);
+            createCell(row, columnCount++, meterReading.getKitchenHot(), style);
+            createCell(row, columnCount++, meterReading.getToiletCold(), style);
+            createCell(row, columnCount++, meterReading.getToiletHot(), style);
+            createCell(row, columnCount++, meterReading.getNeighborCold(), style);
+            createCell(row, columnCount, meterReading.getNeighborHot(), style);
         }
 
         for (ElectricityRecord electricityRecord : electricityRecordList) {

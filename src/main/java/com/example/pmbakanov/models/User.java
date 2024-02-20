@@ -2,14 +2,19 @@ package com.example.pmbakanov.models;
 
 import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.models.enums.SpecialAdresses;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
-import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 @Data
@@ -32,15 +37,15 @@ public class User implements UserDetails, Comparable<User> {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Record> records = new ArrayList<>();
+    private List<MeterReading> meterReadings = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Request> requests = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<ElectricityRecord> electricityRecords = new ArrayList<>();
 
-    public Record getLastRecord() {
-        return areRecords() ? records.get(records.size() - 1) : null;
+    public MeterReading getLastRecord() {
+        return areRecords() ? meterReadings.get(meterReadings.size() - 1) : null;
     }
 
     public ElectricityRecord getLastElectricityRecord() {
@@ -48,7 +53,7 @@ public class User implements UserDetails, Comparable<User> {
     }
 
     public boolean areRecords() {
-        return records.size() > 0;
+        return meterReadings.size() > 0;
     }
 
     public boolean areElectricityRecords() {

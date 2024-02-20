@@ -1,7 +1,7 @@
 package com.example.pmbakanov.controllers;
 
 import com.example.pmbakanov.models.ElectricityRecord;
-import com.example.pmbakanov.models.Record;
+import com.example.pmbakanov.models.MeterReading;
 import com.example.pmbakanov.models.User;
 import com.example.pmbakanov.services.ElectricityRecordService;
 import com.example.pmbakanov.services.RecordService;
@@ -33,13 +33,13 @@ public class RecordController {
      * Метод создания записи счетчиков воды
      *
      * @param model     интерфейс фреймворка для упаковки аттрибутов и передачи в представление
-     * @param record    сущность запись счетчика воды
+     * @param meterReading    сущность запись счетчика воды
      * @param principal текущий залогинившийся пользователь
      * @return представление профиля пользователя
      */
     @PostMapping("/record/create")
-    public String createRecord(Model model, Record record, Principal principal) {
-        if (recordService.saveRecord(principal, record)) {
+    public String createRecord(Model model, MeterReading meterReading, Principal principal) {
+        if (recordService.saveRecord(principal, meterReading)) {
             model.addAttribute("successmessage", "Данные успешно переданы");
         } else {
             model.addAttribute("successmessage", "Данные не переданы, предыдущие показания больше текущих");
@@ -73,7 +73,7 @@ public class RecordController {
     public String userRecords(Principal principal, Model model) {
         User user = recordService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        model.addAttribute("records", user.getRecords());
+        model.addAttribute("records", user.getMeterReadings());
         model.addAttribute("electricityRecords", user.getElectricityRecords());
         return "my-records";
     }
