@@ -15,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
-import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +23,11 @@ import static com.example.pmbakanov.services.UserService.DEPLOY_WEBSITE;
 @Getter
 public class ScheduleTasksService {
 
+    @Value("${DEPLOY_WEBSITE}")
+    private String DEPLOY_WEBSITE;
+
     private final MailSender mailSender;
+
     private final UserRepository userRepository;
 
     @Scheduled(cron = "${interval-in-cron}")

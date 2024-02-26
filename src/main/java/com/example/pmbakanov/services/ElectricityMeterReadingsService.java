@@ -96,5 +96,4 @@ public class ElectricityMeterReadingsService {
     public ElectricityMeterReading getElectricityMeterReadingById(Long id) {
         return electricityMeterReadingRepository.findById(id).orElse(null);
     }
-
 }

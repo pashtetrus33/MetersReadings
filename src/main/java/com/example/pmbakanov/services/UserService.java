@@ -5,6 +5,7 @@ import com.example.pmbakanov.models.enums.Role;
 import com.example.pmbakanov.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -13,12 +14,16 @@ import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
 @Slf4j
 @RequiredArgsConstructor
+@Service
 public class UserService {
-    static final String DEPLOY_WEBSITE = "https://chilemeters.ddns.net";  // адрес текущего расположения сервиса
-    private static final String ADMIN_EMAIL = "pashtet_rus@mail.ru";
+
+    @Value("${DEPLOY_WEBSITE}")
+    private String DEPLOY_WEBSITE;
+
+    @Value("${ADMIN_EMAIL}")
+    private String ADMIN_EMAIL;
 
     private final MailSender mailSender;
     private final UserRepository userRepository;
