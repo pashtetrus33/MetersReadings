@@ -47,7 +47,7 @@ public class UserService {
         user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
 
-        if (!StringUtils.isEmpty(user.getEmail())) {
+        if (!StringUtils.hasLength(user.getEmail())) {
             String message = String.format(
                     "Добро пожаловать, %s. \n" +
                             "Пожалуйста перейдите по ссылке для активации: " + DEPLOY_WEBSITE + "/activate/%s",
