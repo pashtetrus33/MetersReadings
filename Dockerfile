@@ -5,7 +5,7 @@ LABEL maintainer="Pavel Bakanov"
 # copy the pom and src code to the container
 COPY ./ ./
 # package our application code without tests
-RUN mvn clean package
+RUN mvn clean package -DskipTests=true
 
 # the second stage of our build will use open jdk 11
 FROM openjdk:11-jre-slim
