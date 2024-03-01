@@ -18,6 +18,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
@@ -39,6 +40,9 @@ public class MeterReadingService {
     public void exportCustomerToExcel(HttpServletResponse response) throws IOException {
         List<MeterReading> meterReadingList = meterReadingRepository.findAll();
         List<ElectricityMeterReading> electricityMeterReadingList = electricityMeterReadingRepository.findAll();
+        //Сортировка списка показаний электричества по убыванию даты создания
+        electricityMeterReadingList.sort(Comparator.comparing(ElectricityMeterReading::getDateOfCreated).reversed());
+        //Сортировка списка показаний счетчиков воды по адресу
         Collections.sort(meterReadingList);
         ExcelExportUtils exportUtils = new ExcelExportUtils(meterReadingList, electricityMeterReadingList);
         exportUtils.exportDataToExcel(response);

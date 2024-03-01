@@ -15,25 +15,43 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ExcelExportUtils {
+    // Класс для создания документа
     private final XSSFWorkbook workbook;
+    // Лист для показаний текущего месяца
     private XSSFSheet sheetCurrentMonth;
+    // Лист для всех показаний
     private XSSFSheet sheet;
+    // Лист для электричества
     private XSSFSheet sheetElectricity;
+    // Список показаний
     private final List<MeterReading> meterReadingList;
+    // Список показаний электричества
     private final List<ElectricityMeterReading> electricityMeterReadingList;
 
     public ExcelExportUtils(List<MeterReading> meterReadingList, List<ElectricityMeterReading> electricityMeterReadingList) {
+
+        // Инициализация списка показаний
         this.meterReadingList = meterReadingList;
+
+        // Инициализация списка показаний электричества
         this.electricityMeterReadingList = electricityMeterReadingList;
+
+        // Создание нового документа Excel
         workbook = new XSSFWorkbook();
     }
 
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
+
+        // Установка размера колонок
         sheet.autoSizeColumn(columnCount);
         sheetCurrentMonth.autoSizeColumn(columnCount);
         sheetElectricity.autoSizeColumn(columnCount);
+
+        // Создание ячейки
         Cell cell = row.createCell(columnCount);
+
+        // Установка значения в ячейку
         if (value instanceof Integer) {
             cell.setCellValue((Integer) value);
         } else if (value instanceof Double) {
@@ -47,34 +65,48 @@ public class ExcelExportUtils {
         } else {
             cell.setCellValue((String) value);
         }
+        // Установка стиля ячейки
         cell.setCellStyle(style);
     }
 
     private void createHeaderRow() {
+
+        // Создание листов для показаний
         sheetCurrentMonth = workbook.createSheet(LocalDateTime.now().getMonth().name() + " " + LocalDateTime.now().getYear());
         sheet = workbook.createSheet("Все показания");
         sheetElectricity = workbook.createSheet("Электричество");
+
+        // Создание строки для заголовка
         Row row = sheet.createRow(0);
         Row rowCurrentMonth = sheetCurrentMonth.createRow(0);
         Row rowElectricity = sheetElectricity.createRow(0);
+
+        // Создание стиля для заголовка
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
         font.setFontHeight(20);
         style.setFont(font);
         style.setAlignment(HorizontalAlignment.CENTER);
+
+        // Создание заголовка
         createCell(row, 0, "Показания индвидуальных приборов учета", style);
         createCell(rowCurrentMonth, 0, "Показания индвидуальных приборов учета", style);
         createCell(rowElectricity, 0, "Показания индвидуальных приборов учета", style);
+
+        // Слияние ячеек для заголовка
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
         sheetCurrentMonth.addMergedRegion(new CellRangeAddress(0, 0, 0, 8));
         sheetElectricity.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
         font.setFontHeightInPoints((short) 10);
 
+        // Создание второй строки для заголовка
         row = sheet.createRow(1);
         font.setBold(true);
         font.setFontHeight(16);
         style.setFont(font);
+
+        // Создание ячеек для второго заголовка
         createCell(row, 0, "Дата создания", style);
         createCell(row, 1, "Имя", style);
         createCell(row, 2, "Адрес", style);
@@ -85,6 +117,7 @@ public class ExcelExportUtils {
         createCell(row, 7, "Сосед (кухня хол. вода)", style);
         createCell(row, 8, "Сосед (кухня гор. вода)", style);
 
+        // Создание второй строки для заголовка листа текущего месяца
         rowCurrentMonth = sheetCurrentMonth.createRow(1);
         createCell(rowCurrentMonth, 0, "Дата создания", style);
         createCell(rowCurrentMonth, 1, "Имя", style);
@@ -96,6 +129,7 @@ public class ExcelExportUtils {
         createCell(rowCurrentMonth, 7, "Сосед (кухня хол. вода)", style);
         createCell(rowCurrentMonth, 8, "Сосед (кухня гор. вода)", style);
 
+        // Создание второй строки для заголовка листа электричества
         rowElectricity = sheetElectricity.createRow(1);
         createCell(rowElectricity, 0, "Дата создания", style);
         createCell(rowElectricity, 1, "Имя", style);
@@ -108,13 +142,16 @@ public class ExcelExportUtils {
         int rowCount = 2;
         int rowCountCurrent = 2;
         int rowCountElectricity = 2;
+
+        // Создание стиля для данных
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
         style.setFont(font);
 
+        // Заполнение данными списка показаний
         for (MeterReading meterReading : meterReadingList) {
-            if (meterReading.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth()) {
+            if (meterReading.getDateOfCreated().getMonth() == LocalDateTime.now().getMonth() && meterReading.getDateOfCreated().getYear() == LocalDateTime.now().getYear()) {
                 Row row = sheetCurrentMonth.createRow(rowCountCurrent++);
                 int columnCount = 0;
                 createCell(row, columnCount++, meterReading.getDateOfCreatedString(), style);
@@ -140,6 +177,7 @@ public class ExcelExportUtils {
             createCell(row, columnCount, meterReading.getNeighborHot(), style);
         }
 
+        // Заполнение данными списка показаний электричества
         for (ElectricityMeterReading electricityMeterReading : electricityMeterReadingList) {
             if (electricityMeterReading.getElectricity() != null) {
                 Row row = sheetElectricity.createRow(rowCountElectricity++);
@@ -155,11 +193,11 @@ public class ExcelExportUtils {
     }
 
     public void exportDataToExcel(HttpServletResponse response) throws IOException {
-        createHeaderRow();
-        writeCustomerData();
+        createHeaderRow(); // Создание заголовка таблицы
+        writeCustomerData(); // Запись данных
         ServletOutputStream outputStream = response.getOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
+        workbook.write(outputStream); // Закрытие документа
+        workbook.close(); // Закрытие выходного потока
         outputStream.close();
     }
 }
