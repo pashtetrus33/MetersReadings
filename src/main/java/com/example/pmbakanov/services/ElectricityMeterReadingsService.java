@@ -12,26 +12,37 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Сервис для работы с записями счетчика электричества.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ElectricityMeterReadingsService {
+
     private final ElectricityMeterReadingRepository electricityMeterReadingRepository;
+
     private final UserRepository userRepository;
 
+    /**
+     * Получает список записей счетчика электричества.
+     *
+     * @param id Идентификатор записей счетчика электричества (необязательный).
+     * @return Список записей счетчика электричества.
+     */
     public List<ElectricityMeterReading> listElectrcityMeterReadings(String id) {
         if (id != null) return electricityMeterReadingRepository.findById(id);
         return electricityMeterReadingRepository.findAll();
     }
 
     /**
-     * Метод сохранения записи счетчика электричества
+     * Сохраняет запись счетчика электричества.
      *
-     * @param building1         здание 1
-     * @param building2         задние 2
-     * @param school            школьно-жилое здание
-     * @param electricityMeterReading запись счечика электричества
-     * @return булевое значение успеха сохранения записи
+     * @param building1               Жилой дом 1.
+     * @param building2               Жилой дом 2.
+     * @param school                  Школьно-жилое здание.
+     * @param electricityMeterReading Запись счетчика электричества.
+     * @return true, если запись успешно сохранена, в противном случае false.
      */
     public boolean saveElectricityMeterReading(String building1, String building2, String school, ElectricityMeterReading electricityMeterReading) {
         if (building1.equals("empty") && building2.equals("empty") && school.equals("empty")) {
@@ -53,7 +64,6 @@ public class ElectricityMeterReadingsService {
             address = "Школьно-жилой дом " + school;
             flat = school;
         }
-
 
         User user = userRepository.findByAddress(address);
         if (user == null) {
@@ -83,6 +93,11 @@ public class ElectricityMeterReadingsService {
         return true;
     }
 
+    /**
+     * Удаляет запись счетчика электричества по идентификатору.
+     *
+     * @param id Идентификатор записи счетчика электричества.
+     */
     public void deleteElectricityMeterReading(Long id) {
         ElectricityMeterReading electricityMeterReading = electricityMeterReadingRepository.findById(id)
                 .orElse(null);
@@ -93,6 +108,12 @@ public class ElectricityMeterReadingsService {
         }
     }
 
+    /**
+     * Получает запись счетчика электричества по идентификатору.
+     *
+     * @param id Идентификатор записи счетчика электричества.
+     * @return Запись счетчика электричества.
+     */
     public ElectricityMeterReading getElectricityMeterReadingById(Long id) {
         return electricityMeterReadingRepository.findById(id).orElse(null);
     }

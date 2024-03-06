@@ -16,6 +16,9 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Сервис для выполнения периодических задач.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,6 +33,9 @@ public class ScheduleTasksService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Уведомление о начале периода подачи показаний счетчиков воды.
+     */
     @Scheduled(cron = "${interval-in-cron}")
     public void periodStartMailNotification() {
         List<User> activeUsersList = userRepository.findAllByActiveIsTrue();
@@ -40,6 +46,9 @@ public class ScheduleTasksService {
         }
     }
 
+    /**
+     * Уведомление о завершении периода подачи показаний счетчиков воды.
+     */
     @Scheduled(cron = "${interval-in-cron2}")
     @Transactional
     public void periodAlmostFinishedMailNotification() {
@@ -53,10 +62,13 @@ public class ScheduleTasksService {
         }
     }
 
-    // Метод периодического пинга бывшего распложения системы для корректной работы (ONRENDER.COM)
+    // Метод периодического пинга бывшего расположения системы для корректной работы (ONRENDER.COM)
     @Value("${pingtask.url}")
     private String url;
 
+    /**
+     * Периодический пинг для корректной работы системы.
+     */
     @Scheduled(fixedRateString = "${pingtask.period}")
     public void pingMe() {
         try {

@@ -23,6 +23,9 @@ import java.util.List;
 
 import static com.example.pmbakanov.controllers.UserController.TIME_SHIFT;
 
+/**
+ * Сервис для работы с данными о показаниях счетчика.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -32,22 +35,45 @@ public class MeterReadingService {
     private final ElectricityMeterReadingRepository electricityMeterReadingRepository;
     private final UserRepository userRepository;
 
+    /**
+     * Получает список показаний счетчика.
+     *
+     * @param id Идентификатор показаний счетчика.
+     * @return Список показаний счетчика.
+     */
     public List<MeterReading> listMeterReadings(String id) {
         if (id != null) return meterReadingRepository.findById(id);
         return meterReadingRepository.findAll();
     }
 
+    /**
+     * Экспортирует данные о показаниях счетчиков в Excel.
+     *
+     * @param response Объект ответа HTTP.
+     * @throws IOException Если возникает ошибка ввода-вывода.
+     */
     public void exportCustomerToExcel(HttpServletResponse response) throws IOException {
+
         List<MeterReading> meterReadingList = meterReadingRepository.findAll();
         List<ElectricityMeterReading> electricityMeterReadingList = electricityMeterReadingRepository.findAll();
+
         //Сортировка списка показаний электричества по убыванию даты создания
         electricityMeterReadingList.sort(Comparator.comparing(ElectricityMeterReading::getDateOfCreated).reversed());
+
         //Сортировка списка показаний счетчиков воды по адресу
         Collections.sort(meterReadingList);
+
         ExcelExportUtils exportUtils = new ExcelExportUtils(meterReadingList, electricityMeterReadingList);
         exportUtils.exportDataToExcel(response);
     }
 
+    /**
+     * Сохраняет показания счетчика.
+     *
+     * @param principal    Объект, представляющий текущего пользователя.
+     * @param meterReading Показания счетчика.
+     * @return true, если сохранение успешно, в противном случае false.
+     */
     public boolean saveMeterReading(Principal principal, MeterReading meterReading) {
 
         User currentUser = getUserByPrincipal(principal);
@@ -131,12 +157,22 @@ public class MeterReadingService {
         return true;
     }
 
+    /**
+     * Получает пользователя по принципалу.
+     *
+     * @param principal Объект, представляющий текущего пользователя.
+     * @return Пользователь.
+     */
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
 
-
+    /**
+     * Удаляет показания счетчика.
+     *
+     * @param id Идентификатор показаний счетчика.
+     */
     public void deleteMeterReading(Long id) {
         MeterReading meterReading = meterReadingRepository.findById(id)
                 .orElse(null);
@@ -166,6 +202,12 @@ public class MeterReadingService {
         }
     }
 
+    /**
+     * Получает показания счетчика по идентификатору.
+     *
+     * @param id Идентификатор показаний счетчика.
+     * @return Показания счетчика.
+     */
     public MeterReading getMeterReadingById(Long id) {
         return meterReadingRepository.findById(id).orElse(null);
     }

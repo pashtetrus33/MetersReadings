@@ -17,6 +17,9 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Сервис для работы с заявками.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -25,11 +28,24 @@ public class RequestService {
     private final RequestRepository requestRepository;
     private final UserRepository userRepository;
 
+    /**
+     * Получает список заявок.
+     * @param id Идентификатор заявки.
+     * @return Список заявок.
+     */
     public List<Request> listRequests(String id) {
         if (id != null) return requestRepository.findById(id);
         return requestRepository.findAll();
     }
 
+    /**
+     * Сохраняет заявку.
+     * @param principal Объект, представляющий текущего пользователя.
+     * @param request Заявка.
+     * @param file1 Первый файл.
+     * @param file2 Второй файл.
+     * @throws IOException Если возникает ошибка ввода-вывода.
+     */
     public void saveRequest(Principal principal, Request request, MultipartFile file1, MultipartFile file2) throws IOException {
         request.setUser(getUserByPrincipal(principal));
         Image image1;
@@ -50,9 +66,14 @@ public class RequestService {
                 mailSender.sendMail(user.getEmail(), "Новая заявка" + ": " + request.getUser().getName(), request.getUser().getAddress() + "\n" +
                         request.getDescription());
         }
-
     }
 
+    /**
+     * Преобразует MultipartFile в объект Image.
+     * @param file Объект MultipartFile.
+     * @return Объект Image.
+     * @throws IOException Если возникает ошибка ввода-вывода.
+     */
     private Image toImageEntity(MultipartFile file) throws IOException {
         Image image = new Image();
         image.setName(file.getName());
@@ -63,12 +84,20 @@ public class RequestService {
         return image;
     }
 
+    /**
+     * Получает пользователя по принципалу.
+     * @param principal Объект, представляющий текущего пользователя.
+     * @return Пользователь.
+     */
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
 
-
+    /**
+     * Удаляет заявку.
+     * @param id Идентификатор заявки.
+     */
     public void deleteRequest(Long id) {
         Request request = requestRepository.findById(id).orElse(null);
         if (request != null) {

@@ -14,6 +14,9 @@ import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Сервис для работы с пользователями.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -29,6 +32,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Создание нового пользователя.
+     * @param user пользователь для создания.
+     * @return true, если пользователь успешно создан, в противном случае - false.
+     */
     public boolean createUser(User user) {
         String email = user.getEmail();
         String address = user.getAddress();
@@ -59,15 +67,18 @@ public class UserService {
         return true;
     }
 
+    /**
+     * Получение списка всех пользователей.
+     * @return список всех пользователей.
+     */
     public List<User> list() {
         return userRepository.findAll();
     }
 
     /**
-     * Метод для изменения роли пользователя
-     *
-     * @param user пользователь из контроллера
-     * @param form форма, в виде мапы из контроллера
+     * Изменение ролей пользователя.
+     * @param user пользователь для изменения ролей.
+     * @param form форма с новыми ролями пользователя.
      */
     public void changeUserRoles(User user, Map<String, String> form) {
         Set<String> roles = Arrays.stream(Role.values())
@@ -83,16 +94,20 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Получение пользователя по принципалу.
+     * @param principal принципал пользователя.
+     * @return пользователь.
+     */
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
 
     /**
-     * Метод для изменения пароля пользователя
-     *
-     * @param user пользователь из контроллера
-     * @param form форма, в виде мапы из контроллера
+     * Изменение пароля пользователя.
+     * @param user пользователь для изменения пароля.
+     * @param form форма с новым паролем.
      */
     public void changeUserPassword(User user, Map<String, String> form) {
         user.setPassword(passwordEncoder.encode(form.get("password")));
@@ -104,6 +119,11 @@ public class UserService {
         log.info("Changing password for User with email: {}", user.getEmail());
     }
 
+    /**
+     * Сброс пароля пользователя.
+     * @param user пользователь для сброса пароля.
+     * @return true, если пароль успешно сброшен, в противном случае - false.
+     */
     public boolean resetPassword(User user) {
         String email = user.getEmail();
         user = userRepository.findByEmail(email);
@@ -130,15 +150,19 @@ public class UserService {
     }
 
     /**
-     * Метод для удаления пользователя
-     *
-     * @param user пользователь из контроллера
+     * Удаление пользователя.
+     * @param user пользователь для удаления.
      */
     public void deleteUser(User user) {
         log.info("Deleting User with email: {}", user.getEmail());
         userRepository.delete(user);
     }
 
+    /**
+     * Активация пользователя по коду активации.
+     * @param code код активации пользователя.
+     * @return активированный пользователь или null, если пользователь не найден.
+     */
     public User activateUser(String code) {
         User user = userRepository.findByActivationCode(code);
 
@@ -162,10 +186,9 @@ public class UserService {
     }
 
     /**
-     * Метод отправки электронной почты
-     *
-     * @param email   адрес эл. почты из формы
-     * @param message сообщение из формы
+     * Отправка электронной почты.
+     * @param email адрес электронной почты получателя.
+     * @param message сообщение.
      */
     public void sendEmail(String email, String message) {
         if (!email.equals("all@all.ru")) {
@@ -180,10 +203,9 @@ public class UserService {
     }
 
     /**
-     * Метод для изменения имени пользователя
-     *
-     * @param user пользователь из контроллера
-     * @param form форма, в виде мапы из контроллера
+     * Изменение имени пользователя.
+     * @param user пользователь для изменения имени.
+     * @param form форма с новым именем.
      */
     public void userRename(User user, Map<String, String> form) {
         user.setName((form.get("name")));
@@ -197,10 +219,9 @@ public class UserService {
 
 
     /**
-     * Метод для изменения статуса активности пользователя
-     *
-     * @param user пользователь из контроллера
-     * @param form форма, в виде мапы из контроллера
+     * Изменение статуса активности пользователя.
+     * @param user пользователь для изменения статуса активности.
+     * @param form форма с новым статусом активности.
      */
     public void userChangeStatus(User user, Map<String, String> form) {
         if (form.get("status").equals("true")) {
@@ -219,10 +240,9 @@ public class UserService {
     }
 
     /**
-     * Метод для изменения ящика эл. почты пользователя
-     *
-     * @param user пользователь из контроллера
-     * @param form форма, в виде мапы из контроллера
+     * Изменение ящика электронной почты пользователя.
+     * @param user пользователь для изменения ящика электронной почты.
+     * @param form форма с новым ящиком электронной почты.
      */
     public void userChangeEmail(User user, Map<String, String> form) {
 
