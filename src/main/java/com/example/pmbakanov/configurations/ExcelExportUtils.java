@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Класс конфигурации для экспорта данных в Excel.
+ */
 public class ExcelExportUtils {
     // Класс для создания документа
     private final XSSFWorkbook workbook;
@@ -28,6 +31,12 @@ public class ExcelExportUtils {
     // Список показаний электричества
     private final List<ElectricityMeterReading> electricityMeterReadingList;
 
+    /**
+     * Конструктор класса.
+     *
+     * @param meterReadingList         список показаний
+     * @param electricityMeterReadingList список показаний электричества
+     */
     public ExcelExportUtils(List<MeterReading> meterReadingList, List<ElectricityMeterReading> electricityMeterReadingList) {
 
         // Инициализация списка показаний
@@ -40,7 +49,14 @@ public class ExcelExportUtils {
         workbook = new XSSFWorkbook();
     }
 
-
+    /**
+     * Создает ячейку в указанной строке и столбце с заданным значением и стилем.
+     *
+     * @param row         строка, в которой создается ячейка
+     * @param columnCount номер столбца, в котором создается ячейка
+     * @param value       значение, которое необходимо установить в ячейку
+     * @param style       стиль ячейки
+     */
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
 
         // Установка размера колонок
@@ -69,6 +85,9 @@ public class ExcelExportUtils {
         cell.setCellStyle(style);
     }
 
+    /**
+     * Создает заголовочную строку для каждого листа документа.
+     */
     private void createHeaderRow() {
 
         // Создание листов для показаний
@@ -138,6 +157,9 @@ public class ExcelExportUtils {
         createCell(rowElectricity, 4, "Данные внес", style);
     }
 
+    /**
+     * Заполняет листы документа данными из списков показаний и показаний электричества.
+     */
     private void writeCustomerData() {
         int rowCount = 2;
         int rowCountCurrent = 2;
@@ -192,6 +214,12 @@ public class ExcelExportUtils {
 
     }
 
+    /**
+     * Экспортирует данные в Excel и отправляет документ в ответ на запрос HTTP.
+     *
+     * @param response объект HttpServletResponse для отправки данных
+     * @throws IOException если возникает ошибка ввода-вывода при отправке данных
+     */
     public void exportDataToExcel(HttpServletResponse response) throws IOException {
         createHeaderRow(); // Создание заголовка таблицы
         writeCustomerData(); // Запись данных
