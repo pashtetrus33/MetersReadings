@@ -1,7 +1,9 @@
 package com.example.pmbakanov.models.enums;
 
-import org.springframework.security.core.GrantedAuthority;
-
+/**
+ * Перечисление SpecialAdresses содержит специальные адреса, где в квартирах находятся счетчики соседа.
+ * Каждый адрес представлен в виде строки и связан с адресом соседа.
+ */
 public enum SpecialAdresses {
     //Адреса, где в квартирах находятся счетчики соседа (холодная и горячая вода на кухне)
     HOUSE_2_10("Жилой дом №2 кв.№10","Жилой дом №2 кв.№11"),
@@ -15,19 +17,40 @@ public enum SpecialAdresses {
     private final String title;
     private final String neighborAddress;
 
+    /**
+     * Создает новый экземпляр перечисления SpecialAdresses с указанным адресом и адресом соседа.
+     *
+     * @param title           адрес квартиры
+     * @param neighborAddress адрес соседа
+     */
     SpecialAdresses(String title, String neighborAddress) {
         this.title = title;
         this.neighborAddress = neighborAddress;
     }
 
+    /**
+     * Получает адрес квартиры.
+     *
+     * @return адрес квартиры
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Получает адрес соседа.
+     *
+     * @return адрес соседа
+     */
     public String getNeighborAddress() {
         return neighborAddress;
     }
 
+    /**
+     * Возвращает строковое представление адреса квартиры.
+     *
+     * @return строковое представление адреса квартиры
+     */
     @Override
     public String toString() {
         return title;
