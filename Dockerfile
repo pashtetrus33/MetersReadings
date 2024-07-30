@@ -12,7 +12,7 @@ RUN mvn clean package
 FROM openjdk:11-jre-slim
 
 #add library for excel export
-RUN apt-get update -y && apt-get install -y libfontconfig1 && \
+RUN apt-get update -y && apt-get install -y fontconfig && \
     rm -rf /var/lib/apt/lists/*
 
 # copy only the artifacts we need from the first stage and discard the rest
