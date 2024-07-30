@@ -1,5 +1,5 @@
 # the first stage of our build will use a maven 3.6.1 parent image
-FROM openjdk:11-jre AS MAVEN_BUILD
+FROM maven:3.8.6-openjdk-11-slim AS MAVEN_BUILD
 
 LABEL maintainer="Pavel Bakanov"
 # copy the pom and src code to the container
