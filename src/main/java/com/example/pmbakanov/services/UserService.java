@@ -191,9 +191,16 @@ public class UserService {
      * @param message сообщение.
      */
     public void sendEmail(String email, String message) {
-        if (!email.equals("all@all.ru")) {
-            mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
-                    "Уважаемый(ая) " + userRepository.findByEmail(email).getName() + ".\n" + message);
+         if (!email.equals("all@all.ru")) {
+            User user = userRepository.findByEmail(email);
+            if (user != null) {
+                mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
+                        "Уважаемый(ая) " + user.getName() + "\n" + message + "\n\n" + "Адрес сайта:\n" + "https://chilemeters.ddns.net");
+            } else {
+                mailSender.sendMail(email, "Информация от системы передачи показаний счетчиков",
+                        "Уважаемый(ая) " + email + "\n" +  "\n\n" + "Адрес сайта:\n" + "https://chilemeters.ddns.net");
+            }
+
         } else {
             for (User person : userRepository.findAllByActiveIsTrue()) {
                 mailSender.sendMail(person.getEmail(), "Информация от системы передачи показаний счетчиков",
