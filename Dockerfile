@@ -17,16 +17,7 @@ RUN apt-get update -y && apt-get install -y fontconfig && \
 
 # copy only the artifacts we need from the first stage and discard the rest
 COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
-ARG MAIL
-ARG MAIL_PASSWORD
-ARG DATABASE_URL
-ARG DATABASE_USER
-ARG DATABASE_PASSWORD
-ENV MAIL=${MAIL}
-ENV MAIL_PASSWORD=${MAIL_PASSWORD}
-ENV DATABASE_URL=${DATABASE_URL}
-ENV DATABASE_USER=${DATABASE_USER}
-ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
+
 # instruction for open port
 EXPOSE 443
 EXPOSE 80
