@@ -43,16 +43,16 @@ public class ScheduleTasksService {
         for (User person : activeUsersList) {
             mailSender.sendMail(person.getEmail(), "Начало периода подачи показаний счетчиков воды",
                     "Добрый день, " + person.getName() + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца."
-                            + ".\n" + DEPLOY_WEBSITE);
+                            + "\n" + DEPLOY_WEBSITE);
         }
     }
 
     @Scheduled(cron = "${interval-in-cron3}")
     public void testMailNotification() {
-        log.info("periodStartMailNotification");
-            mailSender.sendMail("pashtetrus@gmail.com", "Начало периода подачи показаний счетчиков воды",
+        log.info("testSchedule send mail");
+            mailSender.sendMail("pashtet_rus@mail.ru", "Начало периода подачи показаний счетчиков воды",
                     "Добрый день, " + ".\n" + "Пожалуйста, передайте показания счетчиков воды до 24 числа текущего месяца."
-                            + ".\n" + DEPLOY_WEBSITE);
+                            + "\n" + DEPLOY_WEBSITE);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ScheduleTasksService {
             if ((!person.areMeterReadings()) || (person.getLastMeterReading().getDateOfCreated().getMonth() != LocalDateTime.now().getMonth())) {
                 mailSender.sendMail(person.getEmail(), "Окончание периода подачи показаний счетчиков воды",
                         "Добрый день, " + person.getName() + ".\n" +
-                                "Пожалуйста, передайте показания счетчиков воды." + ".\n" + DEPLOY_WEBSITE);
+                                "Пожалуйста, передайте показания счетчиков воды." + "\n" + DEPLOY_WEBSITE);
             }
         }
     }
