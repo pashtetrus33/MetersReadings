@@ -191,6 +191,8 @@ public class UserService {
      * @param message сообщение.
      */
     public void sendEmail(String email, String message) {
+        log.info("Часовой пояс сервера: " + TimeZone.getDefault().getID());
+        log.info("Смещение от UTC (в часах): " + (TimeZone.getDefault().getOffset(System.currentTimeMillis())/ (60 * 60 * 1000)));
          if (!email.equals("all@all.ru")) {
             User user = userRepository.findByEmail(email);
             if (user != null) {
