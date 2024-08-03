@@ -15,6 +15,10 @@ FROM maven:3.8.6-openjdk-11-slim
 RUN apt-get update -y && apt-get install -y fontconfig && \
     rm -rf /var/lib/apt/lists/*
 
+# set the timezone
+ENV TZ=America/Santiago
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # copy only the artifacts we need from the first stage and discard the rest
 COPY --from=MAVEN_BUILD /target/pmbakanov-1.0.jar /pmbakanov-1.0.jar
 
