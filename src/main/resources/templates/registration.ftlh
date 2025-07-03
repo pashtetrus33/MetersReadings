@@ -37,6 +37,7 @@
                 <option value="кв.№43">кв.№43</option>
                 <option value="кв.№44">кв.№44</option>
                 <option value="кв.№51">кв.№51</option>
+                <option value="кв.№50">кв.№51</option>
                 <option value="кв.№52">кв.№52</option>
                 <option value="кв.№53">кв.№53</option>
                 <option value="кв.№54">кв.№54</option>
